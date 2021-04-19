@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 增删改查 -->
+    
+    
+    <mapper namespace="cn.tianhai.gzadq.mapper.ForecastDataMapper">
+       
+       	<resultMap id="ForecastDataMap" type="cn.tianhai.gzadq.pojo.ForecastData">
+  			<result property="venueid" column="venueid" />
+  			<result property="forecasttime" column="forecasttime" />
+  			<result property="wind" column="wspd10m"/>
+  			<result property="wd" column="WDIR10M"/>
+  			<result property="vis" column="visi"/>
+  			<result property="rain" column="rain"/>
+  			<result property="x" column="x"/>
+  			<result property="y" column="y"/>
+		</resultMap>
+        
+        <select id="getForecastTime" resultMap="ForecastDataMap">
+        	select to_char(forecasttime,'yyyy-mm-dd hh24:mi:ss') as forecasttime from
+        	(
+        		select * from szym.t_zh_grid_forecast order by ddatetime desc,venueid asc,forecasttime asc
+        	)
+        	where <![CDATA[ rownum<=88  ]]> order by rownum asc   
+        </select>
+        
+        <select id="getForecastData" resultMap="ForecastDataMap">
+	        select * from(
+	        (select * from(
+		        select * from szym.t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss') 
+		        order by ddatetime desc,venueid asc,forecasttime asc
+	        )
+	        where <![CDATA[ rownum<=287  ]]> order by rownum asc) f 
+			left join szym.t_zh_grid_point_5k p on f.venueid=p.recid)
+		</select>
+        
+    	<select id="getForeWindList" resultMap="ForecastDataMap">
+	     
+	        select venueid,wspd10m,forecasttime from(
+		        select * from szym.t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss')
+		        and (venueid=234 or venueid=256 or venueid=257 or venueid=258 or venueid=260 or venueid=268 or venueid=269)
+		        order by ddatetime desc,venueid asc,forecasttime asc
+	        )
+	        where <![CDATA[ rownum<=7  ]]> order by rownum asc   
+	
+		</select>
+		
+		<select id="getPoint5k" resultMap="ForecastDataMap">
+	        select recid as venueid,x,y from szym.t_zh_grid_point_5k
+		</select>
+       
+       <select id="getForecastDataById" parameterType="cn.tianhai.gzadq.pojo.ForecastData" resultMap="ForecastDataMap">
+	        select * from(
+		        select * from szym.t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss') 
+		        and venueid=#{venueid}
+		        order by ddatetime desc,venueid asc,forecasttime asc
+	        )
+	        where <![CDATA[ rownum<=1  ]]> order by rownum asc
+		</select>
+		
+		<select id="getForecastDataDiv" parameterType="cn.tianhai.gzadq.pojo.ForecastData" resultMap="ForecastDataMap">
+	       select * from(
+		        select * from szym.t_zh_grid_forecast where venueid=#{venueid}  
+		        order by ddatetime desc,venueid asc,forecasttime asc
+	        )
+	        where <![CDATA[ rownum<=88  ]]> order by rownum asc
+		</select>
+    </mapper>
+    
+

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 增删改查 -->
+    <mapper namespace="cn.tianhai.gzadq.mapper.CarMapper">
+       
+       
+        
+        <select id="getCar" parameterType="cn.tianhai.gzadq.pojo.Car" resultType="cn.tianhai.gzadq.pojo.Car">
+        	select * from T_CAR where cid=#{cid}  
+        </select>
+        
+        
+    
+       
+    </mapper>
+    
+

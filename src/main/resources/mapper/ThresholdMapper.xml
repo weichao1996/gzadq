@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 增删改查 -->
+    <mapper namespace="cn.tianhai.gzadq.mapper.ThresholdMapper">
+       
+       
+        
+        <select id="getThreshold" parameterType="cn.tianhai.gzadq.pojo.Threshold" resultType="cn.tianhai.gzadq.pojo.Threshold">
+        	select * from T_THRESHOLD where USERID=#{userid}  
+        </select>
+        
+        <update id="updateThreshold" parameterType="cn.tianhai.gzadq.pojo.Threshold">
+        	update t_threshold set arain=#{arain},awind=#{awind},avis=#{avis},frain=#{frain},fwind=#{fwind},fvis=#{fvis},
+        	radius=#{radius} where userid=#{userid}
+        </update>
+        
+        <insert id="addThreshold" parameterType="cn.tianhai.gzadq.pojo.Threshold">
+        	insert into t_threshold(userid,arain,awind,avis,frain,fwind,fvis,radius) values(#{userid},#{arain},#{awind},#{avis},#{frain},
+        	#{fwind},#{fvis},#{radius})
+        </insert>
+        
+        <update id="updateLnglat" parameterType="cn.tianhai.gzadq.pojo.Threshold">
+        	update t_threshold set lnglat=#{lnglat} where userid=#{userid}
+        </update>
+        
+        <insert id="addLnglat" parameterType="cn.tianhai.gzadq.pojo.Threshold">
+        	insert into t_threshold(userid,lnglat) values(#{userid},#{lnglat})
+        </insert>
+    
+       
+    </mapper>
+    
+

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    <!-- 增删改查 -->
+    
+    
+    <mapper namespace="cn.tianhai.gzadq.mapper.DfBridgeMapper">
+       
+       	<resultMap id="ActualDataMap" type="cn.tianhai.gzadq.pojo.ActualData">
+  			<result property="obtid" column="obtid" />
+  			<result property="datetime" column="ddatetime" />
+  			<result property="wind" column="wd2df"/>
+  			<result property="wd" column="wd2dd"/>
+  			<result property="rain" column="rain"/>
+  			<result property="vis" column="vis"/>
+  			<result property="lon" column="lon"/>
+  			<result property="lat" column="lat"/>
+		</resultMap>
+        
+        <select id="getMinActualData" parameterType="cn.tianhai.gzadq.pojo.ActualData" resultMap="ActualDataMap">
+        	select *
+        	from (
+	        	select da.obtid, to_char(ddatetime,'yyyy-mm-dd hh24:mi:ss') as ddatetime,wd2df,rain,vis,lon,lat from 
+	        	szym.t_df_bridge  da 
+	        	left join szym.T_BRIDGE_DETAIL de on da.obtid=de.obtid 
+	        	where da.obtid=#{obtid} order by ddatetime desc 
+	        	) 
+        	where <![CDATA[ rownum<=36  ]]> order by rownum asc  
+        </select>
+        
+        
+        <select id="getHourActualData" parameterType="cn.tianhai.gzadq.pojo.ActualData" resultMap="ActualDataMap">
+        	select obtid, to_char(ddatetime,'yyyy-mm-dd hh24:mi:ss') as ddatetime,wd2df,rain,vis 
+        	from (
+	        	select * from szym.t_df_bridge 
+	        	where obtid=#{obtid} 
+	        	order by ddatetime desc
+	        	) 
+        	where <![CDATA[ rownum<=288  ]]> order by rownum asc  
+        </select>
+        
+        <select id="getWindList" resultMap="ActualDataMap">
+        select br.obtid,wd2df,wd2dd,rain,lon,lat from 
+        	((select * from szym.T_DF_BRIDGE t where obtid='G3972' or obtid='G3973' or obtid='G3974' or obtid='G3975' or obtid='G3978' 
+        	order by ddatetime desc) br
+        	left join szym.T_BRIDGE_DETAIL de on br.obtid=de.obtid)
+         where <![CDATA[ rownum<=5  ]]>
+    	</select>
+    
+       <select id="getActualDataById" parameterType="cn.tianhai.gzadq.pojo.ActualData" resultMap="ActualDataMap">
+        	select obtid, to_char(ddatetime,'yyyy-mm-dd hh24:mi:ss') as ddatetime,wd2df,rain,vis 
+        	from (
+	        	select * from szym.t_df_bridge 
+	        	where obtid=#{obtid} 
+	        	order by ddatetime desc
+	        	) 
+        	where <![CDATA[ rownum<=1  ]]> order by rownum asc  
+        </select>
+    </mapper>
+    
+
