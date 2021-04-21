@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/gzadq.iml" filepath="$PROJECT_DIR$/gzadq.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../../../idea2021/shiro/shiro.iml" filepath="$PROJECT_DIR$/../../../idea2021/shiro/shiro.iml" />
     </modules>
   </component>
 </project>
