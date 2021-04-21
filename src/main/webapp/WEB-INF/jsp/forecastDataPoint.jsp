@@ -526,7 +526,8 @@
 					            return '#ffffff'
 					        }
 					    } 
-					   
+
+
 					    
 					</script>
 				</div>
