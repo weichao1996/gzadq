@@ -254,11 +254,12 @@
 					</div>
 					 <jsp:include flush="true" page="threshold.jsp"></jsp:include> 
 					<div id="color1" class="input-card" style=" width: auto;bottom: 150px;display:none">
-					    <div style="width: 50px;height: 20px;background-color: #00FFFF"></div>0-2<br>
-					    <div style="width: 50px;height: 20px;background-color: #00BFFF"></div>2-4<br>
-					    <div style="width: 50px;height: 20px;background-color: #1874CD"></div>4-6<br>
-					    <div style="width: 50px;height: 20px;background-color: #3A5FCD"></div>6-8<br>
-					    <div style="width: 50px;height: 20px;background-color: #0000EE"></div>8-10<br>
+						<div style="width: 50px;height: 20px;background-color: #00FFFF"></div>0<br>
+					    <div style="width: 50px;height: 20px;background-color: #00BFFF"></div>0-2<br>
+					    <div style="width: 50px;height: 20px;background-color: #1874CD"></div>2-4<br>
+					    <div style="width: 50px;height: 20px;background-color: #3A5FCD"></div>4-6<br>
+					    <div style="width: 50px;height: 20px;background-color: #0000EE"></div>6-8<br>
+					    <div style="width: 50px;height: 20px;background-color: #EE7AE9"></div>8-10<br>
 					    <div style="width: 50px;height: 20px;background-color: #BF3EFF"></div>10-20<br>
 					    <div style="width: 50px;height: 20px;background-color: #9A32CD"></div>20-50<br>
 					    <div style="width: 50px;height: 20px;background-color: #551A8B"></div>≥50(mm)<br>
@@ -475,16 +476,18 @@
 					    
 					     function setRainColor(count) {
 						    	var vis=count/50;
-						        if (vis<0.04) {
-						            return '#00FFFF'
-						        } else if(vis>0.04&&vis<0.08||vis==0.04){
+						    	if (vis==0){
+									return '#00FFFF'
+								} else if (vis>0&&vis<0.04) {
 						            return '#00BFFF'
-						        } else if(vis>0.08&&vis<0.12||vis==0.08){
+						        } else if(vis>0.04&&vis<0.08||vis==0.04){
 						            return '#1874CD'
-						        } else if(vis>0.12&&vis<0.16||vis==0.12){
+						        } else if(vis>0.08&&vis<0.12||vis==0.08){
 						            return '#3A5FCD'
-						        } else if(vis>0.16&&vis<0.2||vis==0.16){
+						        } else if(vis>0.12&&vis<0.16||vis==0.12){
 						            return '#0000EE'
+						        } else if(vis>0.16&&vis<0.2||vis==0.16){
+						            return '#EE7AE9'
 						        } else if(vis>0.2&&vis<0.4||vis==0.2){
 						            return '#BF3EFF'
 						        } else if(vis>0.4&&vis<1||vis==0.4){
