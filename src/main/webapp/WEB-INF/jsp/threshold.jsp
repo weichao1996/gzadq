@@ -7,7 +7,7 @@
 		    var event = event || window.event
 		    //esc 键被按下执行
 		    if (event.keyCode == 27) {
-		        $('.close').click();
+		        $('.close_btn').click();
 		    }
 		};
 		

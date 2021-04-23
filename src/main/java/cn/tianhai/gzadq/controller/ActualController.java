@@ -40,7 +40,7 @@ public class ActualController {
 	
 	@GetMapping("/actualData")
     public Object actualData(Model m) {
-		List<BridgeDetail> list=bridgeDetailServiceImpl.getAllBridgeDetail();
+		List<BridgeDetail> list=bridgeDetailServiceImpl.getActualBridgeDetail();
 		JSONArray json = JSONArray.fromObject(list);
 		System.out.println(json);
 		m.addAttribute("json",json);

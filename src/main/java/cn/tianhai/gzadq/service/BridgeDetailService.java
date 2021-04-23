@@ -8,4 +8,8 @@ public interface BridgeDetailService {
 	public List<BridgeDetail> getAllBridgeDetail();
 	public List<BridgeDetail> getNineBridgeDetail();
 	public BridgeDetail getBridgeDetailById(String obtid);
+
+    List<BridgeDetail> getActualBridgeDetail();
+
+    List<BridgeDetail> getSevenBridgeDetail();
 }

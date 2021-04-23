@@ -19,13 +19,28 @@
         .white_content {
             display: none;
             position: absolute;
-            top: 20%;
+            top: 25%;
             left: 20%;
             padding-bottom:30px;
             border: 7px solid #37424f;
             background-color: white;
             z-index:1002;
             overflow: auto;
+        }
+        .left_btn{
+            position: absolute;
+            top:45% ;
+            left: 0;
+        }
+        .right_btn{
+            position: absolute;
+            top:45% ;
+            right: 0;
+        }
+        .close_btn{
+             position: absolute;
+             top:10px ;
+             right: 0px;
         }
 		.yuzhi{
 	        font-family: "宋体";
@@ -76,7 +91,7 @@
  
 		a:visited{text-decoration:none;} /*指已经访问过的链接*/
  
-		a:hover{text-decoration:none;} /*指鼠标在链接*/}
+		a:hover{text-decoration:none;} /*指鼠标在链接*/
  
 		a:active{text-decoration:none;} /*指正在点的链接*/
         

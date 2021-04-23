@@ -35,4 +35,14 @@ public class BridgeDetailServiceImpl implements BridgeDetailService {
 		// TODO Auto-generated method stub
 		return bridgeDetailMapper.getBridgeDetailById(obtid);
 	}
+
+	@Override
+	public List<BridgeDetail> getActualBridgeDetail() {
+		return  bridgeDetailMapper.getActualBridgeDetail();
+	}
+
+	@Override
+	public List<BridgeDetail> getSevenBridgeDetail() {
+		return bridgeDetailMapper.getSevenBridgeDetail();
+	}
 }

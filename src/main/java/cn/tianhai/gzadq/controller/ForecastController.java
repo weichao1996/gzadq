@@ -143,7 +143,7 @@ public class ForecastController {
 	@ResponseBody
     public Object getObtid() {
 		
-		List<BridgeDetail> list=bridgeDetailServiceImpl.getNineBridgeDetail();
+		List<BridgeDetail> list=bridgeDetailServiceImpl.getSevenBridgeDetail();
 		
         return list;
         
@@ -158,7 +158,7 @@ public class ForecastController {
 		Distance distance=new Distance();
 		List list3=new ArrayList();
 		
-		List<BridgeDetail> list=bridgeDetailServiceImpl.getNineBridgeDetail();
+		List<BridgeDetail> list=bridgeDetailServiceImpl.getSevenBridgeDetail();
 		for(BridgeDetail b:list) {
 			double disk=145000;
 			ForecastData forecastData = null;

@@ -176,16 +176,14 @@
 		<div class="view-product background-color">
 			<div class="padding-big background-color">
 				<div id="container"></div>
-				<div id="tips"
-					style="width: 100%; height: 30px; background-color: #37424f; color: white; font-size: 15px; display: none; position: fixed; top: 0">
 
-				</div>
 				<jsp:include flush="true" page="threshold.jsp"></jsp:include>
 
 
 
 				<script>
 					var path="forecastData";
+					zhandian=[];
 					var map = new AMap.Map("container", {
 				    	resizeEnable: true,
 				        center: [113.71, 22.25],
@@ -208,7 +206,7 @@
 									    });
 									    G3970.obtid=res[i].obtid;
 									    G3970.on('click', showInfoClick);
-									    	
+										zhandian.push(res[i].obtid);
 										
 									    
 									}
@@ -312,106 +310,111 @@
 				    function showInfoClick(e){
 				    	
 						obtid=e.target.obtid;
-						$.ajax({
-				            type: 'GET',
-				            url: '/getForecastDataDiv/'+obtid,
-				            error: function () {
-				                alert('网络错误');
-				            },
-				            success: function (res) {
-				            	var str="";
-				            	var str2="";
-				            	var str3="";
-    	    				    	
-    	    				    	
-    	    				    		str+="<tr><td colspan='2'>预报时间</td>";
-    	    				    		for(var j=0;j<24;j+=1){
-        	    					    	str+="<td>"+res[j].forecasttime.substring(11,16)+"</td>";
-        	    				    	}
-    	    				    		str+="</tr>";
-    	    				    		str+="<tr><td colspan='2'>降雨(mm)</td>";
-    	    				    		for(var j=0;j<24;j+=1){
-        	    					    	str+="<td>"+res[j].rain+"</td>";
-        	    				    	}
-    	    				    		str+="</tr>";
-    	    				    		str+="<tr><td colspan='2'>风速(m/s)</td>";
-    	    				    		for(var j=0;j<24;j+=1){
-        	    					    	str+="<td>"+res[j].wind+"</td>";
-        	    				    	}
-    	    				    		str+="</tr>";
-    	    				    		str+="<tr><td colspan='2'>能见度(km)</td>";
-    	    				    		for(var j=0;j<24;j+=1){
-        	    					    	str+="<td>"+res[j].vis+"</td>";
-        	    				    	}
-    	    				    		str+="</tr>";
-    	    				    		
-    	    				    		str2+="<tr><td>预报时间</td>";
-    	    				    		for(var j=24;j<40;j+=1){
-        	    					    	str2+="<td>"+res[j].forecasttime.substring(5,16)+"</td>";
-        	    				    	}
-    	    				    		str2+="</tr>";
-    	    				    		str2+="<tr><td>降雨(mm)</td>";
-    	    				    		for(var j=24;j<40;j+=1){
-        	    					    	str2+="<td>"+res[j].rain+"</td>";
-        	    				    	}
-    	    				    		str2+="</tr>";
-    	    				    		str2+="<tr><td>风速(m/s)</td>";
-    	    				    		for(var j=24;j<40;j+=1){
-        	    					    	str2+="<td>"+res[j].wind+"</td>";
-        	    				    	}
-    	    				    		str2+="</tr>";
-    	    				    		str2+="<tr><td>能见度(km)</td>";
-    	    				    		for(var j=24;j<40;j+=1){
-        	    					    	str2+="<td>"+res[j].vis+"</td>";
-        	    				    	}
-    	    				    		str2+="</tr>";
-    	    				    		
-    	    				    		str3+="<tr><td>预报时间</td>";
-    	    				    		for(var j=40;j<52;j+=1){
-        	    					    	str3+="<td>"+res[j].forecasttime.substring(5,16)+"</td>";
-        	    				    	}
-    	    				    		str3+="</tr>";
-    	    				    		str3+="<tr><td>降雨(mm)</td>";
-    	    				    		for(var j=40;j<52;j+=1){
-        	    					    	str3+="<td>"+res[j].rain+"</td>";
-        	    				    	}
-    	    				    		str3+="</tr>";
-    	    				    		str3+="<tr><td>风速(m/s)</td>";
-    	    				    		for(var j=40;j<52;j+=1){
-        	    					    	str3+="<td>"+res[j].wind+"</td>";
-        	    				    	}
-    	    				    		str3+="</tr>";
-    	    				    		str3+="<tr><td>能见度(km)</td>";
-    	    				    		for(var j=40;j<52;j+=1){
-        	    					    	str3+="<td>"+res[j].vis+"</td>";
-        	    				    	}
-    	    				    		str3+="</tr>";
-    	    				    	
-    	    				    	
-    	    				    	
-    	    				    
-    	    				    document.getElementById("tbody").innerHTML=str;
-    	    				    document.getElementById("tbody2").innerHTML=str2;
-    	    				    document.getElementById("tbody3").innerHTML=str3;
-    	    				    
-    	    				    var x=[];
-			                	var wind=[];
-			                	var rain=[];
-			                	var vis=[];
-				                for(var i=0;i<24;i++){     
+						getObtidData();
+				               
+				    }
 
-				                	x.push(res[i].forecasttime.substring(11,13));    //挨个取出类别并填入类别数组
-				                	wind.push(res[i].wind);
-				                	rain.push(res[i].rain);
-				                	vis.push(res[i].vis*1000);
-				                }
-				                myChart.hideLoading();
-				                myChart.setOption({
+				    function getObtidData(){
+						$.ajax({
+							type: 'GET',
+							url: '/getForecastDataDiv/'+obtid,
+							error: function () {
+								alert('网络错误');
+							},
+							success: function (res) {
+								var str="";
+								var str2="";
+								var str3="";
+
+
+								str+="<tr><td colspan='2'>预报时间</td>";
+								for(var j=0;j<24;j+=1){
+									str+="<td>"+res[j].forecasttime.substring(11,16)+"</td>";
+								}
+								str+="</tr>";
+								str+="<tr><td colspan='2'>降雨(mm)</td>";
+								for(var j=0;j<24;j+=1){
+									str+="<td>"+res[j].rain+"</td>";
+								}
+								str+="</tr>";
+								str+="<tr><td colspan='2'>风速(m/s)</td>";
+								for(var j=0;j<24;j+=1){
+									str+="<td>"+res[j].wind+"</td>";
+								}
+								str+="</tr>";
+								str+="<tr><td colspan='2'>能见度(km)</td>";
+								for(var j=0;j<24;j+=1){
+									str+="<td>"+res[j].vis+"</td>";
+								}
+								str+="</tr>";
+
+								str2+="<tr><td>预报时间</td>";
+								for(var j=24;j<40;j+=1){
+									str2+="<td>"+res[j].forecasttime.substring(5,16)+"</td>";
+								}
+								str2+="</tr>";
+								str2+="<tr><td>降雨(mm)</td>";
+								for(var j=24;j<40;j+=1){
+									str2+="<td>"+res[j].rain+"</td>";
+								}
+								str2+="</tr>";
+								str2+="<tr><td>风速(m/s)</td>";
+								for(var j=24;j<40;j+=1){
+									str2+="<td>"+res[j].wind+"</td>";
+								}
+								str2+="</tr>";
+								str2+="<tr><td>能见度(km)</td>";
+								for(var j=24;j<40;j+=1){
+									str2+="<td>"+res[j].vis+"</td>";
+								}
+								str2+="</tr>";
+
+								str3+="<tr><td>预报时间</td>";
+								for(var j=40;j<52;j+=1){
+									str3+="<td>"+res[j].forecasttime.substring(5,16)+"</td>";
+								}
+								str3+="</tr>";
+								str3+="<tr><td>降雨(mm)</td>";
+								for(var j=40;j<52;j+=1){
+									str3+="<td>"+res[j].rain+"</td>";
+								}
+								str3+="</tr>";
+								str3+="<tr><td>风速(m/s)</td>";
+								for(var j=40;j<52;j+=1){
+									str3+="<td>"+res[j].wind+"</td>";
+								}
+								str3+="</tr>";
+								str3+="<tr><td>能见度(km)</td>";
+								for(var j=40;j<52;j+=1){
+									str3+="<td>"+res[j].vis+"</td>";
+								}
+								str3+="</tr>";
+
+
+
+
+								document.getElementById("tbody").innerHTML=str;
+								document.getElementById("tbody2").innerHTML=str2;
+								document.getElementById("tbody3").innerHTML=str3;
+
+								var x=[];
+								var wind=[];
+								var rain=[];
+								var vis=[];
+								for(var i=0;i<24;i++){
+
+									x.push(res[i].forecasttime.substring(11,13));    //挨个取出类别并填入类别数组
+									wind.push(res[i].wind);
+									rain.push(res[i].rain);
+									vis.push(res[i].vis*1000);
+								}
+								myChart.hideLoading();
+								myChart.setOption({
 									xAxis: {
-				                        data: x
-				                    },
-				                    series:[
-				                    	{
+										data: x
+									},
+									series:[
+										{
 											data:rain
 										},
 										{
@@ -420,28 +423,28 @@
 										{
 											data:vis
 										}
-				                    ]
-									
-								});
-				                
-				                var x2=[];
-			                	var wind2=[];
-			                	var rain2=[];
-			                	var vis2=[];
-				                for(var i=24;i<40;i++){     
+									]
 
-				                	x2.push(res[i].forecasttime.substring(8,10)+"("+res[i].forecasttime.substring(11,13)+")");    //挨个取出类别并填入类别数组
-				                	wind2.push(res[i].wind);
-				                	rain2.push(res[i].rain);
-				                	vis2.push(res[i].vis*1000);
-				                }
-				                myChart2.hideLoading();
-				                myChart2.setOption({
+								});
+
+								var x2=[];
+								var wind2=[];
+								var rain2=[];
+								var vis2=[];
+								for(var i=24;i<40;i++){
+
+									x2.push(res[i].forecasttime.substring(8,10)+"("+res[i].forecasttime.substring(11,13)+")");    //挨个取出类别并填入类别数组
+									wind2.push(res[i].wind);
+									rain2.push(res[i].rain);
+									vis2.push(res[i].vis*1000);
+								}
+								myChart2.hideLoading();
+								myChart2.setOption({
 									xAxis: {
-				                        data: x2
-				                    },
-				                    series:[
-				                    	{
+										data: x2
+									},
+									series:[
+										{
 											data:rain2
 										},
 										{
@@ -450,28 +453,28 @@
 										{
 											data:vis2
 										}
-				                    ]
-									
-								});
-				                
-				                var x3=[];
-			                	var wind3=[];
-			                	var rain3=[];
-			                	var vis3=[];
-				                for(var i=40;i<52;i++){     
+									]
 
-				                	x3.push(res[i].forecasttime.substring(8,10)+"("+res[i].forecasttime.substring(11,13)+")");    //挨个取出类别并填入类别数组
-				                	wind3.push(res[i].wind);
-				                	rain3.push(res[i].rain);
-				                	vis3.push(res[i].vis*1000);
-				                }
-				                myChart3.hideLoading();
-				                myChart3.setOption({
+								});
+
+								var x3=[];
+								var wind3=[];
+								var rain3=[];
+								var vis3=[];
+								for(var i=40;i<52;i++){
+
+									x3.push(res[i].forecasttime.substring(8,10)+"("+res[i].forecasttime.substring(11,13)+")");    //挨个取出类别并填入类别数组
+									wind3.push(res[i].wind);
+									rain3.push(res[i].rain);
+									vis3.push(res[i].vis*1000);
+								}
+								myChart3.hideLoading();
+								myChart3.setOption({
 									xAxis: {
-				                        data: x3
-				                    },
-				                    series:[
-				                    	{
+										data: x3
+									},
+									series:[
+										{
 											data:rain3
 										},
 										{
@@ -480,41 +483,93 @@
 										{
 											data:vis3
 										}
-				                    ]
-									
+									]
+
 								});
-				                document.getElementById('light').style.display='block';
-						    	document.getElementById('fade').style.display='block'
-				            }
-				        });
-						
-						
-						
-					               
-							    	
-							    	
-				               
-				    }
-					
-					   
+								document.getElementById('light').style.display='block';
+								document.getElementById('fade').style.display='block';
+
+								document.getElementById('getLast').style.display='block';
+								document.getElementById('getNext').style.display='block';
+								if(getArrayIndex(zhandian,obtid)==zhandian.length-1){document.getElementById('getNext').style.display='none'}
+								if(getArrayIndex(zhandian,obtid)==0){document.getElementById('getLast').style.display='none'}
+
+								var tips="";
+								for(var j=0;j<res.length;j+=1){
+									if(res[j].rain>0){
+										if(j<24){
+											if(tips.indexOf("预计24小时内即将降雨")==-1){
+												tips+="预计24小时内即将降雨,";
+											}
+										}else if(j>=24&&j<40){
+											if(tips.indexOf("预计2-3天内即将降雨")==-1){
+												tips+="预计2-3天内即将降雨,";
+											}
+										}else if(j>=40&&j<52){
+											if(tips.indexOf("预计4-6天内即将降雨")==-1){
+												tips+="预计4-6天内即将降雨,";
+											}
+										}
+									}
+									if(res[j].wind>10){
+										if(j<24){
+											if(tips.indexOf("预计24小时内风速较快")==-1){
+												tips+="预计24小时内风速较快,";
+											}
+										}else if(j>=24&&j<40){
+											if(tips.indexOf("预计2-3天内风速较快")==-1){
+												tips+="预计2-3天内风速较快,";
+											}
+										}else if(j>=40&&j<52){
+											if(tips.indexOf("预计4-6天内风速较快")==-1){
+												tips+="预计4-6天内风速较快,";
+											}
+										}
+									}
+									if(res[j].vis<1){
+										if(j<24){
+											if(tips.indexOf("预计24小时内能见度较低")==-1){
+												tips+="预计24小时内能见度较低,";
+											}
+										}else if(j>=24&&j<40){
+											if(tips.indexOf("预计2-3天内能见度较低")==-1){
+												tips+="预计2-3天内能见度较低,";
+											}
+										}else if(j>=40&&j<52){
+											if(tips.indexOf("预计4-6天内能见度较低")==-1){
+												tips+="预计4-6天内能见度较低,";
+											}
+										}
+									}
+								}
+								if(tips.length>0){
+									tips=tips.substring(0,tips.length-1);
+								}
+								document.getElementById('tips').innerHTML=obtid+" "+tips;
+							}
+						});
+					}
 					   
 					    
 					</script>
 
 
 				<div id="light" class="white_content_fore">
+					<div id="tips" style="width:100%;height:30px;background-color:#37424f;color:white;font-size:15px;">
 
+					</div>
 
-					<button type="button" class="close" aria-hidden="true"
+					<%--<button type="button" class="close" aria-hidden="true"
 						onclick="document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
 						&times;</button>
-					<br>
-					<div id="lightLeft" style="width:35%;height:98%;float:left;">
-						<div class="panel panel-info" style="height: 30%">
+					<br>--%>
+					<div id="lightLeft" style="width:35%;height:80%;float:left;">
+						<div style="height:10%;"></div>
+						<div class="panel panel-info" style="height:30%;border: 1px solid #37424f;">
 							<div class="panel-heading"><img src="<%=request.getContextPath()%>/img/天气预报.png"/>&nbsp;&nbsp;近24小时预报</div>
 							<div class="panel-body">
 								<div id='box'
-									style=" background: #FCC; overflow-y: hidden;">
+									style=" overflow-y: hidden;">
 									<div id="content" style="width: 300%;">
 		
 										<table class="table table-hover">
@@ -527,12 +582,12 @@
 							</div>
 						</div>
 					
-						<div class="panel panel-info" style="height: 30%">
+						<div class="panel panel-info" style="height: 30%;border: 1px solid #37424f;">
 							<div class="panel-heading"><img src="<%=request.getContextPath()%>/img/天气预报.png"/>&nbsp;&nbsp;未来2-3天预报（逐3小时）</div>
 							<div class="panel-body" style="overflow-y: hidden;">
 								<div id='box2'
-									style="background: #FCC; overflow-y: hidden;">
-									<div id="content" style="width: 400%;">
+									style="overflow-y: hidden;">
+									<div id="content2" style="width: 400%;">
 
 										<table class="table table-hover">
 							  <tbody id="tbody2">
@@ -545,12 +600,12 @@
 						</div>
 					
 					
-						<div class="panel panel-info" style="height: 30%">
+						<div class="panel panel-info" style="height: 30%;border: 1px solid #37424f;">
 							<div class="panel-heading"><img src="<%=request.getContextPath()%>/img/天气预报.png"/>&nbsp;&nbsp;未来4-6天预报（逐6小时）</div>
 							<div class="panel-body" style="overflow-y: hidden;">
 								<div id='box3'
-									style="background: #FCC; overflow-y: hidden;">
-									<div id="content" style="width: 300%;">
+									style="overflow-y: hidden;">
+									<div id="content3" style="width: 300%;">
 
 										<table class="table table-hover">
 							  <tbody id="tbody3">
@@ -564,8 +619,8 @@
 						
 					</div>
 					
-					<div id="lightRight" style="float:right;width:65%;height:97%;" >
-						<div id="main" style="width: 990px;height:290px;"></div>
+					<div id="lightRight" style="float:right;width:64%;height:95%;" >
+						<div id="main" style="width: 990px;height:290px;border: 1px solid #37424f;"></div>
 						    <script type="text/javascript">
 						    
 						        // 基于准备好的dom，初始化echarts实例
@@ -719,7 +774,7 @@
 						    window.onresize = myChart.resize;
 						    </script>
 						    
-						    <div id="main2" style="width: 990px;height:290px;"></div>
+						    <div id="main2" style="width: 990px;height:290px;border: 1px solid #37424f;"></div>
 						    <script type="text/javascript">
 						    
 						        // 基于准备好的dom，初始化echarts实例
@@ -873,7 +928,7 @@
 						    window.onresize = myChart2.resize;
 						    </script>
 						    
-						    <div id="main3" style="width: 990px;height:290px;"></div>
+						    <div id="main3" style="width: 990px;height:290px;border: 1px solid #37424f;"></div>
 						    <script type="text/javascript">
 						    
 						        // 基于准备好的dom，初始化echarts实例
@@ -1026,12 +1081,19 @@
 						    myChart3.setOption(option);
 						    window.onresize = myChart3.resize;
 						    </script>
+
 				
 
 
 					</div>
 				</div>
-				<div id="fade" class="black_overlay"></div>
+				<div id="fade" class="black_overlay">
+					<a onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" href="#">
+						<img class="close_btn" src="<%=request.getContextPath()%>/img/close.png"/>
+					</a>
+					<a onclick="getLast()" href="#" id="getLast"><img class="left_btn" src="<%=request.getContextPath()%>/img/left.png"/></a>
+					<a onclick="getNext()" href="#" id="getNext"><img class="right_btn" src="<%=request.getContextPath()%>/img/right.png"/></a>
+				</div>
 				
 
 
@@ -1040,6 +1102,31 @@
 		</div>
 	</div>
 
+	<script type="application/javascript">
+		function getNext(){
+			var index = getArrayIndex(zhandian,obtid);
+			obtid=zhandian[index+1];
+			getObtidData();
 
+		}
+
+		function getLast(){
+			var index = getArrayIndex(zhandian,obtid);
+			obtid=zhandian[index-1];
+			getObtidData();
+
+		}
+
+		function getArrayIndex(arr, obj) {
+			var i = arr.length;
+			while (i--) {
+				if (arr[i] === obj) {
+					return i;
+				}
+			}
+			return -1;
+		}
+
+	</script>
 </body>
 </html>

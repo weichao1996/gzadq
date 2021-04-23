@@ -151,7 +151,8 @@
 					<script type="text/javascript">
 						var path="actualData";
 						var json=${json};
-					
+						zhandian=[];
+
 					    var map = new AMap.Map("container", {
 					    	resizeEnable: true,
 					        center: [113.74, 22.25],
@@ -171,6 +172,7 @@
 						   
 						    G3970.on('click', showInfoClick);
 						    G3970.on('dblclick', showInfoClick2);
+							zhandian.push(json[i].obtid);
 						}
 					    
 						$.ajax({
@@ -282,21 +284,8 @@
 										});
 						                document.getElementById('light').style.display='block';
 								    	document.getElementById('fade').style.display='block'
-								    	
-								    	document.getElementById('tips').innerHTML="当前";
-							    		if(res[0].rain>0){
-							    			document.getElementById('tips').innerHTML+="正在降雨，";
-							    		}
-							    		if(res[0].wind>10){
-							    			document.getElementById('tips').innerHTML+="风速较快，";
-							    		}
-							    		if(res[0].vis<1000){
-							    			document.getElementById('tips').innerHTML+="能见度较低，";
-								    	}
-							    		document.getElementById('tips').innerHTML+="请减速慢行，注意保持车距！";
-							    		if(document.getElementById('tips').innerHTML.length==15){
-							    			document.getElementById('tips').innerHTML="";
-							    		}
+
+										check2(res);
 					                }else{
 					                	alert("此站点暂无数据")
 					                }
@@ -345,22 +334,9 @@
 						                    ]
 											
 										});
-						                
-						                
-						                document.getElementById('tips').innerHTML="当前";
-							    		if(res[0].rain>0){
-							    			document.getElementById('tips').innerHTML+="正在降雨，";
-							    		}
-							    		if(res[0].wind>10){
-							    			document.getElementById('tips').innerHTML+="风速较快，";
-							    		}
-							    		if(res[0].vis<1000){
-							    			document.getElementById('tips').innerHTML+="能见度较低，";
-								    	}
-							    		document.getElementById('tips').innerHTML+="请减速慢行，注意保持车距！";
-							    		if(document.getElementById('tips').innerHTML.length==15){
-							    			document.getElementById('tips').innerHTML="";
-							    		}
+
+
+										check2(res);
 					                }else{
 					                	alert("此站点暂无数据")
 					                }
@@ -368,7 +344,29 @@
 					            }
 					        });
 					    }
-					      
+
+					    function check2(res){
+							document.getElementById('tips').innerHTML=obtid;
+							document.getElementById('tips').innerHTML+=" 当前";
+							if(res[0].rain>0){
+								document.getElementById('tips').innerHTML+="正在降雨，";
+							}
+							if(res[0].wind>10){
+								document.getElementById('tips').innerHTML+="风速较快，";
+							}
+							if(res[0].vis<1000){
+								document.getElementById('tips').innerHTML+="能见度较低，";
+							}
+							document.getElementById('tips').innerHTML+="请减速慢行，注意保持车距！";
+							if(document.getElementById('tips').innerHTML.length==21){
+								document.getElementById('tips').innerHTML=obtid;
+							}
+
+							document.getElementById('getLast').style.display='block';
+							document.getElementById('getNext').style.display='block';
+							if(getArrayIndex(zhandian,obtid)==zhandian.length-1){document.getElementById('getNext').style.display='none'}
+							if(getArrayIndex(zhandian,obtid)==0){document.getElementById('getLast').style.display='none'}
+						}
 
 				
 					     function showInfoClick(e){
@@ -406,180 +404,215 @@
 					
 					
 					<div id="light" class="white_content">
+
 							<div id="tips" style="width:100%;height:30px;background-color:#37424f;color:white;font-size:15px;">
-								
+
 							</div>
 							<div style="float:left;padding-left:75px;padding-top:20px;position: absolute;z-index:9999;">
-				    			<label><input type="radio" name="type" id="anfen" onclick="anfen()" checked="checked">按分</label>
-				    			<label><input type="radio" name="type" id="anshi" onclick="anshi()">按时</label>
+								<label><input type="radio" name="type" id="anfen" onclick="anfen()" checked="checked">按分</label>
+								<label><input type="radio" name="type" id="anshi" onclick="anshi()">按时</label>
 							</div>
-							<button type="button" class="close" aria-hidden="true" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
-			      				&times;
-			   				</button><br>
-				   			
-					
+							<%--<button type="button" class="close" aria-hidden="true" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+								&times;
+							</button><br>--%>
+						<br>
+
 							<div id="main" style="width: 1000px;height:380px;"></div>
-						    <script type="text/javascript">
-						    
-						        // 基于准备好的dom，初始化echarts实例
-						        var myChart = echarts.init(document.getElementById('main'));
-						 
-						       option = {
-						        color: ["#0B438B","#9bbb59","#CB4335"],
-						    // title: {
-						    //     text: '折线图堆叠'
-						    // },
-						    tooltip: { //框浮层内容格式器  提示框组件
-						                trigger: 'axis',
-						                formatter: '{b}'+'<br>'+'{a0}:{c0}' + '<br>' + '{a1}:{c1}' + '<br>' + '{a2}:{c2}'
-						            },
-						
-						    legend: {
-						             
-						                data: ['降水(mm)', '风力(m/s)', '能见度(m)'],
-						                textStyle: {
-						                    color: "#000",
-						                    fontsize: 25
-						                }
-						            },
-						    grid: {
-						                left: '15%',
-						                bottom: '3%',
-						                containLabel: true
-						            },
-						    toolbox: {
-						        feature: {
-						            saveAsImage: {}
-						        }
-						    },
-						
-						    xAxis: {
-				                type: 'category',
-				                boundaryGap: true,
-				                /* data:function (){
-						        	
-						        	var list = [];
-						            for (var i = 0; i < data.length-30; i++) {
-						                list.push(data[i].datetime);
-						            } 
-						            return list;
-						        }() , */
-						        data:[1,2,3,4,5,6],
-				                axisLabel: {
-				                      interval: 0
-				                    } 
-				                   
-				            },
-						    yAxis: [{
-						                    boundaryGap: [0, '50%'],
-						                    axisLine: {
-						                        lineStyle: {
-						                            color: '#0B438B'
-						                        }
-						                    },
-						                    type: 'value',
-						                    name: '降水(mm)',
-						                    position: 'left',//Y轴在图的坐边
-						                    offset: 120,//坐标轴移动120
-						                    axisLabel: {
-						                        formatter: function(value, index) {
-						                            return value;
-						                        }
-						                    },
-						                    splitLine: {
-						                        show: false,
-						                    },
-						                },
-						                {
-						                    boundaryGap: [0, '50%'],
-						                    axisLine: {
-						                        lineStyle: {
-						                            color: '#9bbb59'
-						                        }
-						                    },
-						                    splitLine: {
-						                        show: false,
-						                    },
-						                    type: 'value',
-						                    name: '风力(m/s)',
-						                    position: 'left',
-						                    offset: 60,//
-						                    axisLabel: {
-						                        formatter: function(value, index) {
-						
-						                            return value;
-						                        }
-						                    }
-						                },
-						                {
-						                    boundaryGap: [0, '50%'],
-						                    axisLine: {
-						                        lineStyle: {
-						                            color: '#CB4335'
-						                        }
-						                    },
-						                    splitLine: {
-						                        show: false,
-						                    },
-						                    type: 'value',
-						                    name: '能见度(m)',
-						                    position: 'left',
-						                    axisLabel: {
-						                        formatter: function(value, index) {
-						                            return value;
-						                        }
-						                    },
-						                    axisTick: {
-						                        inside: 'false',
-						                        length: 10,
-						                    }
-						                },
-						            ],
-						
-						    series: [{
-						                    name: '降水(mm)',
-						                    type: 'line',
-						                    //data: [2,1,2,1,2,1],
-						                    lineStyle: {
-						                        color: "#0B438B"//折线颜色
-						                    },
-						                    yAxisIndex: 0,
-						                },
-						                {
-						                    name: '风力(m/s)',
-						                    type: 'line',
-						                    //data: [7,8,4,2,1,2],
-						                    lineStyle: {
-						                        color: "#9bbb59"
-						                    },
-						                    yAxisIndex: 1,
-						                },
-						                {
-						                    name: '能见度(m)',
-						                    type: 'line',
-						                    //data: [9,5,6,9,7,10],
-						                    lineStyle: {
-						                        color: "#CB4335"
-						                    },
-						                    yAxisIndex: 2,
-						                }
-						            ]
-						
-						    };
-						 
-						    // 使用刚指定的配置项和数据显示图表。
-						    myChart.setOption(option);
-						    window.onresize = myChart.resize;
-						    </script>
+							<script type="text/javascript">
+
+								// 基于准备好的dom，初始化echarts实例
+								var myChart = echarts.init(document.getElementById('main'));
+
+								option = {
+									color: ["#0B438B","#9bbb59","#CB4335"],
+									// title: {
+									//     text: '折线图堆叠'
+									// },
+									tooltip: { //框浮层内容格式器  提示框组件
+										trigger: 'axis',
+										formatter: '{b}'+'<br>'+'{a0}:{c0}' + '<br>' + '{a1}:{c1}' + '<br>' + '{a2}:{c2}'
+									},
+
+									legend: {
+
+										data: ['降水(mm)', '风力(m/s)', '能见度(m)'],
+										textStyle: {
+											color: "#000",
+											fontsize: 25
+										}
+									},
+									grid: {
+										left: '15%',
+										bottom: '3%',
+										containLabel: true
+									},
+									toolbox: {
+										feature: {
+											saveAsImage: {}
+										}
+									},
+
+									xAxis: {
+										type: 'category',
+										boundaryGap: true,
+										/* data:function (){
+
+                                            var list = [];
+                                            for (var i = 0; i < data.length-30; i++) {
+                                                list.push(data[i].datetime);
+                                            }
+                                            return list;
+                                        }() , */
+										data:[1,2,3,4,5,6],
+										axisLabel: {
+											interval: 0
+										}
+
+									},
+									yAxis: [{
+										boundaryGap: [0, '50%'],
+										axisLine: {
+											lineStyle: {
+												color: '#0B438B'
+											}
+										},
+										type: 'value',
+										name: '降水(mm)',
+										position: 'left',//Y轴在图的坐边
+										offset: 120,//坐标轴移动120
+										axisLabel: {
+											formatter: function(value, index) {
+												return value;
+											}
+										},
+										splitLine: {
+											show: false,
+										},
+									},
+										{
+											boundaryGap: [0, '50%'],
+											axisLine: {
+												lineStyle: {
+													color: '#9bbb59'
+												}
+											},
+											splitLine: {
+												show: false,
+											},
+											type: 'value',
+											name: '风力(m/s)',
+											position: 'left',
+											offset: 60,//
+											axisLabel: {
+												formatter: function(value, index) {
+
+													return value;
+												}
+											}
+										},
+										{
+											boundaryGap: [0, '50%'],
+											axisLine: {
+												lineStyle: {
+													color: '#CB4335'
+												}
+											},
+											splitLine: {
+												show: false,
+											},
+											type: 'value',
+											name: '能见度(m)',
+											position: 'left',
+											axisLabel: {
+												formatter: function(value, index) {
+													return value;
+												}
+											},
+											axisTick: {
+												inside: 'false',
+												length: 10,
+											}
+										},
+									],
+
+									series: [{
+										name: '降水(mm)',
+										type: 'line',
+										//data: [2,1,2,1,2,1],
+										lineStyle: {
+											color: "#0B438B"//折线颜色
+										},
+										yAxisIndex: 0,
+									},
+										{
+											name: '风力(m/s)',
+											type: 'line',
+											//data: [7,8,4,2,1,2],
+											lineStyle: {
+												color: "#9bbb59"
+											},
+											yAxisIndex: 1,
+										},
+										{
+											name: '能见度(m)',
+											type: 'line',
+											//data: [9,5,6,9,7,10],
+											lineStyle: {
+												color: "#CB4335"
+											},
+											yAxisIndex: 2,
+										}
+									]
+
+								};
+
+								// 使用刚指定的配置项和数据显示图表。
+								myChart.setOption(option);
+								window.onresize = myChart.resize;
+							</script>
+
+
 					</div>
-			        <div id="fade" class="black_overlay"></div>
+			        <div id="fade" class="black_overlay">
+						<a onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" href="#">
+							<img class="close_btn" src="<%=request.getContextPath()%>/img/close.png"/>
+						</a>
+						<a onclick="getLast()" href="#" id="getLast"><img class="left_btn" src="<%=request.getContextPath()%>/img/left.png"/></a>
+						<a onclick="getNext()" href="#" id="getNext"><img class="right_btn" src="<%=request.getContextPath()%>/img/right.png"/></a>
+					</div>
 			        
 				</div>
 			</div>
 		</div>
 		
-		
-		
+		<script type="application/javascript">
+			function getNext(){
+				var index = getArrayIndex(zhandian,obtid);
+				obtid=zhandian[index+1];
+				document.getElementById("anfen").checked=true;
+				getMinData();
+
+			}
+
+			function getLast(){
+				var index = getArrayIndex(zhandian,obtid);
+				obtid=zhandian[index-1];
+				document.getElementById("anfen").checked=true;
+				getMinData();
+
+			}
+
+			function getArrayIndex(arr, obj) {
+				var i = arr.length;
+				while (i--) {
+					if (arr[i] === obj) {
+						return i;
+					}
+				}
+				return -1;
+			}
+
+		</script>
         
         
 			 
