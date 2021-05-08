@@ -10,7 +10,9 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="gzadq" target="1.8" />
+      <module name="shiro1" target="1.8" />
+      <module name="shiro1.main" target="1.8" />
+      <module name="shiro1.test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

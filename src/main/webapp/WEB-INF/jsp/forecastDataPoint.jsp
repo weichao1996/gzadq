@@ -237,7 +237,7 @@
 							<li>
 								<a href="safeVcar">
 									<b class="sidebar-icon"><img src="Images/icon_news.png" width="16" height="16" /></b>
-									<span class="text-normal">安全速度告警</span>
+									<span class="text-normal">安全行驶速度</span>
 								</a>
 							</li>
 							
@@ -304,7 +304,7 @@
 					    var map = new AMap.Map("container", {
 					        resizeEnable: true,
 					        center: [113.739325, 22.180154],
-					        zoom: 10
+					        zoom: 11
 					    });
 					
 					    /* if (!isSupportCanvas()) {
@@ -408,21 +408,63 @@
 					    		var center=[];
 							   	center.push(res[i].lng);
 							   	center.push(res[i].lat);
-						       var circleMarker = new AMap.CircleMarker({
-						          center:center,
-						          radius:15,//3D视图下，CircleMarker半径不要超过64px
-						          strokeColor:'white',
-						          strokeWeight:2,
-						          strokeOpacity:0.5,
-						          fillColor:setRainColor(res[i].count),
-						          fillOpacity:0.5,
-						          zIndex:10,
-						          bubble:true,
-						          cursor:'pointer',
-						          clickable: true
-						        })
-						        circleMarker.setMap(map)
-						        
+						       // var circleMarker = new AMap.CircleMarker({
+						       //    center:center,
+						       //    radius:15,//3D视图下，CircleMarker半径不要超过64px
+						       //    strokeColor:'white',
+						       //    strokeWeight:2,
+						       //    strokeOpacity:0.5,
+						       //    fillColor:setRainColor(res[i].count),
+						       //    fillOpacity:0.5,
+						       //    zIndex:10,
+						       //    bubble:true,
+						       //    cursor:'pointer',
+						       //    clickable: true
+						       //  })
+						       //  circleMarker.setMap(map)
+								var southWest = new AMap.LngLat(res[i].lng-0.025, res[i].lat-0.025)
+								var northEast = new AMap.LngLat(res[i].lng+0.025, res[i].lat+0.025)
+
+								var bounds = new AMap.Bounds(southWest, northEast)
+
+								var rectangle = new AMap.Rectangle({
+									bounds: bounds,
+									strokeColor:'white',
+									strokeWeight: 6,
+									strokeOpacity:0.5,
+									strokeDasharray: [30,10],
+									// strokeStyle还支持 solid
+									strokeStyle: 'dashed',
+									fillColor:setRainColor(res[i].count),
+									fillOpacity:0.5,
+									cursor:'pointer',
+									zIndex:50,
+								})
+
+								rectangle.setMap(map);
+
+								var text = new AMap.Text({
+									text:res[i].count,
+									anchor:'center', // 设置文本标记锚点
+
+									cursor:'pointer',
+
+									style:{
+										'padding': '.75rem 1.25rem',
+										'margin-bottom': '1rem',
+										'border-radius': '.25rem',
+										'background-color': setRainColor(res[i].count),
+
+										'border-width': 0,
+										'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+										'text-align': 'center',
+										'font-size': '12px',
+										'color': 'white'
+									},
+									position: center
+								});
+
+								text.setMap(map);
 						      }
 					    }
 					    
@@ -432,22 +474,68 @@
 					    		var center=[];
 							   	center.push(res[i].lng);
 							   	center.push(res[i].lat);
-						       var circleMarker = new AMap.CircleMarker({
-						          center:center,
-						          radius:15,//3D视图下，CircleMarker半径不要超过64px
-						          strokeColor:'white',
-						          strokeWeight:2,
-						          strokeOpacity:0.5,
-						          fillColor:setWindColor(res[i].count),
-						          fillOpacity:0.5,
-						          zIndex:10,
-						          bubble:true,
-						          cursor:'pointer',
-						          clickable: true
-						        })
-						        circleMarker.setMap(map)
-						        
+						       // var circleMarker = new AMap.CircleMarker({
+						       //    center:center,
+						       //    radius:15,//3D视图下，CircleMarker半径不要超过64px
+						       //    strokeColor:'white',
+						       //    strokeWeight:2,
+						       //    strokeOpacity:0.5,
+						       //    fillColor:setWindColor(res[i].count),
+						       //    fillOpacity:0.5,
+						       //    zIndex:10,
+						       //    bubble:true,
+						       //    cursor:'pointer',
+						       //    clickable: true
+						       //  })
+						       //  circleMarker.setMap(map)
+								var southWest = new AMap.LngLat(res[i].lng-0.025, res[i].lat-0.025)
+								var northEast = new AMap.LngLat(res[i].lng+0.025, res[i].lat+0.025)
+
+								var bounds = new AMap.Bounds(southWest, northEast)
+
+								var rectangle = new AMap.Rectangle({
+									bounds: bounds,
+									strokeColor:'white',
+									strokeWeight: 6,
+									strokeOpacity:0.5,
+									strokeDasharray: [30,10],
+									// strokeStyle还支持 solid
+									strokeStyle: 'dashed',
+									fillColor:setWindColor(res[i].count),
+									fillOpacity:0.5,
+									cursor:'pointer',
+									zIndex:50,
+								})
+
+								rectangle.setMap(map);
+
+								var text = new AMap.Text({
+									text:res[i].count,
+									anchor:'center', // 设置文本标记锚点
+
+									cursor:'pointer',
+
+									style:{
+										'padding': '.75rem 1.25rem',
+										'margin-bottom': '1rem',
+										'border-radius': '.25rem',
+										'background-color': setWindColor(res[i].count),
+
+										'border-width': 0,
+										'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+										'text-align': 'center',
+										'font-size': '12px',
+										'color': 'white'
+									},
+									position: center
+								});
+
+								text.setMap(map);
 						      }
+
+
+
+
 					    }
 					    
 					     function showVis(res){
@@ -456,20 +544,64 @@
 					    		var center=[];
 							   	center.push(res[i].lng);
 							   	center.push(res[i].lat);
-						       var circleMarker = new AMap.CircleMarker({
-						          center:center,
-						          radius:15,//3D视图下，CircleMarker半径不要超过64px
-						          strokeColor:'white',
-						          strokeWeight:2,
-						          strokeOpacity:0.5,
-						          fillColor:setVisColor(res[i].count),
-						          fillOpacity:0.5,
-						          zIndex:10,
-						          bubble:true,
-						          cursor:'pointer',
-						          clickable: true
-						        })
-						        circleMarker.setMap(map)
+						       // var circleMarker = new AMap.CircleMarker({
+						       //    center:center,
+						       //    radius:15,//3D视图下，CircleMarker半径不要超过64px
+						       //    strokeColor:'white',
+						       //    strokeWeight:2,
+						       //    strokeOpacity:0.5,
+						       //    fillColor:setVisColor(res[i].count),
+						       //    fillOpacity:0.5,
+						       //    zIndex:10,
+						       //    bubble:true,
+						       //    cursor:'pointer',
+						       //    clickable: true
+						       //  })
+						       //  circleMarker.setMap(map)
+
+								var southWest = new AMap.LngLat(res[i].lng-0.025, res[i].lat-0.025)
+								var northEast = new AMap.LngLat(res[i].lng+0.025, res[i].lat+0.025)
+
+								var bounds = new AMap.Bounds(southWest, northEast)
+
+								var rectangle = new AMap.Rectangle({
+									bounds: bounds,
+									strokeColor:'white',
+									strokeWeight: 6,
+									strokeOpacity:0.5,
+									strokeDasharray: [30,10],
+									// strokeStyle还支持 solid
+									strokeStyle: 'dashed',
+									fillColor:setVisColor(res[i].count),
+									fillOpacity:0.5,
+									cursor:'pointer',
+									zIndex:50,
+								})
+
+								rectangle.setMap(map);
+
+								var text = new AMap.Text({
+									text:res[i].count,
+									anchor:'center', // 设置文本标记锚点
+
+									cursor:'pointer',
+
+									style:{
+										'padding': '.75rem 1.25rem',
+										'margin-bottom': '1rem',
+										'border-radius': '.25rem',
+										'background-color': setVisColor(res[i].count),
+
+										'border-width': 0,
+										'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+										'text-align': 'center',
+										'font-size': '12px',
+										'color': 'black'
+									},
+									position: center
+								});
+
+								text.setMap(map);
 						        
 						      }
 					    }
@@ -525,9 +657,10 @@
 					        } else if(vis>1||vis==1){
 					            return '#ffffff'
 					        }
-					    } 
+					    }
 
-					    
+
+
 					</script>
 				</div>
 			</div>

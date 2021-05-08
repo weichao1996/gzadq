@@ -96,7 +96,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">阈值设定</h4>
+            <h4 class="modal-title"><img src="<%=request.getContextPath()%>/img/告警.png"></img>&nbsp;&nbsp;阈值设定</h4>
           </div>
           <div class="modal-body" id="modal-body">
             

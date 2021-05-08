@@ -194,7 +194,7 @@
 				drawRouteBlue(result.routes[0])
 			}else if(Ucar>80 && Ucar<=100){
 				drawRouteGre(result.routes[0])
-			}else if(Ucar=="限行"){
+			}else if(Ucar=="限行(风速大于18m/s封桥)"){
 				drawRouteRed(result.routes[0])
 			}
 		}
@@ -203,15 +203,17 @@
 		    var event = event || window.event
 		    //esc 键被按下执行
 		    if (event.keyCode == 13) {
-		    	if(document.getElementById("Ucar").value<=0||document.getElementById("Ucar").value>100){
-		    		document.getElementById("tbody").innerHTML="";
-		    	}else{
-		    		addTable();
-		    	}
-		    	
+				queding();
 		    }			
 		};
-		 
+
+		function queding(){
+			if(document.getElementById("Ucar").value<=0||document.getElementById("Ucar").value>100){
+				document.getElementById("tbody").innerHTML="";
+			}else{
+				addTable();
+			}
+		}
 		
 		function addTable(){
 			
@@ -381,7 +383,7 @@
 							<li style="background-color: #37424f">
 								<a href="safeVcar">
 									<b class="sidebar-icon"><img src="Images/icon_news.png" width="16" height="16" /></b>
-									<span class="text-normal">安全速度告警</span>
+									<span class="text-normal">安全行驶速度</span>
 								</a>
 							</li>
 							
@@ -413,7 +415,9 @@
 					    <label>车速（km/h）</label>
 					    <input type="text" class="form-control" id="Ucar" onkeyup="this.value=this.value.replace(/\D/g,'');check()" onafterpaste="this.value=this.value.replace(/\D/g,'')"
 					    style="width:100px">
-					    <div id="tips" style="float:right;color:red"></div>
+						  <button type="button" class="btn btn-primary" onclick="queding()">确定</button><br>
+
+						  <div id="tips" style="float:right;color:red"></div>
 					  </div>
 					</div>
 					</br>

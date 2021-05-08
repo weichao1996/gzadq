@@ -51,18 +51,18 @@ public class ActualController {
 	@GetMapping("/getMinActual")
 	@ResponseBody
     public Object getMinActual() {
-		List<BridgeDetail> list=bridgeDetailServiceImpl.getAllBridgeDetail();
+		List<BridgeDetail> list=bridgeDetailServiceImpl.getActualBridgeDetail();
 		List list2=new ArrayList();
 		for(BridgeDetail b:list) {
-			if(b.getObtid().equals("G3981")||b.getObtid().equals("G3972")||b.getObtid().equals("G3973")||
-					b.getObtid().equals("G3974")||b.getObtid().equals("G3975")||b.getObtid().equals("G3983")||
-					b.getObtid().equals("G3978")||b.getObtid().equals("G3984")||b.getObtid().equals("G3985")) {
+//			if(b.getObtid().equals("G3981")||b.getObtid().equals("G3972")||b.getObtid().equals("G3973")||
+//					b.getObtid().equals("G3974")||b.getObtid().equals("G3975")||b.getObtid().equals("G3983")||
+//					b.getObtid().equals("G3978")||b.getObtid().equals("G3984")||b.getObtid().equals("G3985")) {
 				List<ActualData> actualDataList=dfBridgeServiceImpl.getMinActualData(b.getObtid());
 				if(actualDataList.size()==0) {
 					actualDataList=bridgeDataServiceImpl.getMinActualData(b.getObtid());
 				}
 				list2.add(actualDataList);
-			}
+//			}
 			
 		}
 		

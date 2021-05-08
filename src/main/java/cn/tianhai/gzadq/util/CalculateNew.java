@@ -6,10 +6,80 @@ import org.springframework.stereotype.Component;
 import cn.tianhai.gzadq.pojo.ActualData;
 import cn.tianhai.gzadq.pojo.Car;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 @Component
 public class CalculateNew {
-	
+
 	public double getUwind(Car car,int Ucar,ActualData a) {
+		if(a.getRain()==0) {//干路面
+			if(car.getCid()==1) {//轿车
+				return new BigDecimal(Ucar).subtract(BigDecimal.valueOf(199.68)).divide(BigDecimal.valueOf(-5.44),2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}else if(car.getCid()==2) {//微型客车
+				return new BigDecimal(Ucar).subtract(BigDecimal.valueOf(281.6)).divide(BigDecimal.valueOf(-11.52),2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}else if(car.getCid()==3) {//中型客车
+				return new BigDecimal(Ucar).subtract(new BigDecimal(300)).divide(new BigDecimal(-10)).doubleValue();
+			}else if(car.getCid()==4) {//集装箱挂车
+				return new BigDecimal(Ucar).subtract(BigDecimal.valueOf(212.4)).divide(BigDecimal.valueOf(-6.62),2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}
+		}else {//湿路面
+			if(car.getCid()==1) {//轿车
+				return new BigDecimal(Ucar).subtract(BigDecimal.valueOf(173.12)).divide(BigDecimal.valueOf(-5.82),2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}else if(car.getCid()==2) {//微型客车
+				return new BigDecimal(Ucar).subtract(BigDecimal.valueOf(206.5)).divide(new BigDecimal(-11),2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}else if(car.getCid()==3) {//中型客车
+				return new BigDecimal(Ucar).subtract(BigDecimal.valueOf(236.48)).divide(BigDecimal.valueOf(-9.78),2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}else if(car.getCid()==4) {//集装箱挂车
+				return new BigDecimal(Ucar).subtract(BigDecimal.valueOf(189.62)).divide(BigDecimal.valueOf(-7.83),2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			}
+		}
+		return 0;
+
+	}
+
+
+
+	public String getUcar(Car car,ActualData a) {
+		double Uwind=a.getWind();
+		double Ucar;
+		if(Uwind>18){
+			return "限行(风速大于18m/s封桥)";
+		}
+		if(a.getRain()==0) {//干路面
+			if(car.getCid()==1) {//轿车
+				Ucar= BigDecimal.valueOf(-5.44).multiply(BigDecimal.valueOf(Uwind)).add(BigDecimal.valueOf(199.68)).setScale(1,BigDecimal.ROUND_DOWN).doubleValue();
+				return (Ucar>100?"100":Ucar)+"";
+			}else if(car.getCid()==2) {//微型客车
+				Ucar= BigDecimal.valueOf(-11.52).multiply(BigDecimal.valueOf(Uwind)).add(BigDecimal.valueOf(281.6)).setScale(1,BigDecimal.ROUND_DOWN).doubleValue();
+				return (Ucar>100?"100":Ucar)+"";
+			}else if(car.getCid()==3) {//中型客车
+				Ucar= new BigDecimal(-10).multiply(BigDecimal.valueOf(Uwind)).add(new BigDecimal(300)).setScale(1,BigDecimal.ROUND_DOWN).doubleValue();
+				return (Ucar>100?"100":Ucar)+"";
+			}else if(car.getCid()==4) {//集装箱挂车
+				Ucar= BigDecimal.valueOf(-6.62).multiply(BigDecimal.valueOf(Uwind)).add(BigDecimal.valueOf(212.4)).setScale(1,BigDecimal.ROUND_DOWN).doubleValue();
+				return (Ucar>100?"100":Ucar)+"";
+			}
+		}else{//湿路面
+			if(car.getCid()==1) {//轿车
+				Ucar= BigDecimal.valueOf(-5.82).multiply(BigDecimal.valueOf(Uwind)).add(BigDecimal.valueOf(173.12)).setScale(1,BigDecimal.ROUND_DOWN).doubleValue();
+				return (Ucar>100?"100":Ucar)+"";
+			}else if(car.getCid()==2) {//微型客车
+				Ucar= new BigDecimal(-11).multiply(BigDecimal.valueOf(Uwind)).add(BigDecimal.valueOf(206.5)).setScale(1,BigDecimal.ROUND_DOWN).doubleValue();
+				return (Ucar>100?"100":Ucar)+"";
+			}else if(car.getCid()==3) {//中型客车
+				Ucar= BigDecimal.valueOf(-9.78).multiply(BigDecimal.valueOf(Uwind)).add(BigDecimal.valueOf(236.48)).setScale(1,BigDecimal.ROUND_DOWN).doubleValue();
+				return (Ucar>100?"100":Ucar)+"";
+			}else if(car.getCid()==4) {//集装箱挂车
+				Ucar= BigDecimal.valueOf(-7.83).multiply(BigDecimal.valueOf(Uwind)).add(BigDecimal.valueOf(189.62)).setScale(1,BigDecimal.ROUND_DOWN).doubleValue();
+				return (Ucar>100?"100":Ucar)+"";
+			}
+		}
+		return "0";
+
+	}
+
+	/*public double getUwind(Car car,int Ucar,ActualData a) {
 		if(a.getRain()==0) {//干路面
 			if(car.getCid()==1) {//轿车
 				if(Ucar<=100&&Ucar>80) {
@@ -114,11 +184,11 @@ public class CalculateNew {
 			}
 		}
 		return 0;
-		
+
 	}
-	
-	
-	
+
+
+
 	public String getUcar(Car car,ActualData a) {
 		double Uwind=a.getWind();
 		if(a.getRain()==0) {//干路面
@@ -249,6 +319,6 @@ public class CalculateNew {
 			}
 		}
 		return "0";
-		
-	}
+
+	}*/
 }

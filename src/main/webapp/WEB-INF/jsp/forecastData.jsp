@@ -165,7 +165,7 @@
 							</li>
 						<li><a href="safeVcar"> <b class="sidebar-icon"><img
 									src="Images/icon_news.png" width="16" height="16" /></b> <span
-								class="text-normal">安全速度告警</span>
+								class="text-normal">安全行驶速度</span>
 						</a></li>
 
 
@@ -196,116 +196,131 @@
 				        error: function () {
 				            alert('网络错误');
 				        },
-				        success: function (res) {
-					            	for(var i=0;i<res.length;i+=1){
-									    // 创建点、线、面覆盖物实例
-									    var G3970 = new AMap.Marker({
-									        position: new AMap.LngLat(res[i].lon, res[i].lat),
-									        map:map,
-									        icon: '<%=request.getContextPath()%>/img/'+i+'.ico'
-									    });
-									    G3970.obtid=res[i].obtid;
-									    G3970.on('click', showInfoClick);
-										zhandian.push(res[i].obtid);
-										
-									    
+				        success: function (res1) {
+							$.ajax({
+								type: 'GET',
+								url: '/getForecastDataDiv',
+								error: function () {
+									alert('网络错误');
+								},
+								success: function (res) {
+
+									for(var i=0;i<res1.length;i+=1){
+										// 创建点、线、面覆盖物实例
+										var G3970 = new AMap.Marker({
+											position: new AMap.LngLat(res1[i].lon, res1[i].lat),
+											map:map,
+											icon: '<%=request.getContextPath()%>/img/'+i+'.ico'
+										});
+										G3970.obtid=res1[i].obtid;
+										G3970.on('click', showInfoClick);
+										zhandian.push(res1[i].obtid);
+
+										//预警标签
+										// for(var i=0;i<res.length;i+=1){
+										var str=i+1+"| ";
+										var temp=res[i];
+										for(var j=0;j<temp.length;j+=1){
+											if(temp[j].rain>0){
+												if(j<24){
+													if(str.indexOf("预计24小时内即将降雨")==-1){
+														str+="预计24小时内即将降雨,";
+													}
+												}else if(j>=24&&j<40){
+													if(str.indexOf("预计2-3天内即将降雨")==-1){
+														str+="预计2-3天内即将降雨,";
+													}
+												}else if(j>=40&&j<52){
+													if(str.indexOf("预计4-6天内即将降雨")==-1){
+														str+="预计4-6天内即将降雨,";
+													}
+												}
+											}
+											if(temp[j].wind>10){
+												if(j<24){
+													if(str.indexOf("预计24小时内风速较快")==-1){
+														str+="预计24小时内风速较快,";
+													}
+												}else if(j>=24&&j<40){
+													if(str.indexOf("预计2-3天内风速较快")==-1){
+														str+="预计2-3天内风速较快,";
+													}
+												}else if(j>=40&&j<52){
+													if(str.indexOf("预计4-6天内风速较快")==-1){
+														str+="预计4-6天内风速较快,";
+													}
+												}
+											}
+											if(temp[j].vis<1){
+												if(j<24){
+													if(str.indexOf("预计24小时内能见度较低")==-1){
+														str+="预计24小时内能见度较低,";
+													}
+												}else if(j>=24&&j<40){
+													if(str.indexOf("预计2-3天内能见度较低")==-1){
+														str+="预计2-3天内能见度较低,";
+													}
+												}else if(j>=40&&j<52){
+													if(str.indexOf("预计4-6天内能见度较低")==-1){
+														str+="预计4-6天内能见度较低,";
+													}
+												}
+											}
+										}
+
+										if(str.length>3){
+											str=str.substring(0,str.length-1);
+											// 设置label标签
+											// label默认蓝框白底左上角显示，样式className为：amap-marker-label
+											G3970.setLabel({
+
+												content: "<div class='info'>"+str+"</div>", //设置文本标注内容
+												direction: 'top' //设置文本标注方位
+											});
+										}
+
+
+
+										// var center=[];
+										// center.push(temp[0].x);
+										// center.push(temp[0].y+0.02);
+										//   // 创建纯文本标记
+										// var text = new AMap.Text({
+										//     text:str,
+										//     anchor:'center', // 设置文本标记锚点
+										//
+										//     cursor:'pointer',
+										//
+										//     style:{
+										//         'padding': '.75rem 1.25rem',
+										//         'margin-bottom': '1rem',
+										//         'border-radius': '.25rem',
+										//         'background-color': 'white',
+										//
+										//         'border-width': 0,
+										//         'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+										//         'text-align': 'center',
+										//         'font-size': '12px',
+										//         'color': 'grey'
+										//     },
+										//     position: center
+										// });
+										//
+										// text.setMap(map);
+
+										// }
+
 									}
+
+
+
+								}
+							});
+
 				        }
 				    });
 					
-					$.ajax({
-				        type: 'GET',
-				        url: '/getForecastDataDiv',
-				        error: function () {
-				            alert('网络错误');
-				        },
-				        success: function (res) {
-				        	
-					            	for(var i=0;i<res.length;i+=1){
-					            		var str="";
-					            		var temp=res[i];
-					            		for(var j=0;j<temp.length;j+=1){
-					            			if(temp[j].rain>0){
-					            				if(j<24){
-					            					if(str.indexOf("预计24小时内即将降雨")==-1){
-						            					str+="预计24小时内即将降雨,";
-						            				}	
-					            				}else if(j>=24&&j<40){
-					            					if(str.indexOf("预计2-3天内即将降雨")==-1){
-						            					str+="预计2-3天内即将降雨,";
-						            				}
-					            				}else if(j>=40&&j<52){
-					            					if(str.indexOf("预计4-6天内即将降雨")==-1){
-						            					str+="预计4-6天内即将降雨,";
-						            				}
-					            				}
-					            			}
-											if(temp[j].wind>10){
-												if(j<24){
-					            					if(str.indexOf("预计24小时内风速较快")==-1){
-						            					str+="预计24小时内风速较快,";
-						            				}	
-					            				}else if(j>=24&&j<40){
-					            					if(str.indexOf("预计2-3天内风速较快")==-1){
-						            					str+="预计2-3天内风速较快,";
-						            				}
-					            				}else if(j>=40&&j<52){
-					            					if(str.indexOf("预计4-6天内风速较快")==-1){
-						            					str+="预计4-6天内风速较快,";
-						            				}
-					            				}	
-					            			}
-											if(temp[j].vis<1){
-												if(j<24){
-					            					if(str.indexOf("预计24小时内能见度较低")==-1){
-						            					str+="预计24小时内能见度较低,";
-						            				}	
-					            				}else if(j>=24&&j<40){
-					            					if(str.indexOf("预计2-3天内能见度较低")==-1){
-						            					str+="预计2-3天内能见度较低,";
-						            				}
-					            				}else if(j>=40&&j<52){
-					            					if(str.indexOf("预计4-6天内能见度较低")==-1){
-						            					str+="预计4-6天内能见度较低,";
-						            				}
-					            				}			
-											}
-					            		}
-					            		if(str.length>0){
-					            			str=str.substring(0,str.length-1);
-					            		}
-					            		
-					            		var center=[];
-									   	center.push(temp[0].x);
-									   	center.push(temp[0].y+0.02);
-					            		  // 创建纯文本标记
-					            	    var text = new AMap.Text({
-					            	        text:str,
-					            	        anchor:'center', // 设置文本标记锚点
 
-					            	        cursor:'pointer',
-
-					            	        style:{
-					            	            'padding': '.75rem 1.25rem',
-					            	            'margin-bottom': '1rem',
-					            	            'border-radius': '.25rem',
-					            	            'background-color': 'white',
-					            	 
-					            	            'border-width': 0,
-					            	            'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
-					            	            'text-align': 'center',
-					            	            'font-size': '12px',
-					            	            'color': 'grey'
-					            	        },
-					            	        position: center
-					            	    });
-
-					            	    text.setMap(map);
-					            		
-									}
-					            	
-				        }
-				    });
 
 				    function showInfoClick(e){
 				    	
@@ -545,7 +560,7 @@
 								if(tips.length>0){
 									tips=tips.substring(0,tips.length-1);
 								}
-								document.getElementById('tips').innerHTML=obtid+" "+tips;
+								document.getElementById('tips').innerHTML="站点"+(getArrayIndex(zhandian,obtid)+1)+" | "+tips;
 							}
 						});
 					}

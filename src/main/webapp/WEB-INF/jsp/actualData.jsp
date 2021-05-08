@@ -132,7 +132,7 @@
 							<li>
 								<a href="safeVcar">
 									<b class="sidebar-icon"><img src="Images/icon_news.png" width="16" height="16" /></b>
-									<span class="text-normal">安全速度告警</span>
+									<span class="text-normal">安全行驶速度</span>
 								</a>
 							</li>
 							
@@ -159,22 +159,10 @@
 					        zoom: 12
 					    });
 						
-					    <jsp:include flush="true" page="threshold2.jsp"></jsp:include> 
-					    
-						for(var i=0;i<json.length;i+=1){
-						    // 创建点、线、面覆盖物实例
-						    var G3970 = new AMap.Marker({
-						        position: new AMap.LngLat(json[i].lon, json[i].lat),
-						        map:map
-						    });
-						    G3970.positionCode=json[i].positionCode;
-						    G3970.obtid=json[i].obtid;
-						   
-						    G3970.on('click', showInfoClick);
-						    G3970.on('dblclick', showInfoClick2);
-							zhandian.push(json[i].obtid);
-						}
-					    
+					    <jsp:include flush="true" page="threshold2.jsp"></jsp:include>
+
+
+
 						$.ajax({
 					        type: 'GET',
 					        url: '/getMinActual',
@@ -182,55 +170,79 @@
 					            alert('网络错误');
 					        },
 					        success: function (res) {
-					        	
-						            	for(var i=0;i<res.length;i+=1){
-						            		var str="";
-						            		var temp=res[i];
-						            		if(temp.length!=0){
-						            			if(temp[0].rain>0){
-							            			str+="当前正在降雨,";
-						            			}
-												if(temp[0].wind>10){
-													str+="当前风速较大,";
-						            			}
-												if(temp[0].vis<1000){
-													str+="当前能见度较低,";	
-												}
-						            		
-						            		if(str.length>0){
-						            			str=str.substring(0,str.length-1);
-						            		}
-						            		
-						            		var center=[];
-										   	center.push(temp[0].lon);
-										   	center.push(temp[0].lat+0.02);
-						            		  // 创建纯文本标记
-						            	    var text = new AMap.Text({
-						            	        text:str,
-						            	        anchor:'center', // 设置文本标记锚点
 
-						            	        cursor:'pointer',
+								for(var i=0;i<json.length;i+=1){
+									// 创建点、线、面覆盖物实例
+									var G3970 = new AMap.Marker({
+										position: new AMap.LngLat(json[i].lon, json[i].lat),
+										map:map
+									});
+									G3970.positionCode=json[i].positionCode;
+									G3970.obtid=json[i].obtid;
 
-						            	        style:{
-						            	            'padding': '.75rem 1.25rem',
-						            	            'margin-bottom': '1rem',
-						            	            'border-radius': '.25rem',
-						            	            'background-color': 'white',
-						            	 
-						            	            'border-width': 0,
-						            	            'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
-						            	            'text-align': 'center',
-						            	            'font-size': '12px',
-						            	            'color': 'grey'
-						            	        },
-						            	        position: center
-						            	    });
+									G3970.on('click', showInfoClick);
+									G3970.on('dblclick', showInfoClick2);
+									zhandian.push(json[i].obtid);
 
-						            	    text.setMap(map);
-						            		}
-						            			
-						            		
+									// for(var i=0;i<res.length;i+=1){
+										var str="";
+										var temp=res[i];
+										if(temp.length!=0){
+											if(temp[0].rain>0){
+												str+="当前正在降雨,";
+											}
+											if(temp[0].wind>10){
+												str+="当前风速较大,";
+											}
+											if(temp[0].vis<1000){
+												str+="当前能见度较低,";
+											}
+
+											if(str.length>0){
+												str=str.substring(0,str.length-1);
+												// 设置label标签
+												// label默认蓝框白底左上角显示，样式className为：amap-marker-label
+												G3970.setLabel({
+
+													content: "<div class='info'>" + str + "</div>", //设置文本标注内容
+													direction: 'top' //设置文本标注方位
+												});
+											}
+
+
+											// var center=[];
+											// center.push(temp[0].lon);
+											// center.push(temp[0].lat+0.02);
+											// // 创建纯文本标记
+											// var text = new AMap.Text({
+											// 	text:str,
+											// 	anchor:'center', // 设置文本标记锚点
+											//
+											// 	cursor:'pointer',
+											//
+											// 	style:{
+											// 		'padding': '.75rem 1.25rem',
+											// 		'margin-bottom': '1rem',
+											// 		'border-radius': '.25rem',
+											// 		'background-color': 'white',
+											//
+											// 		'border-width': 0,
+											// 		'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+											// 		'text-align': 'center',
+											// 		'font-size': '12px',
+											// 		'color': 'grey'
+											// 	},
+											// 	position: center
+											// });
+											//
+											// text.setMap(map);
 										}
+
+
+									// }
+								}
+					        	
+
 						            	
 					        }
 					    });
