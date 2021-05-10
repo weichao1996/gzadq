@@ -10,53 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50ac6085-54ae-4f71-9b93-facec789b89f" name="Default Changelist" comment="1">
-      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/libraries-with-intellij-classes.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/shiro1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/告警.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/10.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/11.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/12.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/13.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/14.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/15.ico" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/9.ico" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/gzadq.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gzadq.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/controller/ActualController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/controller/ActualController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/util/CalculateNew.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/util/CalculateNew.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/actualData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/actualData.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastData.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastDataPoint.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastDataPoint.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/safeVcar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/safeVcar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/threshold.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/threshold.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/css/threshold.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/threshold.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/Application.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/Application.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/SpringBootStartApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/SpringBootStartApplication.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/config/RedisConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/config/RedisConfig.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/controller/ActualController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/controller/ActualController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/BridgeDataMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/BridgeDataMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/CarMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/CarMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/DfBridgeMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/DfBridgeMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/ForecastDataMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/ForecastDataMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/ThresholdMapper.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/mapper/ThresholdMapper.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/ActualData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/ActualData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/BridgeDetail.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/BridgeDetail.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/Car.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/Car.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/ForecastData.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/ForecastData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/HeartMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/HeartMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/Threshold.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/Threshold.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/BridgeDataService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/BridgeDataService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/CarService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/CarService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/DfBridgeService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/DfBridgeService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/ForecastDataService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/ForecastDataService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/impl/BridgeDataServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/impl/BridgeDataServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/impl/CarServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/impl/CarServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/impl/DfBridgeServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/impl/DfBridgeServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/impl/ForecastDataServiceImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/service/impl/ForecastDataServiceImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/Calculate.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/Calculate.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/CalculateNew.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/CalculateNew.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/ContentComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/ContentComparator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/Distance.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/Distance.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/TimeCompare.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/TimeCompare.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -176,13 +140,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -338,7 +304,8 @@
       <workItem from="1620263904389" duration="19750000" />
       <workItem from="1620353181579" duration="2544000" />
       <workItem from="1620438266472" duration="16408000" />
-      <workItem from="1620469720400" duration="329000" />
+      <workItem from="1620469720400" duration="808000" />
+      <workItem from="1620612938036" duration="11669000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1618819750822</created>
@@ -438,7 +405,14 @@
       <option name="project" value="LOCAL" />
       <updated>1619159985222</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="1">
+      <created>1620470147029</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1620470147029</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

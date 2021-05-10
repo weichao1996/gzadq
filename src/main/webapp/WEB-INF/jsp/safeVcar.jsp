@@ -436,7 +436,7 @@
 					
 					
 					<div class="input-card" style=" width: auto;">
-						<div style="width: 50px;height: 20px">(km/h)</div>
+						<div style="width: 65px;height: 20px">车速(km/h)</div>
 					    <div style="width: 50px;height: 20px;background-color: red"></div>0-20<br>
 					    <div style="width: 50px;height: 20px;background-color: orange"></div>20-40<br>
 					    <div style="width: 50px;height: 20px;background-color: yellow"></div>40-60<br>

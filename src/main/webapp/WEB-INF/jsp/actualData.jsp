@@ -27,7 +27,11 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/select.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/haidao.validate.js"></script>
 		<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
-		
+		<style type="text/css">
+			.yuzhi{
+				right: 43rem;
+			}
+		</style>
 		<script>
 		var int=self.setInterval("clock()",5*1000);
 		function clock()
@@ -146,7 +150,20 @@
 					<div id="container"></div>
 					
 					<jsp:include flush="true" page="threshold.jsp"></jsp:include>
-					
+
+					<div class="input-card2">
+
+						<table class="table table-hover">
+							<thead>
+							<th>站点</th>
+							<th>预警信息</th>
+
+							</thead>
+							<tbody id="tbody">
+
+							</tbody>
+						</table>
+					</div>
 			
 					<script type="text/javascript">
 						var path="actualData";
@@ -155,7 +172,7 @@
 
 					    var map = new AMap.Map("container", {
 					    	resizeEnable: true,
-					        center: [113.74, 22.25],
+					        center: [113.77, 22.25],
 					        zoom: 12
 					    });
 						
@@ -175,7 +192,8 @@
 									// 创建点、线、面覆盖物实例
 									var G3970 = new AMap.Marker({
 										position: new AMap.LngLat(json[i].lon, json[i].lat),
-										map:map
+										map:map,
+										icon: '<%=request.getContextPath()%>/img/'+i+'.ico'
 									});
 									G3970.positionCode=json[i].positionCode;
 									G3970.obtid=json[i].obtid;
@@ -189,25 +207,33 @@
 										var temp=res[i];
 										if(temp.length!=0){
 											if(temp[0].rain>0){
-												str+="当前正在降雨,";
+												str+="当前正在降雨,<br>";
 											}
 											if(temp[0].wind>10){
-												str+="当前风速较大,";
+												str+="当前风速较大,<br>";
 											}
 											if(temp[0].vis<1000){
-												str+="当前能见度较低,";
+												str+="当前能见度较低,<br>";
 											}
 
 											if(str.length>0){
-												str=str.substring(0,str.length-1);
+												str=str.substring(0,str.length-5);
 												// 设置label标签
 												// label默认蓝框白底左上角显示，样式className为：amap-marker-label
-												G3970.setLabel({
+												// G3970.setLabel({
+												//
+												// 	content: "<div class='info'>" + str + "</div>", //设置文本标注内容
+												// 	direction: 'top' //设置文本标注方位
+												// });
+												str="<tr>"+
+														"<td><img src='<%=request.getContextPath()%>/img/"+i+".ico'/></td>"+
+														"<td>"+str+"</td></tr>"
 
-													content: "<div class='info'>" + str + "</div>", //设置文本标注内容
-													direction: 'top' //设置文本标注方位
-												});
+												document.getElementById("tbody").innerHTML+=str;
 											}
+
+
+
 
 
 											// var center=[];
