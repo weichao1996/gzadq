@@ -173,6 +173,7 @@ public class ThresholdController {
 						maxthresholdFore.setMaxRain(maxRain);
 						maxthresholdFore.setMaxWind(maxWind);
 						maxthresholdFore.setMinVis(minVis);
+						maxthresholdFore.setForecasttime(str1);
 						
 				
 						List<Threshold> thresholdList=new ArrayList<Threshold>();

@@ -19,6 +19,16 @@ public class Threshold {
 	private double maxRain;
 	private double maxWind;
 	private double minVis;
+	private String forecasttime;
+
+	public String getForecasttime() {
+		return forecasttime;
+	}
+
+	public void setForecasttime(String forecasttime) {
+		this.forecasttime = forecasttime;
+	}
+
 	public int getTid() {
 		return tid;
 	}

@@ -23,7 +23,7 @@
         <select id="getActualBridgeDetail" resultType="cn.tianhai.gzadq.pojo.BridgeDetail">
             select * from (select obtid from T_BRIDGE_DATA group by obtid
                            union
-                           select obtid from T_DF_BRIDGE group by obtid) a LEFT JOIN T_BRIDGE_DETAIL b on a.obtid=b.obtid ORDER BY lon
+                           select obtid from T_DF_BRIDGE group by obtid) a inner JOIN T_BRIDGE_DETAIL b on a.obtid=b.obtid ORDER BY lon
         </select>
 
         <select id="getSevenBridgeDetail" resultType="cn.tianhai.gzadq.pojo.BridgeDetail">
