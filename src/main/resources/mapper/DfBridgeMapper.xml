@@ -42,10 +42,18 @@
         
         <select id="getWindList" resultMap="ActualDataMap">
         select br.obtid,wd2df,wd2dd,rain,lon,lat from 
-        	((select * from T_DF_BRIDGE t where obtid='G3972' or obtid='G3973' or obtid='G3974' or obtid='G3975' or obtid='G3978' 
-        	order by ddatetime desc) br
-        	left join T_BRIDGE_DETAIL de on br.obtid=de.obtid)
-         where <![CDATA[ rownum<=5  ]]>
+        	(select * from(select * from T_DF_BRIDGE t where obtid='G3972' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+        		union
+			 select * from(select * from T_DF_BRIDGE t where obtid='G3973' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+			    union
+			 select * from(select * from T_DF_BRIDGE t where obtid='G3974' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+			    union
+			 select * from(select * from T_DF_BRIDGE t where obtid='G3975' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+			    union
+			 select * from(select * from T_DF_BRIDGE t where obtid='G3978' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+        	) br
+        	left join T_BRIDGE_DETAIL de on br.obtid=de.obtid
+
     	</select>
     
        <select id="getActualDataById" parameterType="cn.tianhai.gzadq.pojo.ActualData" resultMap="ActualDataMap">

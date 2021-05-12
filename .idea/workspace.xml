@@ -11,14 +11,10 @@
   <component name="ChangeListManager">
     <list default="true" id="50ac6085-54ae-4f71-9b93-facec789b89f" name="Default Changelist" comment="1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/controller/ThresholdController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/controller/ThresholdController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/pojo/Threshold.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/pojo/Threshold.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/BridgeDetailMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/BridgeDetailMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/actualData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/actualData.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastData.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastDataPoint.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastDataPoint.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/safeVcar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/safeVcar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/controller/ThresholdController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/controller/ThresholdController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/BridgeDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/BridgeDataMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mapper/DfBridgeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mapper/DfBridgeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/Threshold.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/Threshold.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/mapper/BridgeDetailMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/BridgeDetailMapper.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,13 +134,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -302,7 +300,8 @@
       <workItem from="1620438266472" duration="16408000" />
       <workItem from="1620469720400" duration="808000" />
       <workItem from="1620612938036" duration="13876000" />
-      <workItem from="1620721002348" duration="7248000" />
+      <workItem from="1620721002348" duration="7872000" />
+      <workItem from="1620783684097" duration="4604000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1618819750822</created>
@@ -416,7 +415,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620635889475</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="1">
+      <created>1620729083818</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1620729083818</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
