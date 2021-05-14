@@ -25,6 +25,16 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/haidao.offcial.general.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/select.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/haidao.validate.js"></script>
+		<style>
+			.input-card .btn{
+				margin-right: 1.2rem;
+				width: 9rem;
+			}
+
+			.input-card .btn:last-child{
+				margin-right: 0;
+			}
+		</style>
 		<script>
 		
 		$(document).ready(function(){
@@ -395,8 +405,11 @@
 			<div class="view-product background-color">
 				<div class="padding-big background-color">
 					<div id="container"></div>
+<%--					<div class="info" id="text">--%>
+<%--						请用鼠标在地图上操作试试--%>
+<%--					</div>--%>
 					
-					<div class="input-card" style=" width: 28%;height:58%;top: 10px;">
+					<div class="input-card" style=" width: 28%;height:58%;">
 					<div class="form-inline">
 					  <div class="form-group">
 					     <div class="input-item">
@@ -435,14 +448,24 @@
 					</div>
 					
 					
-					<div class="input-card" style=" width: auto;">
+					<div class="input-card" style=" width: auto;height:15rem;top: 10px;">
 						<div style="width: 65px;height: 20px">车速(km/h)</div>
 					    <div style="width: 50px;height: 20px;background-color: red"></div>0-20<br>
 					    <div style="width: 50px;height: 20px;background-color: orange"></div>20-40<br>
 					    <div style="width: 50px;height: 20px;background-color: yellow"></div>40-60<br>
 					    <div style="width: 50px;height: 20px;background-color: blue"></div>60-80<br>
 					    <div style="width: 50px;height: 20px;background-color: green"></div>80-100<br>
+
 					</div>
+
+<%--					<div class="input-card" style="right:15rem;top:1rem;height:5rem">--%>
+
+<%--						<div class="input-item">--%>
+<%--							<input type="button" class="btn"  value="开始动画" id="start" onclick="addRoute2()"/>--%>
+
+<%--						</div>--%>
+
+<%--					</div>--%>
 					<script type="text/javascript">
 					
 					    var map = new AMap.Map("container", {
@@ -581,6 +604,297 @@
 					
 					        return path
 					    }
+
+
+
+
+					    //轨迹回放
+
+						// var marker, lineArr = [[113.590622,22.210364],[113.60604,22.220207],[113.628028,22.23424],[113.66419,22.248064],[113.696999,22.267605],
+						// 	[113.719935,22.278745],[113.74061,22.280147],[113.765663,22.280184],[113.810717,22.280212],[113.870335,22.272177]];
+
+							var marker, lineArr = [[113.590622,22.210364],[113.60604,22.220207],
+								[113.628028,22.23424],[113.639563,22.241017],[113.645607,22.243292], [113.66419,22.248064],[113.667521,22.248974],[113.672048,22.250533],[113.679205,22.253939],
+								[113.685567,22.257901],[113.689107,22.260602],[113.696999,22.267605],[113.698471,22.268944],[113.701143,22.270896],[113.705834,22.273646],
+								[113.708874,22.275136],[113.714711,22.27737],[113.719935,22.278745],[113.72589,22.279797],[113.74061,22.280147],[113.765663,22.280184],[113.810717,22.280212],
+								[113.843073,22.279998],[113.845696,22.279809],[113.851827,22.27859],[113.855401,22.277615],[113.870335,22.272177]
+
+							];
+							var lineArr9=[[113.810717,22.280212],[113.843073,22.279998],[113.845696,22.279809],[113.851827,22.27859],[113.855401,22.277615],[113.870335,22.272177]];
+							var lineArr8=[[113.765663,22.280184],[113.810717,22.280212]];
+					     	var lineArr7=[[113.74061,22.280147],[113.765663,22.280184]];
+							var lineArr6=[[113.719935,22.278745],[113.72589,22.279797],[113.74061,22.280147]];
+							var lineArr5=[[113.696999,22.267605],[113.698471,22.268944],[113.701143,22.270896],[113.705834,22.273646],
+								[113.708874,22.275136],[113.714711,22.27737],[113.719935,22.278745]];
+							var lineArr4=[[113.66419,22.248064],[113.667521,22.248974],[113.672048,22.250533],[113.679205,22.253939],
+								[113.685567,22.257901],[113.689107,22.260602],[113.696999,22.267605]];
+							var lineArr3=[[113.628028,22.23424],[113.639563,22.241017],[113.645607,22.243292], [113.66419,22.248064]];
+							var lineArr2=[[113.60604,22.220207],[113.628028,22.23424]];
+							var lineArr1=[[113.590622,22.210364],[113.60604,22.220207]];
+							var map = new AMap.Map("container", {
+							resizeEnable: true,
+							center: [113.78, 22.25],
+							zoom: 12
+						});
+
+							marker = new AMap.Marker({
+							map: map,
+							position: [113.590622,22.210364],
+							icon: "<%=request.getContextPath()%>/img/car2.png",
+							offset: new AMap.Pixel(-26, -30),
+							autoRotation: true,
+							angle:-35,
+						});
+						marker.on('click', addRoute2);
+
+						// 创建跟速度信息展示框
+						var carWindow = new AMap.InfoWindow({
+							offset: new AMap.Pixel(6, -25),
+						});
+
+
+
+							// 绘制轨迹
+							var polyline = new AMap.Polyline({
+							map: map,
+							path: lineArr,
+							showDir:true,
+							strokeColor: "#28F",  //线颜色
+							// strokeOpacity: 1,     //线透明度
+							strokeWeight: 6,      //线宽
+							// strokeStyle: "solid"  //线样式
+						});
+
+						// 	var passedPolyline = new AMap.Polyline({
+						// 	map: map,
+						// 	// path: lineArr,
+						// 	strokeColor: "#28F",  //线颜色
+						// 	// strokeOpacity: 1,     //线透明度
+						// 	strokeWeight: 6,      //线宽
+						// 	// strokeStyle: "solid"  //线样式
+						// });
+
+						//添加监听事件： 车辆移动的时候，更新速度窗体位置
+							marker.on('moving', function (e) {
+								//passedPolyline.setPath(e.passedPath);
+								var lastLocation = e.passedPath[e.passedPath.length - 1];
+								//移动窗体
+								carWindow.setPosition(lastLocation);
+								//console.log(e.target.getPosition());
+								// if(e.target.getPosition()=="113.60604,22.220207"){alert(123)}
+							});
+
+							map.setFitView();
+
+							function startAnimation () {
+								addRoute2();
+							}
+
+
+						function run9(){
+							marker.moveAlong(lineArr9, Ucar[9]*81);
+							carWindow.setContent("速度:" + Ucar[9] + "公里/时");
+							setIcon(8);
+						}
+						function run8(){
+							marker.moveAlong(lineArr8, Ucar[8]*81);
+							carWindow.setContent("速度:" + Ucar[8] + "公里/时");
+							setIcon(7);
+						}
+						function run7(){
+							marker.moveAlong(lineArr7, Ucar[7]*81);
+							carWindow.setContent("速度:" + Ucar[7] + "公里/时");
+							setIcon(6);
+						}
+						function run6(){
+							marker.moveAlong(lineArr6, Ucar[6]*81);
+							carWindow.setContent("速度:" + Ucar[6] + "公里/时");
+							setIcon(5);
+						}
+						function run5(){
+							marker.moveAlong(lineArr5, Ucar[5]*81);
+							carWindow.setContent("速度:" + Ucar[5] + "公里/时");
+							setIcon(4);
+						}
+
+						function run4(){
+							marker.moveAlong(lineArr4, Ucar[4]*81);
+							carWindow.setContent("速度:" + Ucar[4] + "公里/时");
+							setIcon(3);
+						}
+						function run3(){
+							marker.moveAlong(lineArr3, Ucar[3]*81);
+							carWindow.setContent("速度:" + Ucar[3] + "公里/时");
+							setIcon(2);
+						}
+
+						function run2(){
+							marker.moveAlong(lineArr2, Ucar[2]*81);
+							carWindow.setContent("速度:" + Ucar[2] + "公里/时");
+							setIcon(1);
+						}
+
+						function run1(){
+							marker.moveAlong(lineArr1, Ucar[1]*81);
+							carWindow.setContent("速度:" + Ucar[1] + "公里/时");
+							setIcon(0);
+						}
+
+						function setIcon(a){
+							temp=Ucar[0];
+							if(temp[a].rain>0){
+								marker.setIcon("<%=request.getContextPath()%>/img/raincar2.png")
+								marker.setOffset(new AMap.Pixel(-26, -27));
+							}else{
+								marker.setIcon("<%=request.getContextPath()%>/img/car2.png")
+								marker.setOffset(new AMap.Pixel(-26, -30));
+							}
+						}
+						function addRoute2(){
+							// document.getElementById("start").setAttribute("disabled", true);//设置不可点击
+							// document.getElementById("start").style.backgroundColor  = '#555555';//设置背景色
+							// document.getElementById("start").removeAttribute("disabled");//去掉不可点击
+							carWindow.open(map, marker.getPosition());
+							var cid=document.getElementById("cid").value;
+							$.ajax({
+								type: 'GET',
+								url: '/getUcar/'+cid,
+								error: function () {
+									alert('网络错误');
+								},
+								success: function (res) {
+
+									Ucar=[];
+									Ucar.push(res[0]);
+									Ucar.push(res[1]);
+									Ucar.push(res[2]);
+									Ucar.push(res[3]);
+									Ucar.push(res[4]);
+									Ucar.push(res[5]);
+									Ucar.push(res[6]);
+									Ucar.push(res[7]);
+									Ucar.push(res[8]);
+									Ucar.push(res[9]);
+
+									// marker.moveAlong(lineArr1, Ucar[0]*81);
+									//
+									// setTimeout(run9,(1927/1000/Ucar[0]+2749/1000/Ucar[1]+4061/1000/Ucar[2]+4068/1000/Ucar[3]+2693/1000/Ucar[4]+2138/1000/Ucar[5]+
+									// 		2577/1000/Ucar[6]+4635/1000/Ucar[7])*3600/81*1000);
+									// setTimeout(run8,(1927/1000/Ucar[0]+2749/1000/Ucar[1]+4061/1000/Ucar[2]+4068/1000/Ucar[3]+2693/1000/Ucar[4]+2138/1000/Ucar[5]+
+									// 		2577/1000/Ucar[6])*3600/81*1000);
+									// setTimeout(run7,(1927/1000/Ucar[0]+2749/1000/Ucar[1]+4061/1000/Ucar[2]+4068/1000/Ucar[3]+2693/1000/Ucar[4]+2138/1000/Ucar[5])*3600/81*1000);
+									// setTimeout(run6,(1927/1000/Ucar[0]+2749/1000/Ucar[1]+4061/1000/Ucar[2]+4068/1000/Ucar[3]+2693/1000/Ucar[4])*3600/81*1000);
+									// setTimeout(run5,(1927/1000/Ucar[0]+2749/1000/Ucar[1]+4061/1000/Ucar[2]+4068/1000/Ucar[3])*3600/81*1000);
+									// setTimeout(run4,(1927/1000/Ucar[0]+2749/1000/Ucar[1]+4061/1000/Ucar[2])*3600/81*1000);
+									// setTimeout(run3,(1927/1000/Ucar[0]+2749/1000/Ucar[1])*3600/81*1000);
+									// setTimeout(run2, 1927/1000/Ucar[0]*3600/81*1000);
+									if(Ucar[1]!="限行(风速大于18m/s封桥)"){
+										run1();
+										if(Ucar[2]!="限行(风速大于18m/s封桥)"){
+											setTimeout(run2, 1927/1000/Ucar[1]*3600/81*1000);
+											if(Ucar[3]!="限行(风速大于18m/s封桥)"){
+												setTimeout(run3,(1927/1000/Ucar[1]+2749/1000/Ucar[2])*3600/81*1000);
+												if(Ucar[4]!="限行(风速大于18m/s封桥)"){
+													setTimeout(run4,(1927/1000/Ucar[1]+2749/1000/Ucar[2]+4061/1000/Ucar[3])*3600/81*1000);
+													if(Ucar[5]!="限行(风速大于18m/s封桥)"){
+														setTimeout(run5,(1927/1000/Ucar[1]+2749/1000/Ucar[2]+4061/1000/Ucar[3]+4068/1000/Ucar[4])*3600/81*1000);
+														if(Ucar[6]!="限行(风速大于18m/s封桥)"){
+															setTimeout(run6,(1927/1000/Ucar[1]+2749/1000/Ucar[2]+4061/1000/Ucar[3]+4068/1000/Ucar[4]+2693/1000/Ucar[5])*3600/81*1000);
+															if(Ucar[7]!="限行(风速大于18m/s封桥)"){
+																setTimeout(run7,(1927/1000/Ucar[1]+2749/1000/Ucar[2]+4061/1000/Ucar[3]+4068/1000/Ucar[4]+2693/1000/Ucar[5]+2138/1000/Ucar[6])*3600/81*1000);
+																if(Ucar[8]!="限行(风速大于18m/s封桥)"){
+																	setTimeout(run8,(1927/1000/Ucar[1]+2749/1000/Ucar[2]+4061/1000/Ucar[3]+4068/1000/Ucar[4]+2693/1000/Ucar[5]+2138/1000/Ucar[6]+
+																			2577/1000/Ucar[7])*3600/81*1000);
+																	if(Ucar[9]!="限行(风速大于18m/s封桥)"){
+																		setTimeout(run9,(1927/1000/Ucar[1]+2749/1000/Ucar[2]+4061/1000/Ucar[3]+4068/1000/Ucar[4]+2693/1000/Ucar[5]+2138/1000/Ucar[6]+
+																				2577/1000/Ucar[7]+4635/1000/Ucar[8])*3600/81*1000);
+																	}
+																}
+															}
+														}
+													}
+												}
+											}
+										}
+									}
+
+									// while(1){
+									// 	if(marker.getPosition()=="113.60604,22.220207"){
+									// 		if(Ucar[1]!="限行(风速大于18m/s封桥)"){
+									// 			run2();
+									// 			continue;
+									// 		}
+									//
+									// 	}
+									// 	if(marker.getPosition()=="113.628028,22.23424"){
+									// 		if(Ucar[2]!="限行(风速大于18m/s封桥)"){
+									// 			run3();
+									// 			continue;
+									// 		}
+									//
+									// 	}
+									// 	if(marker.getPosition()=="113.66419,22.248064"){
+									// 		if(Ucar[3]!="限行(风速大于18m/s封桥)"){
+									// 			run4();
+									// 			continue;
+									// 		}
+									//
+									// 	}
+									// 	if(marker.getPosition()=="113.696999,22.267605"){
+									// 		if(Ucar[4]!="限行(风速大于18m/s封桥)"){
+									// 			run5();
+									// 			continue;
+									// 		}
+									//
+									// 	}
+									// 	if(marker.getPosition()=="113.719935,22.278745"){
+									// 		if(Ucar[5]!="限行(风速大于18m/s封桥)"){
+									// 			run6();
+									// 			continue;
+									// 		}
+									//
+									// 	}
+									// 	if(marker.getPosition()=="113.74061,22.280147"){
+									// 		if(Ucar[6]!="限行(风速大于18m/s封桥)"){
+									// 			run7();
+									// 			continue;
+									// 		}
+									//
+									// 	}
+									// 	if(marker.getPosition()=="113.765663,22.280184"){
+									// 		if(Ucar[7]!="限行(风速大于18m/s封桥)"){
+									// 			run8();
+									// 			continue;
+									// 		}
+									//
+									// 	}
+									// 	if(marker.getPosition()=="113.810717,22.280212"){
+									// 		if(Ucar[8]!="限行(风速大于18m/s封桥)"){
+									// 			run9();
+									// 			continue;
+									// 		}
+									//
+									// 	}
+									// }
+
+									// setTimeout(run9,40000);
+									// setTimeout(run8,35000);
+									// setTimeout(run7,30000);
+									// setTimeout(run6,25000);
+									// setTimeout(run5,20000);
+									// setTimeout(run4,15000);
+									// setTimeout(run3,10000);
+									// setTimeout(run2, 5000);
+								}
+							})
+
+						}
+
+						// map.on('click', showInfoClick);
+						// function showInfoClick(e){
+						// 	var text = '您在 [ '+e.lnglat.getLng()+','+e.lnglat.getLat()+' ] 的位置单击了地图！'
+						// 	document.querySelector("#text").innerText = text;
+						// }
 					</script>
 					
 				</div>
