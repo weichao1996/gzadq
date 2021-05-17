@@ -11,15 +11,13 @@
   <component name="ChangeListManager">
     <list default="true" id="50ac6085-54ae-4f71-9b93-facec789b89f" name="Default Changelist" comment="1">
       <change afterPath="$PROJECT_DIR$/src/main/webapp/img/car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/car2.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/webapp/img/carrain.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/webapp/img/rainandcar.png" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/webapp/img/raincar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/raincar2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/safeVcar.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/safeVcar.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/BridgeDataMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/BridgeDataMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/mapper/DfBridgeMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/mapper/DfBridgeMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/actualData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/actualData.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastData.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastDataPoint.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastDataPoint.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,13 +138,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="class" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <properties />
+      <listeners />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -308,7 +308,8 @@
       <workItem from="1620783684097" duration="4604000" />
       <workItem from="1620801596977" duration="211000" />
       <workItem from="1620877640419" duration="14452000" />
-      <workItem from="1620956079505" duration="20850000" />
+      <workItem from="1620956079505" duration="21177000" />
+      <workItem from="1621215392421" duration="12110000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1618819750822</created>
@@ -429,7 +430,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620729083818</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="1">
+      <created>1620989732502</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1620989732502</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

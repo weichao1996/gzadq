@@ -179,6 +179,15 @@
 
 				<jsp:include flush="true" page="threshold.jsp"></jsp:include>
 
+				<div class="input-card" style="color: gray">
+					<span style="color: red">说明：</span>
+					<span>1.本页面主要对降水、风力、能见度三要素进行了近24小时（逐小时）、近2-3天（逐3小时）和近4-6天（逐6小时）的预报预警</span>
+					<span>2.预报数据一般会在每天的上午和下午更新</span>
+					<span>3.采用5km*5km的格点预报形式，将覆盖在大桥上的7个格点实体化成站点，为大桥上各个路段提供预报预警</span>
+					<span>4.单击站点可查看具体预报数据以及数据趋势图</span>
+					<span>5.当降雨量>0mm或风速>10m/s或能见度<1000m的频率大于三分之一则给出预警信息</span>
+				</div>
+
 
 
 				<script>
@@ -220,54 +229,123 @@
 										// for(var i=0;i<res.length;i+=1){
 										var str=i+1+"| ";
 										var temp=res[i];
+										var rain1=0;
+										var wind1=0;
+										var vis1=0;
+										var rain3=0;
+										var wind3=0;
+										var vis3=0;
+										var rain6=0;
+										var wind6=0;
+										var vis6=0;
+
+
+										// for(var j=0;j<temp.length;j+=1){
+										// 	if(temp[j].rain>0){
+										// 		if(j<24){
+										// 			if(str.indexOf("预计24小时内即将降雨")==-1){
+										// 				str+="预计24小时内即将降雨,";
+										// 			}
+										// 		}else if(j>=24&&j<40){
+										// 			if(str.indexOf("预计2-3天内即将降雨")==-1){
+										// 				str+="预计2-3天内即将降雨,";
+										// 			}
+										// 		}else if(j>=40&&j<52){
+										// 			if(str.indexOf("预计4-6天内即将降雨")==-1){
+										// 				str+="预计4-6天内即将降雨,";
+										// 			}
+										// 		}
+										// 	}
+										// 	if(temp[j].wind>10){
+										// 		if(j<24){
+										// 			if(str.indexOf("预计24小时内风速较快")==-1){
+										// 				str+="预计24小时内风速较快,";
+										// 			}
+										// 		}else if(j>=24&&j<40){
+										// 			if(str.indexOf("预计2-3天内风速较快")==-1){
+										// 				str+="预计2-3天内风速较快,";
+										// 			}
+										// 		}else if(j>=40&&j<52){
+										// 			if(str.indexOf("预计4-6天内风速较快")==-1){
+										// 				str+="预计4-6天内风速较快,";
+										// 			}
+										// 		}
+										// 	}
+										// 	if(temp[j].vis<1){
+										// 		if(j<24){
+										// 			if(str.indexOf("预计24小时内能见度较低")==-1){
+										// 				str+="预计24小时内能见度较低,";
+										// 			}
+										// 		}else if(j>=24&&j<40){
+										// 			if(str.indexOf("预计2-3天内能见度较低")==-1){
+										// 				str+="预计2-3天内能见度较低,";
+										// 			}
+										// 		}else if(j>=40&&j<52){
+										// 			if(str.indexOf("预计4-6天内能见度较低")==-1){
+										// 				str+="预计4-6天内能见度较低,";
+										// 			}
+										// 		}
+										// 	}
+										// }
+
 										for(var j=0;j<temp.length;j+=1){
 											if(temp[j].rain>0){
 												if(j<24){
-													if(str.indexOf("预计24小时内即将降雨")==-1){
-														str+="预计24小时内即将降雨,";
-													}
+													rain1++;
 												}else if(j>=24&&j<40){
-													if(str.indexOf("预计2-3天内即将降雨")==-1){
-														str+="预计2-3天内即将降雨,";
-													}
+													rain3++;
 												}else if(j>=40&&j<52){
-													if(str.indexOf("预计4-6天内即将降雨")==-1){
-														str+="预计4-6天内即将降雨,";
-													}
+													rain6++;
 												}
 											}
 											if(temp[j].wind>10){
 												if(j<24){
-													if(str.indexOf("预计24小时内风速较快")==-1){
-														str+="预计24小时内风速较快,";
-													}
+													wind1++;
 												}else if(j>=24&&j<40){
-													if(str.indexOf("预计2-3天内风速较快")==-1){
-														str+="预计2-3天内风速较快,";
-													}
+													wind3++;
 												}else if(j>=40&&j<52){
-													if(str.indexOf("预计4-6天内风速较快")==-1){
-														str+="预计4-6天内风速较快,";
-													}
+													wind6++;
 												}
 											}
 											if(temp[j].vis<1){
 												if(j<24){
-													if(str.indexOf("预计24小时内能见度较低")==-1){
-														str+="预计24小时内能见度较低,";
-													}
+													vis1++;
 												}else if(j>=24&&j<40){
-													if(str.indexOf("预计2-3天内能见度较低")==-1){
-														str+="预计2-3天内能见度较低,";
-													}
+													vis3++;
 												}else if(j>=40&&j<52){
-													if(str.indexOf("预计4-6天内能见度较低")==-1){
-														str+="预计4-6天内能见度较低,";
-													}
+													vis6++;
 												}
 											}
 										}
 
+
+										if(rain1>=8){
+											str+="预计24小时内即将降雨,";
+										}
+										if(wind1>=8){
+											str+="预计24小时内风速较快,";
+										}
+										if(vis1>=8){
+											str+="预计24小时内能见度较低,";
+										}
+										if(rain3>=5){
+											str+="预计2-3天内即将降雨,";
+										}
+										if(wind3>=5){
+											str+="预计2-3天内风速较快,";
+										}
+										if(vis3>=5){
+											str+="预计2-3天内能见度较低,";
+										}
+										if(rain6>=4){
+											str+="预计4-6天内即将降雨,";
+										}
+										if(wind6>=4){
+											str+="预计4-6天内风速较快,";
+										}
+										if(vis6>=4){
+											str+="预计4-6天内能见度较低,";
+										}
 										if(str.length>3){
 											str=str.substring(0,str.length-1);
 											// 设置label标签
@@ -510,52 +588,122 @@
 								if(getArrayIndex(zhandian,obtid)==0){document.getElementById('getLast').style.display='none'}
 
 								var tips="";
+								var rain1=0;
+								var wind1=0;
+								var vis1=0;
+								var rain3=0;
+								var wind3=0;
+								var vis3=0;
+								var rain6=0;
+								var wind6=0;
+								var vis6=0;
+
+								// for(var j=0;j<res.length;j+=1){
+								// 	if(res[j].rain>0){
+								// 		if(j<24){
+								// 			if(tips.indexOf("预计24小时内即将降雨")==-1){
+								// 				tips+="预计24小时内即将降雨,";
+								// 			}
+								// 		}else if(j>=24&&j<40){
+								// 			if(tips.indexOf("预计2-3天内即将降雨")==-1){
+								// 				tips+="预计2-3天内即将降雨,";
+								// 			}
+								// 		}else if(j>=40&&j<52){
+								// 			if(tips.indexOf("预计4-6天内即将降雨")==-1){
+								// 				tips+="预计4-6天内即将降雨,";
+								// 			}
+								// 		}
+								// 	}
+								// 	if(res[j].wind>10){
+								// 		if(j<24){
+								// 			if(tips.indexOf("预计24小时内风速较快")==-1){
+								// 				tips+="预计24小时内风速较快,";
+								// 			}
+								// 		}else if(j>=24&&j<40){
+								// 			if(tips.indexOf("预计2-3天内风速较快")==-1){
+								// 				tips+="预计2-3天内风速较快,";
+								// 			}
+								// 		}else if(j>=40&&j<52){
+								// 			if(tips.indexOf("预计4-6天内风速较快")==-1){
+								// 				tips+="预计4-6天内风速较快,";
+								// 			}
+								// 		}
+								// 	}
+								// 	if(res[j].vis<1){
+								// 		if(j<24){
+								// 			if(tips.indexOf("预计24小时内能见度较低")==-1){
+								// 				tips+="预计24小时内能见度较低,";
+								// 			}
+								// 		}else if(j>=24&&j<40){
+								// 			if(tips.indexOf("预计2-3天内能见度较低")==-1){
+								// 				tips+="预计2-3天内能见度较低,";
+								// 			}
+								// 		}else if(j>=40&&j<52){
+								// 			if(tips.indexOf("预计4-6天内能见度较低")==-1){
+								// 				tips+="预计4-6天内能见度较低,";
+								// 			}
+								// 		}
+								// 	}
+								// }
 								for(var j=0;j<res.length;j+=1){
 									if(res[j].rain>0){
 										if(j<24){
-											if(tips.indexOf("预计24小时内即将降雨")==-1){
-												tips+="预计24小时内即将降雨,";
-											}
+											rain1++;
 										}else if(j>=24&&j<40){
-											if(tips.indexOf("预计2-3天内即将降雨")==-1){
-												tips+="预计2-3天内即将降雨,";
-											}
+											rain3++;
 										}else if(j>=40&&j<52){
-											if(tips.indexOf("预计4-6天内即将降雨")==-1){
-												tips+="预计4-6天内即将降雨,";
-											}
+											rain6++;
 										}
 									}
 									if(res[j].wind>10){
 										if(j<24){
-											if(tips.indexOf("预计24小时内风速较快")==-1){
-												tips+="预计24小时内风速较快,";
-											}
+											wind1++;
 										}else if(j>=24&&j<40){
-											if(tips.indexOf("预计2-3天内风速较快")==-1){
-												tips+="预计2-3天内风速较快,";
-											}
+											wind3++;
 										}else if(j>=40&&j<52){
-											if(tips.indexOf("预计4-6天内风速较快")==-1){
-												tips+="预计4-6天内风速较快,";
-											}
+											wind6++;
 										}
 									}
 									if(res[j].vis<1){
 										if(j<24){
-											if(tips.indexOf("预计24小时内能见度较低")==-1){
-												tips+="预计24小时内能见度较低,";
-											}
+											vis1++;
 										}else if(j>=24&&j<40){
-											if(tips.indexOf("预计2-3天内能见度较低")==-1){
-												tips+="预计2-3天内能见度较低,";
-											}
+											vis3++;
 										}else if(j>=40&&j<52){
-											if(tips.indexOf("预计4-6天内能见度较低")==-1){
-												tips+="预计4-6天内能见度较低,";
-											}
+											vis6++;
 										}
 									}
+								}
+
+
+
+
+								if(rain1>=8){
+									tips+="预计24小时内即将降雨,";
+								}
+								if(wind1>=8){
+									tips+="预计24小时内风速较快,";
+								}
+								if(vis1>=8){
+									tips+="预计24小时内能见度较低,";
+								}
+								if(rain3>=5){
+									tips+="预计2-3天内即将降雨,";
+								}
+								if(wind3>=5){
+									tips+="预计2-3天内风速较快,";
+								}
+								if(vis3>=5){
+									tips+="预计2-3天内能见度较低,";
+								}
+								if(rain6>=4){
+									tips+="预计4-6天内即将降雨,";
+								}
+								if(wind6>=4){
+									tips+="预计4-6天内风速较快,";
+								}
+								if(vis6>=4){
+									tips+="预计4-6天内能见度较低,";
 								}
 								if(tips.length>0){
 									tips=tips.substring(0,tips.length-1);

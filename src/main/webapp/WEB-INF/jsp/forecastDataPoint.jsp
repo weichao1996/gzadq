@@ -60,13 +60,13 @@
 	            		document.getElementById("color1").style.display="block";
 	            		document.getElementById("color2").style.display="none";
 	            		document.getElementById("color3").style.display="none";
-	            		for(var i=0;i<res.length;i++){
-	            			if(res[i].count>0){
-	            				document.getElementById("tips").innerHTML+="大桥附近有可能即将降雨，请减速慢行，注意保持车距！";
-	            				document.getElementById("tips").style.display="block";
-	            				break;
-	            			}
-	            		}
+	            		// for(var i=0;i<res.length;i++){
+	            		// 	if(res[i].count>0){
+	            		// 		document.getElementById("tips").innerHTML+="大桥附近有可能即将降雨，请减速慢行，注意保持车距！";
+	            		// 		document.getElementById("tips").style.display="block";
+	            		// 		break;
+	            		// 	}
+	            		// }
 	            	}else if(res.length>0&&type=="wspd10m"){
 	            		/* rainmap.hide();
 	            		vismap.hide();
@@ -80,13 +80,13 @@
 	            		document.getElementById("color1").style.display="none";
 	            		document.getElementById("color2").style.display="block";
 	            		document.getElementById("color3").style.display="none";
-	            		for(var i=0;i<res.length;i++){
-	            			if(res[i].count>10){
-	            				document.getElementById("tips").innerHTML+="大桥附近有可能即将风速较快，请减速慢行，注意保持车距！";
-	            				document.getElementById("tips").style.display="block";
-	            				break;
-	            			}
-	            		}
+	            		// for(var i=0;i<res.length;i++){
+	            		// 	if(res[i].count>10){
+	            		// 		document.getElementById("tips").innerHTML+="大桥附近有可能即将风速较快，请减速慢行，注意保持车距！";
+	            		// 		document.getElementById("tips").style.display="block";
+	            		// 		break;
+	            		// 	}
+	            		// }
 	            	}else if(res.length>0&&type=="visi"){
 	            		/* rainmap.hide();
 	            		windmap.hide();
@@ -100,13 +100,13 @@
 	            		document.getElementById("color1").style.display="none";
 	            		document.getElementById("color2").style.display="none";
 	            		document.getElementById("color3").style.display="block";
-	            		for(var i=0;i<res.length;i++){
-	            			if(res[i].count<1){
-	            				document.getElementById("tips").innerHTML+="大桥附近有可能即将能见度较低，请减速慢行，注意保持车距！";
-	            				document.getElementById("tips").style.display="block";
-	            				break;
-	            			}
-	            		}
+	            		// for(var i=0;i<res.length;i++){
+	            		// 	if(res[i].count<1){
+	            		// 		document.getElementById("tips").innerHTML+="大桥附近有可能即将能见度较低，请减速慢行，注意保持车距！";
+	            		// 		document.getElementById("tips").style.display="block";
+	            		// 		break;
+	            		// 	}
+	            		// }
 	            	}
 	            }
 	        });

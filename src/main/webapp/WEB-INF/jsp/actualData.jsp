@@ -156,13 +156,20 @@
 						<table class="table table-hover">
 							<thead>
 							<th>站点</th>
-							<th>预警信息</th>
+							<th>告警信息</th>
 
 							</thead>
 							<tbody id="tbody">
 
 							</tbody>
 						</table>
+
+							<span style="color: red">说明：</span>
+							<span style="color: gray">1.本页面主要对降水、风力、能见度三要素进行了实况检测</span>
+							<span style="color: gray">2.实况数据每5分钟更新一次</span>
+							<span style="color: gray">3.单击站点可查看站点信息，双击站点可查看具体实况数据以及数据趋势图</span>
+							<span style="color: gray">4.当降雨量>0mm或风速>10m/s或能见度<1000m，则给出告警信息</span>
+
 					</div>
 			
 					<script type="text/javascript">
