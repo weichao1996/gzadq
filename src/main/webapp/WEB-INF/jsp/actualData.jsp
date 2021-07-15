@@ -219,7 +219,7 @@
 											if(temp[0].wind>10){
 												str+="当前风速较大,<br>";
 											}
-											if(temp[0].vis<1000){
+											if(temp[0].vis<1000&&temp[0].vis>0){
 												str+="当前能见度较低,<br>";
 											}
 
@@ -399,7 +399,7 @@
 							if(res[0].wind>10){
 								document.getElementById('tips').innerHTML+="风速较快，";
 							}
-							if(res[0].vis<1000){
+							if(res[0].vis<1000&&res[0].vis>0){
 								document.getElementById('tips').innerHTML+="能见度较低，";
 							}
 							document.getElementById('tips').innerHTML+="请减速慢行，注意保持车距！";

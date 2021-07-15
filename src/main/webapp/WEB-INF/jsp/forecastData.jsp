@@ -307,7 +307,7 @@
 													wind6++;
 												}
 											}
-											if(temp[j].vis<1){
+											if(temp[j].vis<1&&temp[j].vis>0){
 												if(j<24){
 													vis1++;
 												}else if(j>=24&&j<40){
@@ -664,7 +664,7 @@
 											wind6++;
 										}
 									}
-									if(res[j].vis<1){
+									if(res[j].vis<1&&res[j].vis>0){
 										if(j<24){
 											vis1++;
 										}else if(j>=24&&j<40){

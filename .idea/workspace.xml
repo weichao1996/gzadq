@@ -10,14 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="50ac6085-54ae-4f71-9b93-facec789b89f" name="Default Changelist" comment="1">
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/car.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/carrain.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/rainandcar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/webapp/img/raincar.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/controller/ThresholdController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/cn/tianhai/gzadq/controller/ThresholdController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/actualData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/actualData.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastData.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastData.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastDataPoint.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/jsp/forecastDataPoint.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/controller/ActualController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/controller/ActualController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/controller/ThresholdController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/controller/ThresholdController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/Threshold.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/pojo/Threshold.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/CalculateNew.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/cn/tianhai/gzadq/util/CalculateNew.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/cn.tianhai/gzadq/pom.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/m2e-wtp/web-resources/META-INF/maven/cn.tianhai/gzadq/pom.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -138,15 +139,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="" nameIsGenerated="true">
+    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
         <value>
           <option name="containerStateName" value="" />
         </value>
       </option>
-      <option name="TEST_OBJECT" value="CLASS" />
-      <properties />
-      <listeners />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -309,7 +308,13 @@
       <workItem from="1620801596977" duration="211000" />
       <workItem from="1620877640419" duration="14452000" />
       <workItem from="1620956079505" duration="21177000" />
-      <workItem from="1621215392421" duration="12110000" />
+      <workItem from="1621215392421" duration="13294000" />
+      <workItem from="1621245809745" duration="88000" />
+      <workItem from="1621567303232" duration="4866000" />
+      <workItem from="1626055163359" duration="93000" />
+      <workItem from="1626055294508" duration="1331000" />
+      <workItem from="1626142719199" duration="13171000" />
+      <workItem from="1626313816099" duration="3544000" />
     </task>
     <task id="LOCAL-00001" summary="1">
       <created>1618819750822</created>
@@ -437,7 +442,14 @@
       <option name="project" value="LOCAL" />
       <updated>1620989732502</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="1">
+      <created>1621244138637</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1621244138637</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

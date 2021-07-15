@@ -125,7 +125,7 @@ public class ThresholdController {
 							if(a.getWind()>maxWind) {
 								maxWind=a.getWind();
 							}
-							if(a.getVis()<minVis) {
+							if(a.getVis()<minVis&&a.getVis()>0) {
 								minVis=a.getVis();
 							}
 						}
@@ -165,7 +165,7 @@ public class ThresholdController {
 								if(c.getWind()>maxWind) {
 									maxWind=c.getWind();
 								}
-								if(c.getVis()<minVis) {
+								if(c.getVis()<minVis&&c.getVis()>0) {
 									minVis=c.getVis();
 								}
 							}
