@@ -277,6 +277,8 @@
 					    <div style="width: 50px;height: 20px;background-color: #00FFFF"></div>200-1000<br>
 					    <div style="width: 50px;height: 20px;background-color: #00C5CD"></div>50-200<br>
 					    <div style="width: 50px;height: 20px;background-color: #3A5FCD"></div>0-50(m)<br>
+						<div style="width: 50px;height: 20px;background-color: #0000EE"></div>NaN<br>
+
 
 					</div>
 					<div class="input-card" style="width: 200px;">
@@ -525,7 +527,7 @@
 										'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
 										'text-align': 'center',
 										'font-size': '12px',
-										'color': 'white'
+										'color': setWindTextColor(res[i].count)
 									},
 									position: center
 								});
@@ -581,7 +583,7 @@
 								rectangle.setMap(map);
 
 								var text = new AMap.Text({
-									text:res[i].count,
+									text:setVisText(res[i].count),
 									anchor:'center', // 设置文本标记锚点
 
 									cursor:'pointer',
@@ -596,7 +598,7 @@
 										'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
 										'text-align': 'center',
 										'font-size': '12px',
-										'color': 'black'
+										'color': setVisTextColor(res[i].count)
 									},
 									position: center
 								});
@@ -646,7 +648,7 @@
 
 					    function setVisColor(count) {
 					    	var vis=count/10;
-					        if (vis<0.005) {
+					        if (vis<0.005&&vis>0) {
 					            return '#3A5FCD'
 					        } else if(vis>0.005&&vis<0.02||vis==0.005){
 					            return '#00C5CD'
@@ -656,8 +658,35 @@
 					            return '#9AFF9A'
 					        } else if(vis>1||vis==1){
 					            return '#ffffff'
-					        }
+					        } else if(vis==0){
+					        	return '#0000EE';
+							}
 					    }
+
+					    function setVisText(count){
+							if(count==0){
+								return "NaN";
+							}else{
+								return count;
+							}
+						}
+
+						function setVisTextColor(count){
+							if(count==0){
+								return 'white';
+							}else{
+								return 'black';
+							}
+						}
+
+						function setWindTextColor(count){
+							var vis=count/20.8;
+							if(vis>0.385&&vis<0.668||vis==0.385){
+								return 'black';
+							}else{
+								return 'white';
+							}
+						}
 
 
 

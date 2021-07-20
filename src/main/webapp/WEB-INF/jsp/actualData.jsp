@@ -169,6 +169,7 @@
 							<span style="color: gray">2.实况数据每5分钟更新一次</span>
 							<span style="color: gray">3.单击站点可查看站点信息，双击站点可查看具体实况数据以及数据趋势图</span>
 							<span style="color: gray">4.当降雨量>0mm或风速>10m/s或能见度<1000m，则给出告警信息</span>
+							<span style="color: gray">5.能见度的缺省值为0</span>
 
 					</div>
 			
@@ -274,7 +275,10 @@
 
 									// }
 								}
-
+								if(str==""){
+									document.getElementById("tbody").innerHTML="<tr>"+
+											"<td colspan='2' style='text-align:center'>当前无告警信息</td></tr>";
+								}
 
 						            	
 					        }
