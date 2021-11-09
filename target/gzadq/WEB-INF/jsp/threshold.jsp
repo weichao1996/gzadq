@@ -7,7 +7,7 @@
 		    var event = event || window.event
 		    //esc 键被按下执行
 		    if (event.keyCode == 27) {
-		        $('.close').click();
+		        $('.close_btn').click();
 		    }
 		};
 		
@@ -16,7 +16,7 @@
 			
 			$.ajax({
 	            type: 'GET',
-	            url: '/gzadq/getThreshold',
+	            url: '/getThreshold',
 	            error: function () {
 	                alert('网络错误');
 	            },
@@ -24,7 +24,7 @@
 	            	
 	            	if(res!=null&&res!=""){
 	            		var str="";
-	            		str += "<form action='/gzadq/updateThreshold/"+path+"' method='post' name='form' id='form'>"+
+	            		str += "<form action='/updateThreshold/"+path+"' method='post' name='form' id='form'>"+
 	            					"<span class='text-muted'>实况降水(mm)</span><input type='text' class='form-control' id='arain' name='arain' value='"+res.arain+"' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
 	            					"<span class='text-muted'>实况风力(m/s)</span><input type='text' class='form-control' id='awind' name='awind' value='"+res.awind+"' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
 	            					"<span class='text-muted'>实况能见度(km)</span><input type='text' class='form-control' id='avis' name='avis' value='"+res.avis+"' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
@@ -39,7 +39,7 @@
 	            		document.getElementById("submit").innerHTML="修改";
 	            	}else{
 	            		var str="";
-	            		str += "<form action='/gzadq/addThreshold/"+path+"' method='post' name='form' id='form'>"+
+	            		str += "<form action='/addThreshold/"+path+"' method='post' name='form' id='form'>"+
     					"<span class='text-muted'>实况降水(mm)</span><input type='text' class='form-control' id='arain' name='arain' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
     					"<span class='text-muted'>实况风力(m/s)</span><input type='text' class='form-control' id='awind' name='awind' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
     					"<span class='text-muted'>实况能见度(km)</span><input type='text' class='form-control' id='avis' name='avis' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
@@ -96,7 +96,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title">阈值设定</h4>
+            <h4 class="modal-title"><img src="<%=request.getContextPath()%>/img/告警.png"></img>&nbsp;&nbsp;阈值设定</h4>
           </div>
           <div class="modal-body" id="modal-body">
             

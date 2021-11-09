@@ -32,6 +32,7 @@ import net.sf.json.JSONArray;
 @Controller
 public class CalculateController {
 	@Autowired CalculateNew calculateNew;
+	@Autowired Calculate calculate;
 	@Autowired BridgeDetailService bridgeDetailServiceImpl;
 	@Autowired DfBridgeService dfBridgeServiceImpl;
 	@Autowired BridgeDataService bridgeDataServiceImpl;
@@ -109,6 +110,15 @@ public class CalculateController {
         return "safeVcar";
         
     }
+
+
+	@GetMapping("/safeUcar")
+	@ResponseBody
+	public Object safeUcar(int carId,double eg,double s,double uwind) {
+
+		return calculate.test(carId,eg,s,uwind).doubleValue();
+
+	}
 	
 
 }

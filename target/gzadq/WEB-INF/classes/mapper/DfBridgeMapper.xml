@@ -22,8 +22,8 @@
         	select *
         	from (
 	        	select da.obtid, to_char(ddatetime,'yyyy-mm-dd hh24:mi:ss') as ddatetime,wd2df,rain,vis,lon,lat from 
-	        	szym.t_df_bridge  da 
-	        	left join szym.T_BRIDGE_DETAIL de on da.obtid=de.obtid 
+	        	t_df_bridge  da 
+	        	left join T_BRIDGE_DETAIL de on da.obtid=de.obtid 
 	        	where da.obtid=#{obtid} order by ddatetime desc 
 	        	) 
         	where <![CDATA[ rownum<=36  ]]> order by rownum asc  
@@ -33,7 +33,7 @@
         <select id="getHourActualData" parameterType="cn.tianhai.gzadq.pojo.ActualData" resultMap="ActualDataMap">
         	select obtid, to_char(ddatetime,'yyyy-mm-dd hh24:mi:ss') as ddatetime,wd2df,rain,vis 
         	from (
-	        	select * from szym.t_df_bridge 
+	        	select * from t_df_bridge 
 	        	where obtid=#{obtid} 
 	        	order by ddatetime desc
 	        	) 
@@ -42,16 +42,24 @@
         
         <select id="getWindList" resultMap="ActualDataMap">
         select br.obtid,wd2df,wd2dd,rain,lon,lat from 
-        	((select * from szym.T_DF_BRIDGE t where obtid='G3972' or obtid='G3973' or obtid='G3974' or obtid='G3975' or obtid='G3978' 
-        	order by ddatetime desc) br
-        	left join szym.T_BRIDGE_DETAIL de on br.obtid=de.obtid)
-         where <![CDATA[ rownum<=5  ]]>
+        	(select * from(select * from T_DF_BRIDGE t where obtid='G3972' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+        		union
+			 select * from(select * from T_DF_BRIDGE t where obtid='G3973' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+			    union
+			 select * from(select * from T_DF_BRIDGE t where obtid='G3974' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+			    union
+			 select * from(select * from T_DF_BRIDGE t where obtid='G3975' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+			    union
+			 select * from(select * from T_DF_BRIDGE t where obtid='G3978' order by ddatetime desc) where <![CDATA[ rownum<=1  ]]>
+        	) br
+        	left join T_BRIDGE_DETAIL de on br.obtid=de.obtid
+
     	</select>
     
        <select id="getActualDataById" parameterType="cn.tianhai.gzadq.pojo.ActualData" resultMap="ActualDataMap">
         	select obtid, to_char(ddatetime,'yyyy-mm-dd hh24:mi:ss') as ddatetime,wd2df,rain,vis 
         	from (
-	        	select * from szym.t_df_bridge 
+	        	select * from t_df_bridge 
 	        	where obtid=#{obtid} 
 	        	order by ddatetime desc
 	        	) 

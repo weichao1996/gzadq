@@ -43,7 +43,7 @@
 			            type: 'GET',
 			            url: '/getDetailIn',
 			            error: function () {
-			                alert('网络错误');
+			                alert('获取警戒圈预警错误');
 			            },
 			            success: function (res) {
 			            	var str0="";
@@ -192,7 +192,7 @@
 					        type: 'GET',
 					        url: '/getMinActual',
 					        error: function () {
-					            alert('网络错误');
+					            alert('获取所有分钟数据错误');
 					        },
 					        success: function (res) {
 
@@ -296,7 +296,7 @@
 					            type: 'GET',
 					            url: '/getMinActual/'+obtid,
 					            error: function () {
-					                alert('网络错误');
+					                alert('获取该站点分钟数据错误');
 					            },
 					            success: function (res) {
 					                //var data=res;
@@ -348,7 +348,7 @@
 					            type: 'GET',
 					            url: '/getHourActual/'+obtid,
 					            error: function () {
-					                alert('网络错误');
+					                alert('获取该站点小时数据错误');
 					            },
 					            success: function (res) {
 					                //var data=res;

@@ -21,7 +21,7 @@
         <select id="getForecastTime" resultMap="ForecastDataMap">
         	select to_char(forecasttime,'yyyy-mm-dd hh24:mi:ss') as forecasttime from
         	(
-        		select * from t_zh_grid_forecast order by ddatetime desc,venueid asc,forecasttime asc
+        		select * from WEICHAO.t_zh_grid_forecast order by ddatetime desc,venueid asc,forecasttime asc
         	)
         	where <![CDATA[ rownum<=88  ]]> order by rownum asc   
         </select>
@@ -29,17 +29,17 @@
         <select id="getForecastData" resultMap="ForecastDataMap">
 	        select * from(
 	        (select * from(
-		        select * from t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss') 
+		        select * from WEICHAO.t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss')
 		        order by ddatetime desc,venueid asc,forecasttime asc
 	        )
 	        where <![CDATA[ rownum<=287  ]]> order by rownum asc) f 
-			left join t_zh_grid_point_5k p on f.venueid=p.recid)
+			left join WEICHAO.t_zh_grid_point_5k p on f.venueid=p.recid)
 		</select>
         
     	<select id="getForeWindList" resultMap="ForecastDataMap">
 	     
 	        select venueid,wspd10m,forecasttime from(
-		        select * from t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss')
+		        select * from WEICHAO.t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss')
 		        and (venueid=234 or venueid=256 or venueid=257 or venueid=258 or venueid=260 or venueid=268 or venueid=269)
 		        order by ddatetime desc,venueid asc,forecasttime asc
 	        )
@@ -48,12 +48,12 @@
 		</select>
 		
 		<select id="getPoint5k" resultMap="ForecastDataMap">
-	        select recid as venueid,x,y from t_zh_grid_point_5k
+	        select recid as venueid,x,y from WEICHAO.t_zh_grid_point_5k
 		</select>
        
        <select id="getForecastDataById" parameterType="cn.tianhai.gzadq.pojo.ForecastData" resultMap="ForecastDataMap">
 	        select * from(
-		        select * from t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss') 
+		        select * from WEICHAO.t_zh_grid_forecast where forecasttime=to_date(#{forecasttime},'yyyy-mm-dd hh24:mi:ss')
 		        and venueid=#{venueid}
 		        order by ddatetime desc,venueid asc,forecasttime asc
 	        )
@@ -62,7 +62,7 @@
 		
 		<select id="getForecastDataDiv" parameterType="cn.tianhai.gzadq.pojo.ForecastData" resultMap="ForecastDataMap">
 	       select * from(
-		        select * from t_zh_grid_forecast where venueid=#{venueid}  
+		        select * from WEICHAO.t_zh_grid_forecast where venueid=#{venueid}
 		        order by ddatetime desc,venueid asc,forecasttime asc
 	        )
 	        where <![CDATA[ rownum<=88  ]]> order by rownum asc

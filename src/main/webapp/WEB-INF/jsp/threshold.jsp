@@ -18,7 +18,7 @@
 	            type: 'GET',
 	            url: '/getThreshold',
 	            error: function () {
-	                alert('网络错误');
+	                alert('获取阈值错误');
 	            },
 	            success: function (res) {
 	            	

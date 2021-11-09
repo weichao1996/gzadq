@@ -8,7 +8,7 @@
        
         
         <select id="getCar" parameterType="cn.tianhai.gzadq.pojo.Car" resultType="cn.tianhai.gzadq.pojo.Car">
-        	select * from T_CAR where cid=#{cid}  
+        	select * from WEICHAO.T_CAR where cid=#{cid}  
         </select>
         
         

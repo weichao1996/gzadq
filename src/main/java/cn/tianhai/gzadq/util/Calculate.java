@@ -320,7 +320,76 @@ public class Calculate {
 		return 0;
 
 	}
-	
-	
+
+	/**
+	 * 根据风速求安全行驶速度
+	 * @param car0
+	 * @return
+	 */
+	public BigDecimal test(int carId,double eg,double s,double uwind) {
+		if(carId==1){
+			m=BigDecimal.valueOf(1140);
+			A=BigDecimal.valueOf(2.05);
+			kcs=BigDecimal.valueOf(0.034);
+			kcl=BigDecimal.valueOf(0.02);
+		}else if(carId==2){
+			m=BigDecimal.valueOf(970);
+			A=BigDecimal.valueOf(2.3);
+			kcs=BigDecimal.valueOf(0.071);
+			kcl=BigDecimal.valueOf(0.04);
+		}else if(carId==3){
+			m=BigDecimal.valueOf(7100);
+			A=BigDecimal.valueOf(5.55);
+			kcs=BigDecimal.valueOf(0.18);
+			kcl=BigDecimal.valueOf(0.04);
+		}else if(carId==4){
+			m=BigDecimal.valueOf(17340);
+			A=BigDecimal.valueOf(8.89);
+			kcs=BigDecimal.valueOf(0.18);
+			kcl=BigDecimal.valueOf(0.04);
+		}
+
+//		eg=getEg(a);
+		us=BigDecimal.valueOf(s);
+
+		Uwind=BigDecimal.valueOf(uwind);
+		for(Ucar0=new BigDecimal(0.01);Ucar0.compareTo(new BigDecimal(300))==-1;Ucar0=Ucar0.add(BigDecimal.valueOf(0.01))) {
+			Ucar=Ucar0.multiply(new BigDecimal(1000)).divide(new BigDecimal(3600),5,RoundingMode.HALF_UP); //	m/s
+			double egRadians = Math.toRadians(eg);//角度转换
+			double arfaRadians = Math.toRadians(arfa);//角度转换
+			betatemp=Uwind.multiply(BigDecimal.valueOf(Math.sin(egRadians))).divide(
+					Uwind.multiply(BigDecimal.valueOf(Math.cos(egRadians))).add(Ucar),5,RoundingMode.HALF_UP);
+			if(betatemp.compareTo(new BigDecimal(0))>-1) {
+				beta=BigDecimal.valueOf(Math.atan(betatemp.doubleValue())).multiply(new BigDecimal(180)).divide(BigDecimal.valueOf(3.14159),5,RoundingMode.HALF_UP);
+			}else if(betatemp.compareTo(new BigDecimal(0))==-1){
+				beta=BigDecimal.valueOf(Math.atan(betatemp.doubleValue())).multiply(new BigDecimal(180)).divide(BigDecimal.valueOf(3.14159),5,RoundingMode.HALF_UP)
+						.add(new BigDecimal(180));
+			}
+
+			Cs=kcs.multiply(beta);
+			Cl=kcl.multiply(beta);
+			Fs=BigDecimal.valueOf(0.5).multiply(lou).multiply(A).multiply(Cs).multiply(
+					BigDecimal.valueOf(Math.pow(Uwind.doubleValue(), 2))
+							.add(BigDecimal.valueOf(Math.pow(Ucar.doubleValue(), 2)))
+							.add(new BigDecimal(2).multiply(Uwind).multiply(Ucar).multiply(BigDecimal.valueOf(Math.cos(egRadians))))
+			);
+			Fl=BigDecimal.valueOf(0.5).multiply(lou).multiply(A).multiply(Cl).multiply(
+					BigDecimal.valueOf(Math.pow(Uwind.doubleValue(), 2))
+							.add(BigDecimal.valueOf(Math.pow(Ucar.doubleValue(), 2)))
+							.add(new BigDecimal(2).multiply(Uwind).multiply(Ucar).multiply(BigDecimal.valueOf(Math.cos(egRadians))))
+			);
+			Fi=m.multiply(BigDecimal.valueOf(Math.pow(Ucar.doubleValue(), 2))).divide(R,5,RoundingMode.HALF_UP);
+			Ga=m.multiply(g).multiply(BigDecimal.valueOf(Math.sin(arfaRadians)));
+
+			Ff=us.multiply(m.multiply(g).multiply(BigDecimal.valueOf(Math.cos(arfaRadians))).subtract(Fl));
+
+			if(Fs.add(Fi).add(Ga).compareTo(Ff)>-1) {
+				break;
+			}
+
+		}
+		return Ucar0;
+
+	}
 	
 }

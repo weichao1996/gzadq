@@ -19,7 +19,7 @@
         .white_content {
             display: none;
             position: absolute;
-            top: 20%;
+            top: 25%;
             left: 20%;
             padding-bottom:30px;
             border: 7px solid #37424f;
@@ -27,13 +27,28 @@
             z-index:1002;
             overflow: auto;
         }
+        .left_btn{
+            position: absolute;
+            top:45% ;
+            left: 0;
+        }
+        .right_btn{
+            position: absolute;
+            top:45% ;
+            right: 0;
+        }
+        .close_btn{
+             position: absolute;
+             top:10px ;
+             right: 0px;
+        }
 		.yuzhi{
 	        font-family: "宋体";
 	        font-size:15px;
 	    	background-color: #fff;
 	    	position: fixed;
 	    	right: 1rem;
-        	top: 40px;
+        	top: 1rem;
         	width: 60px;height: 60px;border-radius: 50%;border: none;
         	color:#25A5F7;
         	font-weight: 400;
@@ -76,7 +91,39 @@
  
 		a:visited{text-decoration:none;} /*指已经访问过的链接*/
  
-		a:hover{text-decoration:none;} /*指鼠标在链接*/}
+		a:hover{text-decoration:none;} /*指鼠标在链接*/
  
 		a:active{text-decoration:none;} /*指正在点的链接*/
+
+        .amap-marker-label{
+            border: 0;
+            background-color: transparent;
+        }
+
+        .info{
+            position: relative;
+            top: 0;
+            right: 0;
+            min-width: 0;
+        }
+
+.input-card2 {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border-radius: .25rem;
+    width: 40rem;
+    border-width: 0;
+    border-radius: 0.4rem;
+    box-shadow: 0 2px 6px 0 rgb(114 124 245 / 50%);
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 0.75rem 1.25rem;
+}
         

@@ -42,7 +42,7 @@
 	            type: 'GET',
 	            url: '/getForecastData/'+forecasttime+'/'+type,
 	            error: function () {
-	                alert('网络错误');
+	                alert('获取预报数据错误');
 	            },
 	            success: function (res) {
 	            	document.getElementById("tips").style.display="none";
@@ -117,7 +117,7 @@
 	            type: 'GET',
 	            url: '/getForecastTime',
 	            error: function () {
-	                alert('网络错误');
+	                alert('获取预报时间错误');
 	            },
 	            success: function (res) {
 	            		var str="";
@@ -150,7 +150,7 @@
 		            type: 'GET',
 		            url: '/getDetailIn',
 		            error: function () {
-		                alert('网络错误');
+		                alert('获取警戒圈预警错误');
 		            },
 		            success: function (res) {
 		            	var str0="";

@@ -40,7 +40,7 @@
 			var type=document.getElementById("type").value;
 			$.ajax({
 	            type: 'GET',
-	            url: '/gzadq/getForecastData/'+forecasttime+'/'+type,
+	            url: '/getForecastData/'+forecasttime+'/'+type,
 	            error: function () {
 	                alert('网络错误');
 	            },
@@ -60,13 +60,13 @@
 	            		document.getElementById("color1").style.display="block";
 	            		document.getElementById("color2").style.display="none";
 	            		document.getElementById("color3").style.display="none";
-	            		for(var i=0;i<res.length;i++){
-	            			if(res[i].count>0){
-	            				document.getElementById("tips").innerHTML+="大桥附近有可能即将降雨，请减速慢行，注意保持车距！";
-	            				document.getElementById("tips").style.display="block";
-	            				break;
-	            			}
-	            		}
+	            		// for(var i=0;i<res.length;i++){
+	            		// 	if(res[i].count>0){
+	            		// 		document.getElementById("tips").innerHTML+="大桥附近有可能即将降雨，请减速慢行，注意保持车距！";
+	            		// 		document.getElementById("tips").style.display="block";
+	            		// 		break;
+	            		// 	}
+	            		// }
 	            	}else if(res.length>0&&type=="wspd10m"){
 	            		/* rainmap.hide();
 	            		vismap.hide();
@@ -80,13 +80,13 @@
 	            		document.getElementById("color1").style.display="none";
 	            		document.getElementById("color2").style.display="block";
 	            		document.getElementById("color3").style.display="none";
-	            		for(var i=0;i<res.length;i++){
-	            			if(res[i].count>10){
-	            				document.getElementById("tips").innerHTML+="大桥附近有可能即将风速较快，请减速慢行，注意保持车距！";
-	            				document.getElementById("tips").style.display="block";
-	            				break;
-	            			}
-	            		}
+	            		// for(var i=0;i<res.length;i++){
+	            		// 	if(res[i].count>10){
+	            		// 		document.getElementById("tips").innerHTML+="大桥附近有可能即将风速较快，请减速慢行，注意保持车距！";
+	            		// 		document.getElementById("tips").style.display="block";
+	            		// 		break;
+	            		// 	}
+	            		// }
 	            	}else if(res.length>0&&type=="visi"){
 	            		/* rainmap.hide();
 	            		windmap.hide();
@@ -100,13 +100,13 @@
 	            		document.getElementById("color1").style.display="none";
 	            		document.getElementById("color2").style.display="none";
 	            		document.getElementById("color3").style.display="block";
-	            		for(var i=0;i<res.length;i++){
-	            			if(res[i].count<1){
-	            				document.getElementById("tips").innerHTML+="大桥附近有可能即将能见度较低，请减速慢行，注意保持车距！";
-	            				document.getElementById("tips").style.display="block";
-	            				break;
-	            			}
-	            		}
+	            		// for(var i=0;i<res.length;i++){
+	            		// 	if(res[i].count<1){
+	            		// 		document.getElementById("tips").innerHTML+="大桥附近有可能即将能见度较低，请减速慢行，注意保持车距！";
+	            		// 		document.getElementById("tips").style.display="block";
+	            		// 		break;
+	            		// 	}
+	            		// }
 	            	}
 	            }
 	        });
@@ -115,7 +115,7 @@
 		function getForecastTime(){
 	    	$.ajax({
 	            type: 'GET',
-	            url: '/gzadq/getForecastTime',
+	            url: '/getForecastTime',
 	            error: function () {
 	                alert('网络错误');
 	            },
@@ -140,7 +140,7 @@
 </head>
 <body>
 	<script type="text/javascript">
-	var int=self.setInterval("clock()",5*60*1000);
+	var int=self.setInterval("clock()",5*1000);
 	function clock()
 	{
 		if(${sessionScope.threshold !=null}&&${sessionScope.threshold.radius!=""}&&"${sessionScope.threshold.radius}">0&&${sessionScope.threshold.lnglat!=null}){
@@ -148,7 +148,7 @@
 			||${sessionScope.threshold.frain!=""}||${sessionScope.threshold.fwind!=""}||${sessionScope.threshold.fvis!=""}){
 				$.ajax({
 		            type: 'GET',
-		            url: '/gzadq/getDetailIn',
+		            url: '/getDetailIn',
 		            error: function () {
 		                alert('网络错误');
 		            },
@@ -171,23 +171,23 @@
 				            	str0+="港珠澳大桥 能见度要素 实况值 已低于警戒值"+"${sessionScope.threshold.avis}"+"km(所设置的警戒值)\n";
 				            }
 		            	}
-		            	
-		            	if(${sessionScope.threshold.frain!=null}&&${sessionScope.threshold.frain!=""}){
-		            		if("${sessionScope.threshold.frain}"<res[1].maxRain){
-				            	str1+="港珠澳大桥 降雨要素 预报值 已超过警戒值"+"${sessionScope.threshold.frain}"+"mm(所设置的警戒值)\n";
-				            }
-		            	}
-		            	
-		            	if(${sessionScope.threshold.fwind!=null}&&${sessionScope.threshold.fwind!=""}){
-		            		if("${sessionScope.threshold.fwind}"<res[1].maxWind){
-				            	str1+="港珠澳大桥 风力要素 预报值 已超过警戒值"+"${sessionScope.threshold.fwind}"+"m/s(所设置的警戒值)\n";
-				            }
-		            	}
-		            	if(${sessionScope.threshold.fvis!=null}&&${sessionScope.threshold.fvis!=""}){
-		            		if("${sessionScope.threshold.fvis}">res[1].minVis){
-				            	str1+="港珠澳大桥 能见度要素 预报值 已低于警戒值"+"${sessionScope.threshold.fvis}"+"km(所设置的警戒值)\n";
-				            }
-		            	}
+
+						if(${sessionScope.threshold.frain!=null}&&${sessionScope.threshold.frain!=""}){
+							if("${sessionScope.threshold.frain}"<res[1].maxRain){
+								str1+="港珠澳大桥 降雨要素 预报值("+res[1].forecasttime+") 已超过警戒值"+"${sessionScope.threshold.frain}"+"mm(所设置的警戒值)\n";
+							}
+						}
+
+						if(${sessionScope.threshold.fwind!=null}&&${sessionScope.threshold.fwind!=""}){
+							if("${sessionScope.threshold.fwind}"<res[1].maxWind){
+								str1+="港珠澳大桥 风力要素 预报值("+res[1].forecasttime+") 已超过警戒值"+"${sessionScope.threshold.fwind}"+"m/s(所设置的警戒值)\n";
+							}
+						}
+						if(${sessionScope.threshold.fvis!=null}&&${sessionScope.threshold.fvis!=""}){
+							if("${sessionScope.threshold.fvis}">res[1].minVis){
+								str1+="港珠澳大桥 能见度要素 预报值("+res[1].forecasttime+") 已低于警戒值"+"${sessionScope.threshold.fvis}"+"km(所设置的警戒值)\n";
+							}
+						}
 		            	
 		            	
 		            	if(str0!="") alert(str0);
@@ -237,7 +237,7 @@
 							<li>
 								<a href="safeVcar">
 									<b class="sidebar-icon"><img src="Images/icon_news.png" width="16" height="16" /></b>
-									<span class="text-normal">安全速度告警</span>
+									<span class="text-normal">安全行驶速度</span>
 								</a>
 							</li>
 							
@@ -254,11 +254,12 @@
 					</div>
 					 <jsp:include flush="true" page="threshold.jsp"></jsp:include> 
 					<div id="color1" class="input-card" style=" width: auto;bottom: 150px;display:none">
-					    <div style="width: 50px;height: 20px;background-color: #00FFFF"></div>0-2<br>
-					    <div style="width: 50px;height: 20px;background-color: #00BFFF"></div>2-4<br>
-					    <div style="width: 50px;height: 20px;background-color: #1874CD"></div>4-6<br>
-					    <div style="width: 50px;height: 20px;background-color: #3A5FCD"></div>6-8<br>
-					    <div style="width: 50px;height: 20px;background-color: #0000EE"></div>8-10<br>
+						<div style="width: 50px;height: 20px;background-color: #00FFFF"></div>0<br>
+					    <div style="width: 50px;height: 20px;background-color: #00BFFF"></div>0-2<br>
+					    <div style="width: 50px;height: 20px;background-color: #1874CD"></div>2-4<br>
+					    <div style="width: 50px;height: 20px;background-color: #3A5FCD"></div>4-6<br>
+					    <div style="width: 50px;height: 20px;background-color: #0000EE"></div>6-8<br>
+					    <div style="width: 50px;height: 20px;background-color: #EE7AE9"></div>8-10<br>
 					    <div style="width: 50px;height: 20px;background-color: #BF3EFF"></div>10-20<br>
 					    <div style="width: 50px;height: 20px;background-color: #9A32CD"></div>20-50<br>
 					    <div style="width: 50px;height: 20px;background-color: #551A8B"></div>≥50(mm)<br>
@@ -276,6 +277,8 @@
 					    <div style="width: 50px;height: 20px;background-color: #00FFFF"></div>200-1000<br>
 					    <div style="width: 50px;height: 20px;background-color: #00C5CD"></div>50-200<br>
 					    <div style="width: 50px;height: 20px;background-color: #3A5FCD"></div>0-50(m)<br>
+						<div style="width: 50px;height: 20px;background-color: #0000EE"></div>NaN<br>
+
 
 					</div>
 					<div class="input-card" style="width: 200px;">
@@ -303,7 +306,7 @@
 					    var map = new AMap.Map("container", {
 					        resizeEnable: true,
 					        center: [113.739325, 22.180154],
-					        zoom: 10
+					        zoom: 11
 					    });
 					
 					    /* if (!isSupportCanvas()) {
@@ -407,21 +410,63 @@
 					    		var center=[];
 							   	center.push(res[i].lng);
 							   	center.push(res[i].lat);
-						       var circleMarker = new AMap.CircleMarker({
-						          center:center,
-						          radius:15,//3D视图下，CircleMarker半径不要超过64px
-						          strokeColor:'white',
-						          strokeWeight:2,
-						          strokeOpacity:0.5,
-						          fillColor:setRainColor(res[i].count),
-						          fillOpacity:0.5,
-						          zIndex:10,
-						          bubble:true,
-						          cursor:'pointer',
-						          clickable: true
-						        })
-						        circleMarker.setMap(map)
-						        
+						       // var circleMarker = new AMap.CircleMarker({
+						       //    center:center,
+						       //    radius:15,//3D视图下，CircleMarker半径不要超过64px
+						       //    strokeColor:'white',
+						       //    strokeWeight:2,
+						       //    strokeOpacity:0.5,
+						       //    fillColor:setRainColor(res[i].count),
+						       //    fillOpacity:0.5,
+						       //    zIndex:10,
+						       //    bubble:true,
+						       //    cursor:'pointer',
+						       //    clickable: true
+						       //  })
+						       //  circleMarker.setMap(map)
+								var southWest = new AMap.LngLat(res[i].lng-0.025, res[i].lat-0.025)
+								var northEast = new AMap.LngLat(res[i].lng+0.025, res[i].lat+0.025)
+
+								var bounds = new AMap.Bounds(southWest, northEast)
+
+								var rectangle = new AMap.Rectangle({
+									bounds: bounds,
+									strokeColor:'white',
+									strokeWeight: 6,
+									strokeOpacity:0.5,
+									strokeDasharray: [30,10],
+									// strokeStyle还支持 solid
+									strokeStyle: 'dashed',
+									fillColor:setRainColor(res[i].count),
+									fillOpacity:0.5,
+									cursor:'pointer',
+									zIndex:50,
+								})
+
+								rectangle.setMap(map);
+
+								var text = new AMap.Text({
+									text:res[i].count,
+									anchor:'center', // 设置文本标记锚点
+
+									cursor:'pointer',
+
+									style:{
+										'padding': '.75rem 1.25rem',
+										'margin-bottom': '1rem',
+										'border-radius': '.25rem',
+										'background-color': setRainColor(res[i].count),
+
+										'border-width': 0,
+										'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+										'text-align': 'center',
+										'font-size': '12px',
+										'color': 'white'
+									},
+									position: center
+								});
+
+								text.setMap(map);
 						      }
 					    }
 					    
@@ -431,22 +476,68 @@
 					    		var center=[];
 							   	center.push(res[i].lng);
 							   	center.push(res[i].lat);
-						       var circleMarker = new AMap.CircleMarker({
-						          center:center,
-						          radius:15,//3D视图下，CircleMarker半径不要超过64px
-						          strokeColor:'white',
-						          strokeWeight:2,
-						          strokeOpacity:0.5,
-						          fillColor:setWindColor(res[i].count),
-						          fillOpacity:0.5,
-						          zIndex:10,
-						          bubble:true,
-						          cursor:'pointer',
-						          clickable: true
-						        })
-						        circleMarker.setMap(map)
-						        
+						       // var circleMarker = new AMap.CircleMarker({
+						       //    center:center,
+						       //    radius:15,//3D视图下，CircleMarker半径不要超过64px
+						       //    strokeColor:'white',
+						       //    strokeWeight:2,
+						       //    strokeOpacity:0.5,
+						       //    fillColor:setWindColor(res[i].count),
+						       //    fillOpacity:0.5,
+						       //    zIndex:10,
+						       //    bubble:true,
+						       //    cursor:'pointer',
+						       //    clickable: true
+						       //  })
+						       //  circleMarker.setMap(map)
+								var southWest = new AMap.LngLat(res[i].lng-0.025, res[i].lat-0.025)
+								var northEast = new AMap.LngLat(res[i].lng+0.025, res[i].lat+0.025)
+
+								var bounds = new AMap.Bounds(southWest, northEast)
+
+								var rectangle = new AMap.Rectangle({
+									bounds: bounds,
+									strokeColor:'white',
+									strokeWeight: 6,
+									strokeOpacity:0.5,
+									strokeDasharray: [30,10],
+									// strokeStyle还支持 solid
+									strokeStyle: 'dashed',
+									fillColor:setWindColor(res[i].count),
+									fillOpacity:0.5,
+									cursor:'pointer',
+									zIndex:50,
+								})
+
+								rectangle.setMap(map);
+
+								var text = new AMap.Text({
+									text:res[i].count,
+									anchor:'center', // 设置文本标记锚点
+
+									cursor:'pointer',
+
+									style:{
+										'padding': '.75rem 1.25rem',
+										'margin-bottom': '1rem',
+										'border-radius': '.25rem',
+										'background-color': setWindColor(res[i].count),
+
+										'border-width': 0,
+										'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+										'text-align': 'center',
+										'font-size': '12px',
+										'color': setWindTextColor(res[i].count)
+									},
+									position: center
+								});
+
+								text.setMap(map);
 						      }
+
+
+
+
 					    }
 					    
 					     function showVis(res){
@@ -455,36 +546,82 @@
 					    		var center=[];
 							   	center.push(res[i].lng);
 							   	center.push(res[i].lat);
-						       var circleMarker = new AMap.CircleMarker({
-						          center:center,
-						          radius:15,//3D视图下，CircleMarker半径不要超过64px
-						          strokeColor:'white',
-						          strokeWeight:2,
-						          strokeOpacity:0.5,
-						          fillColor:setVisColor(res[i].count),
-						          fillOpacity:0.5,
-						          zIndex:10,
-						          bubble:true,
-						          cursor:'pointer',
-						          clickable: true
-						        })
-						        circleMarker.setMap(map)
+						       // var circleMarker = new AMap.CircleMarker({
+						       //    center:center,
+						       //    radius:15,//3D视图下，CircleMarker半径不要超过64px
+						       //    strokeColor:'white',
+						       //    strokeWeight:2,
+						       //    strokeOpacity:0.5,
+						       //    fillColor:setVisColor(res[i].count),
+						       //    fillOpacity:0.5,
+						       //    zIndex:10,
+						       //    bubble:true,
+						       //    cursor:'pointer',
+						       //    clickable: true
+						       //  })
+						       //  circleMarker.setMap(map)
+
+								var southWest = new AMap.LngLat(res[i].lng-0.025, res[i].lat-0.025)
+								var northEast = new AMap.LngLat(res[i].lng+0.025, res[i].lat+0.025)
+
+								var bounds = new AMap.Bounds(southWest, northEast)
+
+								var rectangle = new AMap.Rectangle({
+									bounds: bounds,
+									strokeColor:'white',
+									strokeWeight: 6,
+									strokeOpacity:0.5,
+									strokeDasharray: [30,10],
+									// strokeStyle还支持 solid
+									strokeStyle: 'dashed',
+									fillColor:setVisColor(res[i].count),
+									fillOpacity:0.5,
+									cursor:'pointer',
+									zIndex:50,
+								})
+
+								rectangle.setMap(map);
+
+								var text = new AMap.Text({
+									text:setVisText(res[i].count),
+									anchor:'center', // 设置文本标记锚点
+
+									cursor:'pointer',
+
+									style:{
+										'padding': '.75rem 1.25rem',
+										'margin-bottom': '1rem',
+										'border-radius': '.25rem',
+										'background-color': setVisColor(res[i].count),
+
+										'border-width': 0,
+										'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+										'text-align': 'center',
+										'font-size': '12px',
+										'color': setVisTextColor(res[i].count)
+									},
+									position: center
+								});
+
+								text.setMap(map);
 						        
 						      }
 					    }
 					    
 					     function setRainColor(count) {
 						    	var vis=count/50;
-						        if (vis<0.04) {
-						            return '#00FFFF'
-						        } else if(vis>0.04&&vis<0.08||vis==0.04){
+						    	if (vis==0){
+									return '#00FFFF'
+								} else if (vis>0&&vis<0.04) {
 						            return '#00BFFF'
-						        } else if(vis>0.08&&vis<0.12||vis==0.08){
+						        } else if(vis>0.04&&vis<0.08||vis==0.04){
 						            return '#1874CD'
-						        } else if(vis>0.12&&vis<0.16||vis==0.12){
+						        } else if(vis>0.08&&vis<0.12||vis==0.08){
 						            return '#3A5FCD'
-						        } else if(vis>0.16&&vis<0.2||vis==0.16){
+						        } else if(vis>0.12&&vis<0.16||vis==0.12){
 						            return '#0000EE'
+						        } else if(vis>0.16&&vis<0.2||vis==0.16){
+						            return '#EE7AE9'
 						        } else if(vis>0.2&&vis<0.4||vis==0.2){
 						            return '#BF3EFF'
 						        } else if(vis>0.4&&vis<1||vis==0.4){
@@ -511,7 +648,7 @@
 
 					    function setVisColor(count) {
 					    	var vis=count/10;
-					        if (vis<0.005) {
+					        if (vis<0.005&&vis>0) {
 					            return '#3A5FCD'
 					        } else if(vis>0.005&&vis<0.02||vis==0.005){
 					            return '#00C5CD'
@@ -521,10 +658,38 @@
 					            return '#9AFF9A'
 					        } else if(vis>1||vis==1){
 					            return '#ffffff'
-					        }
-					    } 
-					   
-					    
+					        } else if(vis==0){
+					        	return '#0000EE';
+							}
+					    }
+
+					    function setVisText(count){
+							if(count==0){
+								return "NaN";
+							}else{
+								return count;
+							}
+						}
+
+						function setVisTextColor(count){
+							if(count==0){
+								return 'white';
+							}else{
+								return 'black';
+							}
+						}
+
+						function setWindTextColor(count){
+							var vis=count/20.8;
+							if(vis>0.385&&vis<0.668||vis==0.385){
+								return 'black';
+							}else{
+								return 'white';
+							}
+						}
+
+
+
 					</script>
 				</div>
 			</div>

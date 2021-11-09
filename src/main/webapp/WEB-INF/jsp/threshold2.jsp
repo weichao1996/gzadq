@@ -14,7 +14,7 @@
 	            type: 'GET',
 	            url: '/setLnglat/'+userid+'/'+contextMenuPositon+'/'+path,
 	            error: function () {
-	                alert('网络错误');
+	                alert('设置境界点错误');
 	            },
 	            success: function (res) {
 	            	
@@ -39,7 +39,7 @@
 	            type: 'GET',
 	            url: '/getThreshold',
 	            error: function () {
-	                alert('网络错误');
+	                alert('获取阈值错误');
 	            },
 	            success: function (res) {
 	            	var str=res.lnglat.split(",");

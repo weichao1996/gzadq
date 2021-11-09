@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -31,6 +32,7 @@ import cn.tianhai.gzadq.util.TimeCompare;
 @CrossOrigin(origins = "*",maxAge = 3600)
 @Controller
 public class ForecastController {
+	static Logger logger = Logger.getLogger(ForecastController.class);
 	@Autowired ForecastDataService forecastDataServiceImpl;
 	@Autowired BridgeDetailService bridgeDetailServiceImpl;
 	
@@ -125,6 +127,11 @@ public class ForecastController {
 		String str1 = simpleDateFormat.format(ca.getTime());
 		System.out.println(str1);
 		List<ForecastData> forecastDataList=forecastDataServiceImpl.getForeWindList("2021-03-26 12:00:00");//str1
+		
+		System.out.println("大桥预报风速list大小:"+forecastDataList.size());
+		for(ForecastData fd:forecastDataList){
+			System.out.println(fd.getVenueid());
+		}
 		
 		ForecastData f260=forecastDataList.get(4);
 		ForecastData f269=forecastDataList.get(6);

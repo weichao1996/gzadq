@@ -81,7 +81,7 @@
 		            type: 'GET',
 		            url: '/getDetailIn',
 		            error: function () {
-		                alert('网络错误');
+		                alert('获取警戒圈预警错误');
 		            },
 		            success: function (res) {
 		            	var str0="";
@@ -204,14 +204,14 @@
 				        type: 'GET',
 				        url: '/getObtid',
 				        error: function () {
-				            alert('网络错误');
+				            alert('获取站点错误');
 				        },
 				        success: function (res1) {
 							$.ajax({
 								type: 'GET',
 								url: '/getForecastDataDiv',
 								error: function () {
-									alert('网络错误');
+									alert('获取所有站点div数据错误');
 								},
 								success: function (res) {
 
@@ -413,7 +413,7 @@
 							type: 'GET',
 							url: '/getForecastDataDiv/'+obtid,
 							error: function () {
-								alert('网络错误');
+								alert('获取该站点div数据错误');
 							},
 							success: function (res) {
 								var str="";

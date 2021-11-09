@@ -27,9 +27,13 @@
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/select.js"></script>
 		<script type="text/javascript" src="<%=request.getContextPath()%>/js/haidao.validate.js"></script>
 		<script src="https://cdn.staticfile.org/echarts/4.3.0/echarts.min.js"></script>
-		
+		<style type="text/css">
+			.yuzhi{
+				right: 43rem;
+			}
+		</style>
 		<script>
-		var int=self.setInterval("clock()",5*60*1000);
+		var int=self.setInterval("clock()",5*1000);
 		function clock()
 		{
 			if(${sessionScope.threshold !=null}&&${sessionScope.threshold.radius!=""}&&"${sessionScope.threshold.radius}">0&&${sessionScope.threshold.lnglat!=null}){
@@ -37,7 +41,7 @@
 				||${sessionScope.threshold.frain!=""}||${sessionScope.threshold.fwind!=""}||${sessionScope.threshold.fvis!=""}){
 					$.ajax({
 			            type: 'GET',
-			            url: '/gzadq/getDetailIn',
+			            url: '/getDetailIn',
 			            error: function () {
 			                alert('网络错误');
 			            },
@@ -63,18 +67,18 @@
 			            	
 			            	if(${sessionScope.threshold.frain!=null}&&${sessionScope.threshold.frain!=""}){
 			            		if("${sessionScope.threshold.frain}"<res[1].maxRain){
-					            	str1+="港珠澳大桥 降雨要素 预报值 已超过警戒值"+"${sessionScope.threshold.frain}"+"mm(所设置的警戒值)\n";
+					            	str1+="港珠澳大桥 降雨要素 预报值("+res[1].forecasttime+") 已超过警戒值"+"${sessionScope.threshold.frain}"+"mm(所设置的警戒值)\n";
 					            }
 			            	}
 			            	
 			            	if(${sessionScope.threshold.fwind!=null}&&${sessionScope.threshold.fwind!=""}){
 			            		if("${sessionScope.threshold.fwind}"<res[1].maxWind){
-					            	str1+="港珠澳大桥 风力要素 预报值 已超过警戒值"+"${sessionScope.threshold.fwind}"+"m/s(所设置的警戒值)\n";
+					            	str1+="港珠澳大桥 风力要素 预报值("+res[1].forecasttime+") 已超过警戒值"+"${sessionScope.threshold.fwind}"+"m/s(所设置的警戒值)\n";
 					            }
 			            	}
 			            	if(${sessionScope.threshold.fvis!=null}&&${sessionScope.threshold.fvis!=""}){
 			            		if("${sessionScope.threshold.fvis}">res[1].minVis){
-					            	str1+="港珠澳大桥 能见度要素 预报值 已低于警戒值"+"${sessionScope.threshold.fvis}"+"km(所设置的警戒值)\n";
+					            	str1+="港珠澳大桥 能见度要素 预报值("+res[1].forecasttime+") 已低于警戒值"+"${sessionScope.threshold.fvis}"+"km(所设置的警戒值)\n";
 					            }
 			            	}
 			            	
@@ -132,7 +136,7 @@
 							<li>
 								<a href="safeVcar">
 									<b class="sidebar-icon"><img src="Images/icon_news.png" width="16" height="16" /></b>
-									<span class="text-normal">安全速度告警</span>
+									<span class="text-normal">安全行驶速度</span>
 								</a>
 							</li>
 							
@@ -146,89 +150,136 @@
 					<div id="container"></div>
 					
 					<jsp:include flush="true" page="threshold.jsp"></jsp:include>
-					
+
+					<div class="input-card2">
+
+						<table class="table table-hover">
+							<thead>
+							<th>站点</th>
+							<th>告警信息</th>
+
+							</thead>
+							<tbody id="tbody">
+
+							</tbody>
+						</table>
+
+							<span style="color: red">说明：</span>
+							<span style="color: gray">1.本页面主要对降水、风力、能见度三要素进行了实况检测</span>
+							<span style="color: gray">2.实况数据每5分钟更新一次</span>
+							<span style="color: gray">3.单击站点可查看站点信息，双击站点可查看具体实况数据以及数据趋势图</span>
+							<span style="color: gray">4.当降雨量>0mm或风速>10m/s或能见度<1000m，则给出告警信息</span>
+							<span style="color: gray">5.能见度的缺省值为0</span>
+
+					</div>
 			
 					<script type="text/javascript">
 						var path="actualData";
 						var json=${json};
-					
+						zhandian=[];
+
 					    var map = new AMap.Map("container", {
 					    	resizeEnable: true,
-					        center: [113.74, 22.25],
+					        center: [113.77, 22.25],
 					        zoom: 12
 					    });
 						
-					    <jsp:include flush="true" page="threshold2.jsp"></jsp:include> 
-					    
-						for(var i=0;i<json.length;i+=1){
-						    // 创建点、线、面覆盖物实例
-						    var G3970 = new AMap.Marker({
-						        position: new AMap.LngLat(json[i].lon, json[i].lat),
-						        map:map
-						    });
-						    G3970.positionCode=json[i].positionCode;
-						    G3970.obtid=json[i].obtid;
-						   
-						    G3970.on('click', showInfoClick);
-						    G3970.on('dblclick', showInfoClick2);
-						}
-					    
+					    <jsp:include flush="true" page="threshold2.jsp"></jsp:include>
+
+
+
 						$.ajax({
 					        type: 'GET',
-					        url: '/gzadq/getMinActual',
+					        url: '/getMinActual',
 					        error: function () {
 					            alert('网络错误');
 					        },
 					        success: function (res) {
-					        	
-						            	for(var i=0;i<res.length;i+=1){
-						            		var str="";
-						            		var temp=res[i];
-						            		if(temp.length!=0){
-						            			if(temp[0].rain>0){
-							            			str+="当前正在降雨,";
-						            			}
-												if(temp[0].wind>10){
-													str+="当前风速较大,";
-						            			}
-												if(temp[0].vis<1000){
-													str+="当前能见度较低,";	
-												}
-						            		
-						            		if(str.length>0){
-						            			str=str.substring(0,str.length-1);
-						            		}
-						            		
-						            		var center=[];
-										   	center.push(temp[0].lon);
-										   	center.push(temp[0].lat+0.02);
-						            		  // 创建纯文本标记
-						            	    var text = new AMap.Text({
-						            	        text:str,
-						            	        anchor:'center', // 设置文本标记锚点
 
-						            	        cursor:'pointer',
+								for(var i=0;i<json.length;i+=1){
+									// 创建点、线、面覆盖物实例
+									var G3970 = new AMap.Marker({
+										position: new AMap.LngLat(json[i].lon, json[i].lat),
+										map:map,
+										icon: '<%=request.getContextPath()%>/img/'+i+'.ico'
+									});
+									G3970.positionCode=json[i].positionCode;
+									G3970.obtid=json[i].obtid;
 
-						            	        style:{
-						            	            'padding': '.75rem 1.25rem',
-						            	            'margin-bottom': '1rem',
-						            	            'border-radius': '.25rem',
-						            	            'background-color': 'white',
-						            	 
-						            	            'border-width': 0,
-						            	            'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
-						            	            'text-align': 'center',
-						            	            'font-size': '12px',
-						            	            'color': 'grey'
-						            	        },
-						            	        position: center
-						            	    });
+									G3970.on('click', showInfoClick);
+									G3970.on('dblclick', showInfoClick2);
+									zhandian.push(json[i].obtid);
 
-						            	    text.setMap(map);
-						            		}
-						            			
-						            		
+									// for(var i=0;i<res.length;i+=1){
+										var str="";
+										var temp=res[i];
+										if(temp.length!=0){
+											if(temp[0].rain>0){
+												str+="当前正在降雨,<br>";
+											}
+											if(temp[0].wind>10){
+												str+="当前风速较大,<br>";
+											}
+											if(temp[0].vis<1000&&temp[0].vis>0){
+												str+="当前能见度较低,<br>";
+											}
+
+											if(str.length>0){
+												str=str.substring(0,str.length-5);
+												// 设置label标签
+												// label默认蓝框白底左上角显示，样式className为：amap-marker-label
+												// G3970.setLabel({
+												//
+												// 	content: "<div class='info'>" + str + "</div>", //设置文本标注内容
+												// 	direction: 'top' //设置文本标注方位
+												// });
+												str="<tr>"+
+														"<td><img src='<%=request.getContextPath()%>/img/"+i+".ico'/></td>"+
+														"<td>"+str+"</td></tr>"
+
+												document.getElementById("tbody").innerHTML+=str;
+											}
+
+
+
+
+
+											// var center=[];
+											// center.push(temp[0].lon);
+											// center.push(temp[0].lat+0.02);
+											// // 创建纯文本标记
+											// var text = new AMap.Text({
+											// 	text:str,
+											// 	anchor:'center', // 设置文本标记锚点
+											//
+											// 	cursor:'pointer',
+											//
+											// 	style:{
+											// 		'padding': '.75rem 1.25rem',
+											// 		'margin-bottom': '1rem',
+											// 		'border-radius': '.25rem',
+											// 		'background-color': 'white',
+											//
+											// 		'border-width': 0,
+											// 		'box-shadow': '0 2px 6px 0 rgba(114, 124, 245, .5)',
+											// 		'text-align': 'center',
+											// 		'font-size': '12px',
+											// 		'color': 'grey'
+											// 	},
+											// 	position: center
+											// });
+											//
+											// text.setMap(map);
 										}
+
+
+									// }
+								}
+								if(str==""){
+									document.getElementById("tbody").innerHTML="<tr>"+
+											"<td colspan='2' style='text-align:center'>当前无告警信息</td></tr>";
+								}
+
 						            	
 					        }
 					    });
@@ -243,7 +294,7 @@
 					    function getMinData(){
 					    	$.ajax({
 					            type: 'GET',
-					            url: '/gzadq/getMinActual/'+obtid,
+					            url: '/getMinActual/'+obtid,
 					            error: function () {
 					                alert('网络错误');
 					            },
@@ -282,21 +333,8 @@
 										});
 						                document.getElementById('light').style.display='block';
 								    	document.getElementById('fade').style.display='block'
-								    	
-								    	document.getElementById('tips').innerHTML="当前";
-							    		if(res[0].rain>0){
-							    			document.getElementById('tips').innerHTML+="正在降雨，";
-							    		}
-							    		if(res[0].wind>10){
-							    			document.getElementById('tips').innerHTML+="风速较快，";
-							    		}
-							    		if(res[0].vis<1000){
-							    			document.getElementById('tips').innerHTML+="能见度较低，";
-								    	}
-							    		document.getElementById('tips').innerHTML+="请减速慢行，注意保持车距！";
-							    		if(document.getElementById('tips').innerHTML.length==15){
-							    			document.getElementById('tips').innerHTML="";
-							    		}
+
+										check2(res);
 					                }else{
 					                	alert("此站点暂无数据")
 					                }
@@ -308,7 +346,7 @@
 					    function getHourData(){
 					    	$.ajax({
 					            type: 'GET',
-					            url: '/gzadq/getHourActual/'+obtid,
+					            url: '/getHourActual/'+obtid,
 					            error: function () {
 					                alert('网络错误');
 					            },
@@ -345,22 +383,9 @@
 						                    ]
 											
 										});
-						                
-						                
-						                document.getElementById('tips').innerHTML="当前";
-							    		if(res[0].rain>0){
-							    			document.getElementById('tips').innerHTML+="正在降雨，";
-							    		}
-							    		if(res[0].wind>10){
-							    			document.getElementById('tips').innerHTML+="风速较快，";
-							    		}
-							    		if(res[0].vis<1000){
-							    			document.getElementById('tips').innerHTML+="能见度较低，";
-								    	}
-							    		document.getElementById('tips').innerHTML+="请减速慢行，注意保持车距！";
-							    		if(document.getElementById('tips').innerHTML.length==15){
-							    			document.getElementById('tips').innerHTML="";
-							    		}
+
+
+										check2(res);
 					                }else{
 					                	alert("此站点暂无数据")
 					                }
@@ -368,7 +393,29 @@
 					            }
 					        });
 					    }
-					      
+
+					    function check2(res){
+							document.getElementById('tips').innerHTML=obtid;
+							document.getElementById('tips').innerHTML+=" 当前";
+							if(res[0].rain>0){
+								document.getElementById('tips').innerHTML+="正在降雨，";
+							}
+							if(res[0].wind>10){
+								document.getElementById('tips').innerHTML+="风速较快，";
+							}
+							if(res[0].vis<1000&&res[0].vis>0){
+								document.getElementById('tips').innerHTML+="能见度较低，";
+							}
+							document.getElementById('tips').innerHTML+="请减速慢行，注意保持车距！";
+							if(document.getElementById('tips').innerHTML.length==21){
+								document.getElementById('tips').innerHTML=obtid;
+							}
+
+							document.getElementById('getLast').style.display='block';
+							document.getElementById('getNext').style.display='block';
+							if(getArrayIndex(zhandian,obtid)==zhandian.length-1){document.getElementById('getNext').style.display='none'}
+							if(getArrayIndex(zhandian,obtid)==0){document.getElementById('getLast').style.display='none'}
+						}
 
 				
 					     function showInfoClick(e){
@@ -406,180 +453,215 @@
 					
 					
 					<div id="light" class="white_content">
+
 							<div id="tips" style="width:100%;height:30px;background-color:#37424f;color:white;font-size:15px;">
-								
+
 							</div>
 							<div style="float:left;padding-left:75px;padding-top:20px;position: absolute;z-index:9999;">
-				    			<label><input type="radio" name="type" id="anfen" onclick="anfen()" checked="checked">按分</label>
-				    			<label><input type="radio" name="type" id="anshi" onclick="anshi()">按时</label>
+								<label><input type="radio" name="type" id="anfen" onclick="anfen()" checked="checked">按分</label>
+								<label><input type="radio" name="type" id="anshi" onclick="anshi()">按时</label>
 							</div>
-							<button type="button" class="close" aria-hidden="true" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
-			      				&times;
-			   				</button><br>
-				   			
-					
+							<%--<button type="button" class="close" aria-hidden="true" onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">
+								&times;
+							</button><br>--%>
+						<br>
+
 							<div id="main" style="width: 1000px;height:380px;"></div>
-						    <script type="text/javascript">
-						    
-						        // 基于准备好的dom，初始化echarts实例
-						        var myChart = echarts.init(document.getElementById('main'));
-						 
-						       option = {
-						        color: ["#0B438B","#9bbb59","#CB4335"],
-						    // title: {
-						    //     text: '折线图堆叠'
-						    // },
-						    tooltip: { //框浮层内容格式器  提示框组件
-						                trigger: 'axis',
-						                formatter: '{b}'+'<br>'+'{a0}:{c0}' + '<br>' + '{a1}:{c1}' + '<br>' + '{a2}:{c2}'
-						            },
-						
-						    legend: {
-						             
-						                data: ['降水(mm)', '风力(m/s)', '能见度(m)'],
-						                textStyle: {
-						                    color: "#000",
-						                    fontsize: 25
-						                }
-						            },
-						    grid: {
-						                left: '15%',
-						                bottom: '3%',
-						                containLabel: true
-						            },
-						    toolbox: {
-						        feature: {
-						            saveAsImage: {}
-						        }
-						    },
-						
-						    xAxis: {
-				                type: 'category',
-				                boundaryGap: true,
-				                /* data:function (){
-						        	
-						        	var list = [];
-						            for (var i = 0; i < data.length-30; i++) {
-						                list.push(data[i].datetime);
-						            } 
-						            return list;
-						        }() , */
-						        data:[1,2,3,4,5,6],
-				                axisLabel: {
-				                      interval: 0
-				                    } 
-				                   
-				            },
-						    yAxis: [{
-						                    boundaryGap: [0, '50%'],
-						                    axisLine: {
-						                        lineStyle: {
-						                            color: '#0B438B'
-						                        }
-						                    },
-						                    type: 'value',
-						                    name: '降水(mm)',
-						                    position: 'left',//Y轴在图的坐边
-						                    offset: 120,//坐标轴移动120
-						                    axisLabel: {
-						                        formatter: function(value, index) {
-						                            return value;
-						                        }
-						                    },
-						                    splitLine: {
-						                        show: false,
-						                    },
-						                },
-						                {
-						                    boundaryGap: [0, '50%'],
-						                    axisLine: {
-						                        lineStyle: {
-						                            color: '#9bbb59'
-						                        }
-						                    },
-						                    splitLine: {
-						                        show: false,
-						                    },
-						                    type: 'value',
-						                    name: '风力(m/s)',
-						                    position: 'left',
-						                    offset: 60,//
-						                    axisLabel: {
-						                        formatter: function(value, index) {
-						
-						                            return value;
-						                        }
-						                    }
-						                },
-						                {
-						                    boundaryGap: [0, '50%'],
-						                    axisLine: {
-						                        lineStyle: {
-						                            color: '#CB4335'
-						                        }
-						                    },
-						                    splitLine: {
-						                        show: false,
-						                    },
-						                    type: 'value',
-						                    name: '能见度(m)',
-						                    position: 'left',
-						                    axisLabel: {
-						                        formatter: function(value, index) {
-						                            return value;
-						                        }
-						                    },
-						                    axisTick: {
-						                        inside: 'false',
-						                        length: 10,
-						                    }
-						                },
-						            ],
-						
-						    series: [{
-						                    name: '降水(mm)',
-						                    type: 'line',
-						                    //data: [2,1,2,1,2,1],
-						                    lineStyle: {
-						                        color: "#0B438B"//折线颜色
-						                    },
-						                    yAxisIndex: 0,
-						                },
-						                {
-						                    name: '风力(m/s)',
-						                    type: 'line',
-						                    //data: [7,8,4,2,1,2],
-						                    lineStyle: {
-						                        color: "#9bbb59"
-						                    },
-						                    yAxisIndex: 1,
-						                },
-						                {
-						                    name: '能见度(m)',
-						                    type: 'line',
-						                    //data: [9,5,6,9,7,10],
-						                    lineStyle: {
-						                        color: "#CB4335"
-						                    },
-						                    yAxisIndex: 2,
-						                }
-						            ]
-						
-						    };
-						 
-						    // 使用刚指定的配置项和数据显示图表。
-						    myChart.setOption(option);
-						    window.onresize = myChart.resize;
-						    </script>
+							<script type="text/javascript">
+
+								// 基于准备好的dom，初始化echarts实例
+								var myChart = echarts.init(document.getElementById('main'));
+
+								option = {
+									color: ["#0B438B","#9bbb59","#CB4335"],
+									// title: {
+									//     text: '折线图堆叠'
+									// },
+									tooltip: { //框浮层内容格式器  提示框组件
+										trigger: 'axis',
+										formatter: '{b}'+'<br>'+'{a0}:{c0}' + '<br>' + '{a1}:{c1}' + '<br>' + '{a2}:{c2}'
+									},
+
+									legend: {
+
+										data: ['降水(mm)', '风力(m/s)', '能见度(m)'],
+										textStyle: {
+											color: "#000",
+											fontsize: 25
+										}
+									},
+									grid: {
+										left: '15%',
+										bottom: '3%',
+										containLabel: true
+									},
+									toolbox: {
+										feature: {
+											saveAsImage: {}
+										}
+									},
+
+									xAxis: {
+										type: 'category',
+										boundaryGap: true,
+										/* data:function (){
+
+                                            var list = [];
+                                            for (var i = 0; i < data.length-30; i++) {
+                                                list.push(data[i].datetime);
+                                            }
+                                            return list;
+                                        }() , */
+										data:[1,2,3,4,5,6],
+										axisLabel: {
+											interval: 0
+										}
+
+									},
+									yAxis: [{
+										boundaryGap: [0, '50%'],
+										axisLine: {
+											lineStyle: {
+												color: '#0B438B'
+											}
+										},
+										type: 'value',
+										name: '降水(mm)',
+										position: 'left',//Y轴在图的坐边
+										offset: 120,//坐标轴移动120
+										axisLabel: {
+											formatter: function(value, index) {
+												return value;
+											}
+										},
+										splitLine: {
+											show: false,
+										},
+									},
+										{
+											boundaryGap: [0, '50%'],
+											axisLine: {
+												lineStyle: {
+													color: '#9bbb59'
+												}
+											},
+											splitLine: {
+												show: false,
+											},
+											type: 'value',
+											name: '风力(m/s)',
+											position: 'left',
+											offset: 60,//
+											axisLabel: {
+												formatter: function(value, index) {
+
+													return value;
+												}
+											}
+										},
+										{
+											boundaryGap: [0, '50%'],
+											axisLine: {
+												lineStyle: {
+													color: '#CB4335'
+												}
+											},
+											splitLine: {
+												show: false,
+											},
+											type: 'value',
+											name: '能见度(m)',
+											position: 'left',
+											axisLabel: {
+												formatter: function(value, index) {
+													return value;
+												}
+											},
+											axisTick: {
+												inside: 'false',
+												length: 10,
+											}
+										},
+									],
+
+									series: [{
+										name: '降水(mm)',
+										type: 'line',
+										//data: [2,1,2,1,2,1],
+										lineStyle: {
+											color: "#0B438B"//折线颜色
+										},
+										yAxisIndex: 0,
+									},
+										{
+											name: '风力(m/s)',
+											type: 'line',
+											//data: [7,8,4,2,1,2],
+											lineStyle: {
+												color: "#9bbb59"
+											},
+											yAxisIndex: 1,
+										},
+										{
+											name: '能见度(m)',
+											type: 'line',
+											//data: [9,5,6,9,7,10],
+											lineStyle: {
+												color: "#CB4335"
+											},
+											yAxisIndex: 2,
+										}
+									]
+
+								};
+
+								// 使用刚指定的配置项和数据显示图表。
+								myChart.setOption(option);
+								window.onresize = myChart.resize;
+							</script>
+
+
 					</div>
-			        <div id="fade" class="black_overlay"></div>
+			        <div id="fade" class="black_overlay">
+						<a onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'" href="#">
+							<img class="close_btn" src="<%=request.getContextPath()%>/img/close.png"/>
+						</a>
+						<a onclick="getLast()" href="#" id="getLast"><img class="left_btn" src="<%=request.getContextPath()%>/img/left.png"/></a>
+						<a onclick="getNext()" href="#" id="getNext"><img class="right_btn" src="<%=request.getContextPath()%>/img/right.png"/></a>
+					</div>
 			        
 				</div>
 			</div>
 		</div>
 		
-		
-		
+		<script type="application/javascript">
+			function getNext(){
+				var index = getArrayIndex(zhandian,obtid);
+				obtid=zhandian[index+1];
+				document.getElementById("anfen").checked=true;
+				getMinData();
+
+			}
+
+			function getLast(){
+				var index = getArrayIndex(zhandian,obtid);
+				obtid=zhandian[index-1];
+				document.getElementById("anfen").checked=true;
+				getMinData();
+
+			}
+
+			function getArrayIndex(arr, obj) {
+				var i = arr.length;
+				while (i--) {
+					if (arr[i] === obj) {
+						return i;
+					}
+				}
+				return -1;
+			}
+
+		</script>
         
         
 			 

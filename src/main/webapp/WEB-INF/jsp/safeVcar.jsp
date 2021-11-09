@@ -64,7 +64,7 @@
 	            type: 'GET',
 	            url: '/getUcar/'+cid,
 	            error: function () {
-	                alert('网络错误');
+	                alert('获取车速错误');
 	            },
 	            success: function (res) {
 	            			var temp=res[0];
@@ -235,21 +235,21 @@
 		            type: 'GET',
 		            url: '/getUwind/'+cid+'/'+Ucar,
 		            error: function () {
-		                alert('网络错误');
+		                alert('获取安全行驶风速错误');
 		            },
 		            success: function (res2) {
 		            	$.ajax({
 		    	            type: 'GET',
 		    	            url: '/getWindList',
 		    	            error: function () {
-		    	                alert('网络错误');
+		    	                alert('获取风速实况错误');
 		    	            },
 		    	            success: function (res) {
 		    	            	$.ajax({
 		    	    	            type: 'GET',
 		    	    	            url: '/getForeWindList',
 		    	    	            error: function () {
-		    	    	                alert('网络错误');
+		    	    	                alert('获取风速预报错误');
 		    	    	            },
 		    	    	            success: function (res1) {
 		    	    	            	var str="";
@@ -306,7 +306,7 @@
 			            type: 'GET',
 			            url: '/getDetailIn',
 			            error: function () {
-			                alert('网络错误');
+			                alert('获取警戒圈预警错误');
 			            },
 			            success: function (res) {
 			            	var str0="";
@@ -760,7 +760,7 @@
 								type: 'GET',
 								url: '/getUcar/'+cid,
 								error: function () {
-									alert('网络错误');
+									alert('获取车速错误');
 								},
 								success: function (res) {
 

@@ -12,7 +12,7 @@
     contextMenu.addItem("设置为警戒点", function (e) {
         $.ajax({
 	            type: 'GET',
-	            url: '/gzadq/setLnglat/'+userid+'/'+contextMenuPositon+'/'+path,
+	            url: '/setLnglat/'+userid+'/'+contextMenuPositon+'/'+path,
 	            error: function () {
 	                alert('网络错误');
 	            },
@@ -37,7 +37,7 @@
  //---------------------------------------------显示警戒圈-------------------------------------------------------
  	$.ajax({
 	            type: 'GET',
-	            url: '/gzadq/getThreshold',
+	            url: '/getThreshold',
 	            error: function () {
 	                alert('网络错误');
 	            },
