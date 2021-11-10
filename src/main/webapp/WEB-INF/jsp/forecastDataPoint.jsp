@@ -40,7 +40,7 @@
 			var type=document.getElementById("type").value;
 			$.ajax({
 	            type: 'GET',
-	            url: '/getForecastData/'+forecasttime+'/'+type,
+	            url: '/gzadq/getForecastData/'+forecasttime+'/'+type,
 	            error: function () {
 	                alert('获取预报数据错误');
 	            },
@@ -115,7 +115,7 @@
 		function getForecastTime(){
 	    	$.ajax({
 	            type: 'GET',
-	            url: '/getForecastTime',
+	            url: '/gzadq/getForecastTime',
 	            error: function () {
 	                alert('获取预报时间错误');
 	            },
@@ -148,7 +148,7 @@
 			||${sessionScope.threshold.frain!=""}||${sessionScope.threshold.fwind!=""}||${sessionScope.threshold.fvis!=""}){
 				$.ajax({
 		            type: 'GET',
-		            url: '/getDetailIn',
+		            url: '/gzadq/getDetailIn',
 		            error: function () {
 		                alert('获取警戒圈预警错误');
 		            },

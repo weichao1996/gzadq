@@ -16,7 +16,7 @@
            </c:if>
            
            <c:if test="${path!=null}">
-           document.location.href="<%=path%>/${path}";
+           document.location.href="<%=path%>/gzadq/${path}";
            </c:if>
        </script>
    

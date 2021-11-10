@@ -79,9 +79,9 @@
 			||${sessionScope.threshold.frain!=""}||${sessionScope.threshold.fwind!=""}||${sessionScope.threshold.fvis!=""}){
 				$.ajax({
 		            type: 'GET',
-		            url: '/getDetailIn',
+		            url: '/gzadq/getDetailIn',
 		            error: function () {
-		                alert('网络错误');
+		                alert('获取警戒圈预警错误');
 		            },
 		            success: function (res) {
 		            	var str0="";
@@ -202,16 +202,16 @@
 					<jsp:include flush="true" page="threshold2.jsp"></jsp:include> 
 					$.ajax({
 				        type: 'GET',
-				        url: '/getObtid',
+				        url: '/gzadq/getObtid',
 				        error: function () {
-				            alert('网络错误');
+				            alert('获取站点错误');
 				        },
 				        success: function (res1) {
 							$.ajax({
 								type: 'GET',
-								url: '/getForecastDataDiv',
+								url: '/gzadq/getForecastDataDiv',
 								error: function () {
-									alert('网络错误');
+									alert('获取所有站点div数据错误');
 								},
 								success: function (res) {
 
@@ -411,9 +411,9 @@
 				    function getObtidData(){
 						$.ajax({
 							type: 'GET',
-							url: '/getForecastDataDiv/'+obtid,
+							url: '/gzadq/getForecastDataDiv/'+obtid,
 							error: function () {
-								alert('网络错误');
+								alert('获取该站点div数据错误');
 							},
 							success: function (res) {
 								var str="";

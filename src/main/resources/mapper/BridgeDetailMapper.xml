@@ -8,26 +8,26 @@
        
         
         <select id="getAllBridgeDetail" resultType="cn.tianhai.gzadq.pojo.BridgeDetail">
-        	select * from WEICHAO.T_BRIDGE_DETAIL order by lon
+        	select * from SZYM.T_BRIDGE_DETAIL order by lon
         </select>
         
         <select id="getNineBridgeDetail" resultType="cn.tianhai.gzadq.pojo.BridgeDetail">
-        	select * from WEICHAO.T_BRIDGE_DETAIL where obtid='G3981' or obtid='G3983' or obtid='G3984' or obtid='G3985' or
+        	select * from SZYM.T_BRIDGE_DETAIL where obtid='G3981' or obtid='G3983' or obtid='G3984' or obtid='G3985' or
         	obtid='G3972' or obtid='G3973' or obtid='G3974' or obtid='G3975' or obtid='G3978' order by lon
         </select>
         
     	<select id="getBridgeDetailById" resultType="cn.tianhai.gzadq.pojo.BridgeDetail">
-        	select * from WEICHAO.WEICHAO.T_BRIDGE_DETAIL where obtid=#{obtid}
+        	select * from SZYM.SZYM.T_BRIDGE_DETAIL where obtid=#{obtid}
         </select>
 
         <select id="getActualBridgeDetail" resultType="cn.tianhai.gzadq.pojo.BridgeDetail">
-            select * from (select obtid from WEICHAO.T_BRIDGE_DATA group by obtid
+            select * from (select obtid from SZYM.T_BRIDGE_DATA group by obtid
                            union
-                           select obtid from WEICHAO.T_DF_BRIDGE group by obtid) a inner JOIN WEICHAO.T_BRIDGE_DETAIL b on a.obtid=b.obtid ORDER BY lon
+                           select obtid from SZYM.T_DF_BRIDGE group by obtid) a inner JOIN SZYM.T_BRIDGE_DETAIL b on a.obtid=b.obtid ORDER BY lon
         </select>
 
         <select id="getSevenBridgeDetail" resultType="cn.tianhai.gzadq.pojo.BridgeDetail">
-            select * from WEICHAO.T_BRIDGE_DETAIL where obtid='G3981' or obtid='G3985' or
+            select * from SZYM.T_BRIDGE_DETAIL where obtid='G3981' or obtid='G3985' or
                 obtid='G3972' or obtid='G3973' or obtid='G3974' or obtid='G3975' or obtid='G3978' order by lon
         </select>
     </mapper>

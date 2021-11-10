@@ -8,25 +8,25 @@
        
         
         <select id="getThreshold" parameterType="cn.tianhai.gzadq.pojo.Threshold" resultType="cn.tianhai.gzadq.pojo.Threshold">
-        	select * from T_THRESHOLD where USERID=#{userid}  
+        	select * from SZYM.T_THRESHOLD where USERID=#{userid}  
         </select>
         
         <update id="updateThreshold" parameterType="cn.tianhai.gzadq.pojo.Threshold">
-        	update t_threshold set arain=#{arain},awind=#{awind},avis=#{avis},frain=#{frain},fwind=#{fwind},fvis=#{fvis},
+        	update SZYM.T_threshold set arain=#{arain},awind=#{awind},avis=#{avis},frain=#{frain},fwind=#{fwind},fvis=#{fvis},
         	radius=#{radius} where userid=#{userid}
         </update>
         
         <insert id="addThreshold" parameterType="cn.tianhai.gzadq.pojo.Threshold">
-        	insert into t_threshold(userid,arain,awind,avis,frain,fwind,fvis,radius) values(#{userid},#{arain},#{awind},#{avis},#{frain},
+        	insert into SZYM.T_threshold(userid,arain,awind,avis,frain,fwind,fvis,radius) values(#{userid},#{arain},#{awind},#{avis},#{frain},
         	#{fwind},#{fvis},#{radius})
         </insert>
         
         <update id="updateLnglat" parameterType="cn.tianhai.gzadq.pojo.Threshold">
-        	update t_threshold set lnglat=#{lnglat} where userid=#{userid}
+        	update SZYM.T_threshold set lnglat=#{lnglat} where userid=#{userid}
         </update>
         
         <insert id="addLnglat" parameterType="cn.tianhai.gzadq.pojo.Threshold">
-        	insert into t_threshold(userid,lnglat) values(#{userid},#{lnglat})
+        	insert into SZYM.T_threshold(userid,lnglat) values(#{userid},#{lnglat})
         </insert>
     
        

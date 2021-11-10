@@ -16,7 +16,7 @@
 			
 			$.ajax({
 	            type: 'GET',
-	            url: '/getThreshold',
+	            url: '/gzadq/getThreshold',
 	            error: function () {
 	                alert('获取阈值错误');
 	            },
@@ -24,7 +24,7 @@
 	            	
 	            	if(res!=null&&res!=""){
 	            		var str="";
-	            		str += "<form action='/updateThreshold/"+path+"' method='post' name='form' id='form'>"+
+	            		str += "<form action='/gzadq/updateThreshold/"+path+"' method='post' name='form' id='form'>"+
 	            					"<span class='text-muted'>实况降水(mm)</span><input type='text' class='form-control' id='arain' name='arain' value='"+res.arain+"' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
 	            					"<span class='text-muted'>实况风力(m/s)</span><input type='text' class='form-control' id='awind' name='awind' value='"+res.awind+"' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
 	            					"<span class='text-muted'>实况能见度(km)</span><input type='text' class='form-control' id='avis' name='avis' value='"+res.avis+"' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
@@ -39,7 +39,7 @@
 	            		document.getElementById("submit").innerHTML="修改";
 	            	}else{
 	            		var str="";
-	            		str += "<form action='/addThreshold/"+path+"' method='post' name='form' id='form'>"+
+	            		str += "<form action='/gzadq/addThreshold/"+path+"' method='post' name='form' id='form'>"+
     					"<span class='text-muted'>实况降水(mm)</span><input type='text' class='form-control' id='arain' name='arain' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
     					"<span class='text-muted'>实况风力(m/s)</span><input type='text' class='form-control' id='awind' name='awind' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+
     					"<span class='text-muted'>实况能见度(km)</span><input type='text' class='form-control' id='avis' name='avis' onkeyup='this.value=this.value.replace(\/\\D\/g,\"\")' onafterpaste='this.value=this.value.replace(\/\\D\/g,\"\")'><br></br>"+

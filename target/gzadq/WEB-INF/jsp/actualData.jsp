@@ -41,9 +41,9 @@
 				||${sessionScope.threshold.frain!=""}||${sessionScope.threshold.fwind!=""}||${sessionScope.threshold.fvis!=""}){
 					$.ajax({
 			            type: 'GET',
-			            url: '/getDetailIn',
+			            url: '/gzadq/getDetailIn',
 			            error: function () {
-			                alert('网络错误');
+			                alert('获取警戒圈预警错误');
 			            },
 			            success: function (res) {
 			            	var str0="";
@@ -190,9 +190,9 @@
 
 						$.ajax({
 					        type: 'GET',
-					        url: '/getMinActual',
+					        url: '/gzadq/getMinActual',
 					        error: function () {
-					            alert('网络错误');
+					            alert('获取所有分钟数据错误');
 					        },
 					        success: function (res) {
 
@@ -294,9 +294,9 @@
 					    function getMinData(){
 					    	$.ajax({
 					            type: 'GET',
-					            url: '/getMinActual/'+obtid,
+					            url: '/gzadq/getMinActual/'+obtid,
 					            error: function () {
-					                alert('网络错误');
+					                alert('获取该站点分钟数据错误');
 					            },
 					            success: function (res) {
 					                //var data=res;
@@ -346,9 +346,9 @@
 					    function getHourData(){
 					    	$.ajax({
 					            type: 'GET',
-					            url: '/getHourActual/'+obtid,
+					            url: '/gzadq/getHourActual/'+obtid,
 					            error: function () {
-					                alert('网络错误');
+					                alert('获取该站点小时数据错误');
 					            },
 					            success: function (res) {
 					                //var data=res;

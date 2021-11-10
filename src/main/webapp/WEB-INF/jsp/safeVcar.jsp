@@ -62,7 +62,7 @@
 			var cid=document.getElementById("cid").value;
 	    	$.ajax({
 	            type: 'GET',
-	            url: '/getUcar/'+cid,
+	            url: '/gzadq/getUcar/'+cid,
 	            error: function () {
 	                alert('获取车速错误');
 	            },
@@ -233,21 +233,21 @@
 		    	
 		    	$.ajax({
 		            type: 'GET',
-		            url: '/getUwind/'+cid+'/'+Ucar,
+		            url: '/gzadq/getUwind/'+cid+'/'+Ucar,
 		            error: function () {
 		                alert('获取安全行驶风速错误');
 		            },
 		            success: function (res2) {
 		            	$.ajax({
 		    	            type: 'GET',
-		    	            url: '/getWindList',
+		    	            url: '/gzadq/getWindList',
 		    	            error: function () {
 		    	                alert('获取风速实况错误');
 		    	            },
 		    	            success: function (res) {
 		    	            	$.ajax({
 		    	    	            type: 'GET',
-		    	    	            url: '/getForeWindList',
+		    	    	            url: '/gzadq/getForeWindList',
 		    	    	            error: function () {
 		    	    	                alert('获取风速预报错误');
 		    	    	            },
@@ -304,7 +304,7 @@
 				||${sessionScope.threshold.frain!=""}||${sessionScope.threshold.fwind!=""}||${sessionScope.threshold.fvis!=""}){
 					$.ajax({
 			            type: 'GET',
-			            url: '/getDetailIn',
+			            url: '/gzadq/getDetailIn',
 			            error: function () {
 			                alert('获取警戒圈预警错误');
 			            },
@@ -758,7 +758,7 @@
 							var cid=document.getElementById("cid").value;
 							$.ajax({
 								type: 'GET',
-								url: '/getUcar/'+cid,
+								url: '/gzadq/getUcar/'+cid,
 								error: function () {
 									alert('获取车速错误');
 								},
