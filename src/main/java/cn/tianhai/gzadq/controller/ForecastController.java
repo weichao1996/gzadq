@@ -11,7 +11,9 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,17 +37,21 @@ public class ForecastController {
 	static Logger logger = Logger.getLogger(ForecastController.class);
 	@Autowired ForecastDataService forecastDataServiceImpl;
 	@Autowired BridgeDetailService bridgeDetailServiceImpl;
+	@Value("${timeCompare}") 
+	private Integer timeCompare;
+	@Value("${thresholdTime}") 
+	private Integer thresholdTime;
 	
 	@GetMapping("/forecastData")
-    public Object forecastData() {
-		
+    public Object forecastData(Model m) {
+		m.addAttribute("thresholdTime", thresholdTime);
         return "forecastData";
         
     }
 	
 	@GetMapping("/forecastDataPoint")
-    public Object forecastDataPoint() {
-		
+    public Object forecastDataPoint(Model m) {
+		m.addAttribute("thresholdTime", thresholdTime);
         return "forecastDataPoint";
         
     }
@@ -59,7 +65,7 @@ public class ForecastController {
         String now=simpleDateFormat .format(new Date());
         List<ForecastData> list2=new ArrayList();
         for(ForecastData forecastData:list) {
-        	if(TimeCompare.timeCompare(now, forecastData.getForecasttime())==1) {//-1
+        	if(TimeCompare.timeCompare(now, forecastData.getForecasttime())==timeCompare) {//-1
         		list2.add(forecastData);
         	}
         }

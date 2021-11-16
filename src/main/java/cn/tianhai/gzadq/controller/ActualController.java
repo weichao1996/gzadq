@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -37,6 +38,8 @@ public class ActualController {
 	@Autowired BridgeDetailService bridgeDetailServiceImpl;
 	@Autowired DfBridgeService dfBridgeServiceImpl;
 	@Autowired BridgeDataService bridgeDataServiceImpl;
+	@Value("${thresholdTime}") 
+	private Integer thresholdTime;
 	
 	@GetMapping("/actualData")
     public Object actualData(Model m) {
@@ -44,6 +47,7 @@ public class ActualController {
 		JSONArray json = JSONArray.fromObject(list);
 		System.out.println(json);
 		m.addAttribute("json",json);
+		m.addAttribute("thresholdTime", thresholdTime);
         return "actualData";
         
     }

@@ -7,6 +7,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -36,6 +37,8 @@ public class CalculateController {
 	@Autowired BridgeDetailService bridgeDetailServiceImpl;
 	@Autowired DfBridgeService dfBridgeServiceImpl;
 	@Autowired BridgeDataService bridgeDataServiceImpl;
+	@Value("${thresholdTime}") 
+	private Integer thresholdTime;
 	
 	@GetMapping("/getUwind/{cid}/{Ucar}")
 	@ResponseBody
@@ -106,7 +109,7 @@ public class CalculateController {
 	
 	@GetMapping("/safeVcar")
     public Object safeVcar(Model m) {
-		
+		m.addAttribute("thresholdTime", thresholdTime);
         return "safeVcar";
         
     }

@@ -33,7 +33,7 @@
 			}
 		</style>
 		<script>
-		var int=self.setInterval("clock()",5*1000);
+		var int=self.setInterval("clock()",${thresholdTime});
 		function clock()
 		{
 			if(${sessionScope.threshold !=null}&&${sessionScope.threshold.radius!=""}&&"${sessionScope.threshold.radius}">0&&${sessionScope.threshold.lnglat!=null}){
